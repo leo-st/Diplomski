@@ -17,9 +17,9 @@ using namespace RooFit;
 void Analyzer::runArgusModel() {
 	TCanvas *c1 = new TCanvas("c1","c1");
 	c1->cd();
-	RooRealVar x("x","x",100,150) ;
-	RooRealVar mean("mean","Mean of Gaussian",125,100,150) ;
-	RooRealVar sigma("sigma","Width of Gaussian",3,100,150) ;
+	RooRealVar x("x","x",110,145) ;
+	RooRealVar mean("mean","Mean of Gaussian",125,110,145) ;
+	RooRealVar sigma("sigma","Width of Gaussian",1,110,145) ;
 	RooGaussian gauss("gauss","gauss(x,mean,sigma)",x,mean,sigma) ;
    // --- Observable ---
    //RooRealVar mes("mes","m_{ES} (GeV)",5.20,5.30);
@@ -44,16 +44,16 @@ void Analyzer::runArgusModel() {
    //and visualise the data with the p.d.f overlaid.
 
    // --- Generate a toyMC sample from composite PDF ---
-   RooRealVar ZZMass("ZZMass","ZZMass",100,200) ;
+   RooRealVar ZZMass("ZZMass","ZZMass",110,145) ;
 	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 
    // --- Perform extended ML fit of composite PDF to toy data ---
-   gauss.fitTo(data);
+   gauss.fitTo(data, Range(110,145));
 
    // --- Plot toy data and composite PDF overlaid ---
    RooPlot* mesframe = ZZMass.frame();
-   data.plotOn(mesframe);
-   gauss.plotOn(mesframe);
+   data.plotOn(mesframe, LineColor(kBlue));
+   gauss.plotOn(mesframe, LineColor(kRed));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 
    mesframe->Draw();
