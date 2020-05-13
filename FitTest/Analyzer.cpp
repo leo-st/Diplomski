@@ -17,38 +17,28 @@ using namespace RooFit;
 void Analyzer::runArgusModel() {
 	TCanvas *c1 = new TCanvas("c1","c1");
 	c1->cd();
-	RooRealVar x("x","x",110,145) ;
-	RooRealVar mean("mean","Mean of Gaussian",125,110,145) ;
-	RooRealVar sigma("sigma","Width of Gaussian",1,110,145) ;
-	RooGaussian gauss("gauss","gauss(x,mean,sigma)",x,mean,sigma) ;
-   // --- Observable ---
-   //RooRealVar mes("mes","m_{ES} (GeV)",5.20,5.30);
-
-   // --- Parameters ---
-   //RooRealVar sigmean("sigmean","B^{#pm} mass",5.28,5.20,5.30);
-   //RooRealVar sigwidth("sigwidth","B^{#pm} width",0.0027,0.001,1.);
-
-   // --- Build Gaussian PDF ---
-   //RooGaussian signalModel("signal","signal PDF",mes,sigmean,sigwidth);
-
-   // --- Build Argus background PDF ---
-   //RooRealVar argpar("argpar","argus shape parameter",-20.0,-100.,-1.);
-   //RooArgusBG background("background","Argus PDF",mes,RooConst(5.291),argpar);
-
-   // --- Construct signal+background PDF ---
-   //RooRealVar nsig("nsig","#signal events",200,0.,10000);
-   //RooRealVar nbkg("nbkg","#background events",800,0.,10000);
-   //RooAddPdf model("model","g+a",RooArgList(signalModel,background),RooArgList(nsig,nbkg));
-
-   //We can now use this p.d.f. to generate an unbinned toy dataset, fit the p.d.f to that dataset using an unbinned maximum likelihood fit
-   //and visualise the data with the p.d.f overlaid.
-
-   // --- Generate a toyMC sample from composite PDF ---
-   RooRealVar ZZMass("ZZMass","ZZMass",110,145) ;
+	RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
+	//RooRealVar x("x","x",0,250) ;
+	RooRealVar mean("mean","Mean of Gaussian",125,110,140) ;
+	RooRealVar sigma("sigma","Width of Gaussian",2,0,250) ;
+	RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
+   
+   
+   //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 
-   // --- Perform extended ML fit of composite PDF to toy data ---
-   gauss.fitTo(data, Range(110,145));
+   
+   //mean.setConstant(kTRUE) ;
+ gauss.fitTo(data, Range(110,140));
+
+	//samo gausijan test
+	
+	//RooPlot* xframe = x.frame();
+	//gauss.plotOn(xframe);
+	//xframe->Draw();
+
+
+
 
    // --- Plot toy data and composite PDF overlaid ---
    RooPlot* mesframe = ZZMass.frame();
@@ -57,7 +47,7 @@ void Analyzer::runArgusModel() {
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 
    mesframe->Draw();
-   c1->SaveAs("test.pdf");
+   c1->SaveAs("test7.pdf");
 }
 
 void Analyzer::Loop()
