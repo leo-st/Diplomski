@@ -9,6 +9,7 @@
 #include "RooRealVar.h"
 #include "RooConstVar.h"
 #include "RooGaussian.h"
+#include "RooCBShape.h"
 #include "RooArgusBG.h"
 #include "RooAddPdf.h"
 #include "RooDataSet.h"
@@ -26,7 +27,9 @@ void Analyzer::runArgusModel() {
 	//RooRealVar x("x","x",0,250) ;
 	RooRealVar mean("mean","Mean of Gaussian",125,110,140) ;
 	RooRealVar sigma("sigma","Width of Gaussian",2,0,250) ;
-	RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
+	RooRealVar alpha("alpha","alpha",10,0,250) ;
+	RooRealVar n("n","n",100,0,250) ;
+	RooCBShape CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n);
    
    
    //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
@@ -34,7 +37,7 @@ void Analyzer::runArgusModel() {
 
    
    //mean.setConstant(kTRUE) ;
- gauss.fitTo(data, Range(110,140));
+ CBall.fitTo(data, Range(110,140));
 
 	//samo gausijan test
 	
@@ -50,7 +53,7 @@ void Analyzer::runArgusModel() {
 
    RooPlot* mesframe = ZZMass.frame();
    data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
-   gauss.plotOn(mesframe,Range(110,140),  LineColor(kRed));
+   CBall.plotOn(mesframe,Range(110,140),  LineColor(kRed));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 
    mesframe->Draw();
