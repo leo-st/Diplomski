@@ -10,11 +10,12 @@
 #include "RooConstVar.h"
 #include "RooGaussian.h"
 #include "RooCBShape.h"
-#include "RooCBDShape.h"
 #include "RooArgusBG.h"
 #include "RooAddPdf.h"
 #include "RooDataSet.h"
 #include "RooPlot.h"
+#include "LinkDef.h"
+#include "RooDoubleCB.h"
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
@@ -30,7 +31,7 @@ void Analyzer::runArgusModel() {
 	RooRealVar sigma("sigma","Width of Gaussian",2,0,250) ;
 	RooRealVar alpha("alpha","alpha",10,0,250) ;
 	RooRealVar n("n","n",100,0,250) ;
-	RooCBDShape CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n);
+	RooDoubleCB CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n, alpha ,n);
    
    
    //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
