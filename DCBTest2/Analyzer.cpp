@@ -59,7 +59,7 @@ void Analyzer::runArgusModel() {
    data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
    CBall.plotOn(mesframe,Range(110,140),  LineColor(kRed));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-
+	CBall.paramOn(mesframe, Layout(0.55));
    mesframe->Draw();
    TPaveText *pt = new TPaveText(.05,.1,.95,.8);
    pt->AddText("proba!");
