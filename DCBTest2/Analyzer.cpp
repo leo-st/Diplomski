@@ -28,10 +28,12 @@ void Analyzer::runArgusModel() {
 	RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 	//RooRealVar x("x","x",0,250) ;
 	RooRealVar mean("mean","Mean of Gaussian",125,110,140) ;
-	RooRealVar sigma("sigma","Width of Gaussian",2,0,250) ;
+	RooRealVar sigma("sigma","Width of Gaussian",1,0,100) ;
 	RooRealVar alpha("alpha","alpha",10,0,250) ;
 	RooRealVar n("n","n",100,0,250) ;
-	RooDoubleCB CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n, alpha ,n);
+	RooRealVar alpha2("alpha2","alpha2",10,0,250) ;
+	RooRealVar n2("n2","n2",100,0,250) ;
+	RooDoubleCB CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n, alpha2 ,n2);
    
    
    //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
