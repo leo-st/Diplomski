@@ -18,6 +18,7 @@
 #include "LinkDef.h"
 #include "RooDoubleCB.h"
 #include "RooChi2Var.h"
+#include "RooDataHist.h"
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
@@ -113,11 +114,64 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	//RooChi2Var chi2("chi2","chi2",g,data) ;
    mesframe->Draw();
    c1->SaveAs("test-background.pdf");
-	//cout<<chi2.getVal()<<endl;
-	cout<<endl;
-	cout<<mesframe->chiSquare("g","data",3)<<endl;
+	 //RooDataSet* dsmall = (RooDataSet*) data.reduce(EventRange(110,140)) ;
+  RooDataHist* dhsmall = data.binnedClone() ;
+  RooChi2Var chi2_lowstat("chi2_lowstat","chi2",g,*dhsmall) ;
+  cout << chi2_lowstat.getVal() << endl ;
 
 }
+
+void Analyzer::ggTo4mu()
+{
+TCanvas *c1 = new TCanvas("c1","c1");
+	
+	c1->cd();
+	 
+
+   
+	RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
+	//RooRealVar x("x","x",0,250) ;
+	RooRealVar a("a","a",-1,-5,10) ;
+	RooRealVar b("b","b",225,100,450) ;
+	RooRealVar c("c","c",7000,-4000,10000) ;
+	RooGenericPdf g("g","a*ZZMass*ZZMass + b*ZZMass + c", RooArgSet(ZZMass,a,b,c));
+	//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
+   
+   
+   //RooRealVar ZZMass("ZZMass","ZZMass",0,250) ;
+	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
+
+   
+   //mean.setConstant(kTRUE) ;
+ g.fitTo(data, Range(110,140));
+
+	//samo gausijan test
+	
+	//RooPlot* xframe = x.frame();
+	//gauss.plotOn(xframe);
+	//xframe->Draw();
+
+
+
+
+   // --- Plot toy data and composite PDF overlaid ---
+   //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
+
+   RooPlot* mesframe = ZZMass.frame();
+   data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
+   g.plotOn(mesframe,Range(110,140),  LineColor(kRed));
+	g.paramOn(mesframe, Layout(0.25));
+
+   //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
+	//RooChi2Var chi2("chi2","chi2",g,data) ;
+   mesframe->Draw();
+   c1->SaveAs("test-background-gg.pdf");
+	//cout<<chi2.getVal()<<endl;
+	cout<<endl;
+	//cout<<mesframe->chiSquare("g","data",3)<<endl;
+
+}
+
 void Analyzer::Loop()
 {
 //   In a ROOT session, you can do:

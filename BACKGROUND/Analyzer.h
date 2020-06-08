@@ -1852,6 +1852,7 @@ public :
    virtual void     Loop();
 	virtual void runArgusModel();
 virtual void ZZTo4lext1();
+virtual void ggTo4mu();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
