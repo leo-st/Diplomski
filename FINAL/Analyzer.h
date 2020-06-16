@@ -11,8 +11,7 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
-#include "RooDoubleCB.h"
-#include "RooGenericPdf.h"
+
 
 // Header file for the classes stored in the TTree if any.
 #include "vector"
@@ -1846,7 +1845,7 @@ public :
    TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen;   //!
    TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen;   //!
 
-   Analyzer(TString path,TTree *tree=0);
+   Analyzer();
    virtual ~Analyzer();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -1859,30 +1858,20 @@ virtual void ggTo4mu();
 virtual void ggTo4mutest();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
-RooDoubleCB CBall;
-RooGenericPdf g1;
-RooGenericPdf g2;
-
+virtual void sumall(TString path);
+//TTree *tree;
 
 };
 
 #endif
 
 #ifdef Analyzer_cxx
-Analyzer::Analyzer(TString path, TTree *tree) : fChain(0) 
+Analyzer::Analyzer() : fChain(0) 
 {
+
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
-   if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(path+ "ZZ4lAnalysis.root");
-      if (!f || !f->IsOpen()) {
-         f = new TFile(path+"ZZ4lAnalysis.root");
-      }
-      TDirectory * dir = (TDirectory*)f->Get(path+ "ZZ4lAnalysis.root:/ZZTree");
-      dir->GetObject("candTree",tree);
-
-   }
-   Init(tree);
+   
 }
 
 Analyzer::~Analyzer()
