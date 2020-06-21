@@ -188,13 +188,13 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",0.0,2.5) ;
 	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
 	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
-	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",1,0.0,10.0) ;
+	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
 	
-	RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
+	//RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
 	RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",fChain,KFactor_QCD_ggZZ_Nominal) ;
 	RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",fChain,overallEventWeight) ;
-	RooDataSet L1prefiringWeight_data("L1prefiringWeight_data","L1prefiringWeight_data",fChain,L1prefiringWeight) ;
-	RooDataSet genHEPMCweight_data("genHEPMCweight_data","genHEPMCweight_data",fChain,genHEPMCweight) ;
+	//RooDataSet L1prefiringWeight_data("L1prefiringWeight_data","L1prefiringWeight_data",fChain,L1prefiringWeight) ;
+	//RooDataSet genHEPMCweight_data("genHEPMCweight_data","genHEPMCweight_data",fChain,genHEPMCweight) ;
 	
 	//RooRealVar ZZMass("ZZMass","ZZMass",0,250) ;
 	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;

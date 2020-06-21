@@ -1859,9 +1859,7 @@ virtual void ggTo4mu();
 virtual void ggTo4mutest();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
-RooDoubleCB CBall;
-RooGenericPdf g1;
-RooGenericPdf g2;
+
 
 
 };
