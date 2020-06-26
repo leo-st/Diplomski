@@ -24,17 +24,17 @@ using namespace std;
 
 int main(){
 
-	//Analyzer *signal = new Analyzer("/home/public/data/HiggsMassMeasurement/2018/ggH125/");
+	Analyzer *signal = new Analyzer("/home/public/data/HiggsMassMeasurement/2018/ggH125/");
 	//signal->Loop();
-	//signal->runArgusModel();
+	signal->runArgusModel();
 
 	//Analyzer *a = new Analyzer("/home/public/data/2018_MC/ZZTo4lext1/");
 	//a->Loop();
 	//a->ZZTo4lext1();
 	
 	
-	Analyzer *b = new Analyzer("/home/public/data/2018_MC/ggTo4mu_Contin_MCFM701/");
-	b->ggTo4mutest();
+	//Analyzer *b = new Analyzer("/home/public/data/2018_MC/ggTo4mu_Contin_MCFM701/");
+	//b->ggTo4mutest();
 	//b->Loop();
 	
 

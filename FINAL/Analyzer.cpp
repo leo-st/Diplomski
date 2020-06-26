@@ -36,12 +36,12 @@ void Analyzer::sumall(){
    
 		RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar mean("mean","Mean of Gaussian",125,110,140) ;
-		RooRealVar sigma("sigma","Width of Gaussian",1,0,100) ;
-		RooRealVar alpha("alpha","alpha",10,0,250) ;
-		RooRealVar n("n","n",100,0,250) ;
-		RooRealVar alpha2("alpha2","alpha2",10,0,250) ;
-		RooRealVar n2("n2","n2",100,0,250) ;
+		RooRealVar mean("mean","Mean of Gaussian",124.6032,124.5,124.7) ;
+		RooRealVar sigma("sigma","Width of Gaussian",1.381,1.36,1.4) ;
+		RooRealVar alpha("alpha","alpha",0.73,0.71,0.75) ;
+		RooRealVar n("n","n",4.8,4.6,5.0) ;
+		RooRealVar alpha2("alpha2","alpha2",1.38,1.41,1.35) ;
+		RooRealVar n2("n2","n2",5.06,4.7,5.3) ;
 		RooDoubleCB CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n, alpha2 ,n2);
    
 	   
@@ -79,9 +79,9 @@ void Analyzer::sumall(){
 
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a("a","a",-1,-5,10) ;
-		RooRealVar b("b","b",225,100,450) ;
-		RooRealVar c("c","c",5000,-15000,15000) ;
+		RooRealVar a("a","a",-0.95665,-1.5,-0.5) ;
+		RooRealVar b("b","b",250.1,245,255) ;
+		RooRealVar c("c","c",-14998.6,-15100,-14800) ;
 		RooGenericPdf g1("g1","a*ZZMass*ZZMass + b*ZZMass + c", RooArgSet(ZZMass,a,b,c));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
@@ -127,8 +127,8 @@ void Analyzer::sumall(){
 	   
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar aa("aa","aa",0.1,0.001,0.5) ;
-		RooRealVar bb("bb","bb",200,1,500) ;
+		RooRealVar aa("aa","aa",0.02,-0.2,0.3) ;
+		RooRealVar bb("bb","bb",200,-50,450) ;
 		
 		RooGenericPdf g2("g2","aa*ZZMass + bb", RooArgSet(ZZMass,aa,bb));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
@@ -170,9 +170,9 @@ void Analyzer::sumall(){
 	RooRealVar nsig("nsig","#signal events",121570);
   	RooRealVar nbkg1("nbkg1","#background events1",163213);
   	RooRealVar nbkg2("nbkg2","#background events2",332083);
-   	RooAddPdf model("model","s+b1",RooArgList(CBall,g1,g2),RooArgList(nsig,nbkg1,nbkg2));
+   	RooAddPdf model("model","s+b1+b2",RooArgList(CBall,g1,g2),RooArgList(nsig,nbkg1,nbkg2));
    	
-   	RooDataSet *podaci = model.generate(ZZMass, 200000);
+   	RooDataSet *podaci = model.generate(ZZMass, 6000);
    	model.fitTo(*podaci);
    	RooPlot* masaframe = ZZMass.frame();
    	
@@ -184,7 +184,7 @@ void Analyzer::sumall(){
 	model.plotOn(masaframe, Components(g2), LineColor(kGreen));
 
    masaframe->Draw();
-   c1->SaveAs("final-test1.pdf");
+   c1->SaveAs("final-test2.pdf");
 
 }
 

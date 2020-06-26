@@ -1,0 +1,1 @@
+jentry: 		data		weight( (LumiNumber * 1000 * xsec * overallEventWeight) / genHEPMCweight
