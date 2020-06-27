@@ -34,14 +34,14 @@ void Analyzer::sumall(){
 	 
 
    
-		RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
+		RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar mean("mean","Mean of Gaussian",124.6032,124.5,124.7) ;
-		RooRealVar sigma("sigma","Width of Gaussian",1.381,1.36,1.4) ;
-		RooRealVar alpha("alpha","alpha",0.73,0.71,0.75) ;
-		RooRealVar n("n","n",4.8,4.6,5.0) ;
-		RooRealVar alpha2("alpha2","alpha2",1.38,1.41,1.35) ;
-		RooRealVar n2("n2","n2",5.06,4.7,5.3) ;
+		RooRealVar mean("mean","Mean of Gaussian",124.588,124.496,124.68) ;
+		RooRealVar sigma("sigma","Width of Gaussian",1.4,1.25,1.55) ;
+		RooRealVar alpha("alpha","alpha",0.77,0.64,0.91) ;
+		RooRealVar n("n","n",4.13,3.22,5.05) ;
+		RooRealVar alpha2("alpha2","alpha2",1.41,1.17,1.65) ;
+		RooRealVar n2("n2","n2",4.9,3.0,6.8) ;
 		RooDoubleCB CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n, alpha2 ,n2);
    
 	   
@@ -79,9 +79,9 @@ void Analyzer::sumall(){
 
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a("a","a",-0.95665,-1.5,-0.5) ;
-		RooRealVar b("b","b",250.1,245,255) ;
-		RooRealVar c("c","c",-14998.6,-15100,-14800) ;
+		RooRealVar a("a","a",-0.41,-0.58,-0.21) ;
+		RooRealVar b("b","b",106.0,45.0,167.0) ;
+		RooRealVar c("c","c",-6366.6,-8695.0,-4035.0) ;
 		RooGenericPdf g1("g1","a*ZZMass*ZZMass + b*ZZMass + c", RooArgSet(ZZMass,a,b,c));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
@@ -127,8 +127,8 @@ void Analyzer::sumall(){
 	   
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar aa("aa","aa",0.02,-0.2,0.3) ;
-		RooRealVar bb("bb","bb",200,-50,450) ;
+		RooRealVar aa("aa","aa",0.1,-0.34,0.53) ;
+		RooRealVar bb("bb","bb",36,-235,305) ;
 		
 		RooGenericPdf g2("g2","aa*ZZMass + bb", RooArgSet(ZZMass,aa,bb));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
@@ -184,7 +184,7 @@ void Analyzer::sumall(){
 	model.plotOn(masaframe, Components(g2), LineColor(kGreen));
 
    masaframe->Draw();
-   c1->SaveAs("final-test2.pdf");
+   c1->SaveAs("final-test3.pdf");
 
 }
 
