@@ -372,22 +372,22 @@ double suma=0.0;
       // if (Cut(ientry) < 0) continue;
       //h1->Fill(ZZMass);
 
-	/*if(ZZMass>= 105.0 && ZZMass<=140.0){
+	if(ZZMass>= 105.0 && ZZMass<=140.0){
 		//myfile <<jentry<<"	"<<LumiNumber<<"	 "<<overallEventWeight<<endl;
 		//myfile1<<jentry<<"		"<<ZZMass<<"		"<<(LumiNumber * 1000 * 0.0133352 * overallEventWeight) / 28744188.0 * ggH_NNLOPS_weight<<endl;		
-suma = suma+((137.0 * 1000 * 0.0133352 * overallEventWeight) / 28744188.0 * ggH_NNLOPS_weight);
+suma = suma+((137.0 * 1000 * 0.00158549 * KFactor_QCD_ggZZ_Nominal * overallEventWeight ) / 594858.56);
 //cout<<jentry<<" : "<<L1prefiringWeight<<endl;
-	}*/
-	if(ZZMass>= 105.0 && ZZMass<=140.0){
+	}
+	/*if(ZZMass>= 105.0 && ZZMass<=140.0){
 	cout<<"jentry: "<<jentry<<"	ggH_NNLOPS_weight: "<<ggH_NNLOPS_weight<<endl;
-if(L1prefiringWeight<min){
+/*if(L1prefiringWeight<min){
 min=L1prefiringWeight;}
 if(L1prefiringWeight>max){
 max=L1prefiringWeight;}
-	}
-      /*if(ZZMass>= 105.0 && ZZMass<=140.0){
+	}*/
+      if(ZZMass>= 105.0 && ZZMass<=140.0){
 	cout<<"jentry: "<<jentry<<"	"<<KFactor_QCD_ggZZ_Nominal<<endl;
-}*/
+	}	
    }
    cout<<"min: "<<min<<"  max: "<<max<<endl; 
 	cout<<"suma: "<<suma<<endl;

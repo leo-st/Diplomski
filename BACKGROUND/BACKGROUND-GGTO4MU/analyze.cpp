@@ -23,6 +23,8 @@
 using namespace std;
 
 int main(){
+	//suma: 9.23738
+
 
 	//Analyzer *signal = new Analyzer("/home/public/data/HiggsMassMeasurement/2018/ggH125/");
 	//signal->Loop();
@@ -34,8 +36,8 @@ int main(){
 	
 	
 	Analyzer *b = new Analyzer("/home/public/data/2018_MC/ggTo4mu_Contin_MCFM701/");
-	//b->ggTo4mutest();
-	b->Loop();
+	b->ggTo4mu();
+	//b->Loop();
 	
 
 	//a->runArgusModel();
