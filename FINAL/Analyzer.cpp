@@ -79,9 +79,9 @@ void Analyzer::sumall(){
 
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a("a","a",-0.41,-0.58,-0.21) ;
-		RooRealVar b("b","b",106.0,45.0,167.0) ;
-		RooRealVar c("c","c",-6366.6,-8695.0,-4035.0) ;
+		RooRealVar a("a","a",-0.3865,-0.43,-0.352) ;
+		RooRealVar b("b","b",100.0,79.0,121.0) ;
+		RooRealVar c("c","c",-6002.0,-6317.0,-5687.0) ;
 		RooGenericPdf g1("g1","a*ZZMass*ZZMass + b*ZZMass + c", RooArgSet(ZZMass,a,b,c));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
@@ -127,8 +127,8 @@ void Analyzer::sumall(){
 	   
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar aa("aa","aa",0.1,-0.34,0.53) ;
-		RooRealVar bb("bb","bb",36,-235,305) ;
+		RooRealVar aa("aa","aa",0.1,-3.0,3.0) ;
+		RooRealVar bb("bb","bb",33,-285,345) ;
 		
 		RooGenericPdf g2("g2","aa*ZZMass + bb", RooArgSet(ZZMass,aa,bb));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
@@ -184,7 +184,7 @@ void Analyzer::sumall(){
 	model.plotOn(masaframe, Components(g2), LineColor(kGreen));
 
    masaframe->Draw();
-   c1->SaveAs("final-test3.pdf");
+   c1->SaveAs("final-test4.pdf");
 
 }
 

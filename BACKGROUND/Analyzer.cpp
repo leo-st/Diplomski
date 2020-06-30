@@ -22,6 +22,8 @@
 #include "RooFormulaVar.h"
 #include <iostream>
 #include <fstream>
+ RooRealVar  x("x","x",105,140) ;
+RooDataSet test("test","test", RooArgSet(x));
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
@@ -31,7 +33,7 @@ void Analyzer::runArgusModel() {
 	 
 
    
-	RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
+	//RooRealVar x("x","x",105,140) ;
 	//RooRealVar x("x","x",0,250) ;
 	RooRealVar mean("mean","Mean of Gaussian",125,105,140) ;
 	RooRealVar sigma("sigma","Width of Gaussian",1,0,100) ;
@@ -39,7 +41,7 @@ void Analyzer::runArgusModel() {
 	RooRealVar n("n","n",100,0,250) ;
 	RooRealVar alpha2("alpha2","alpha2",10,0,250) ;
 	RooRealVar n2("n2","n2",100,0,250) ;
-	RooDoubleCB CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n, alpha2 ,n2);
+	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
 
 
 
@@ -67,23 +69,48 @@ void Analyzer::runArgusModel() {
 	//RooDataSet L1prefiringWeight_data("L1prefiringWeight_data","L1prefiringWeight_data",fChain,L1prefiringWeight) ;
 	//RooDataSet genHEPMCweight_data("genHEPMCweight_data","genHEPMCweight_data",fChain,genHEPMCweight) ;
 	
-	
+	//RooDataSet data("data","dataset with ZZMass");
    
+ /*if (fChain == 0) return;
+   Long64_t nentries = fChain->GetEntriesFast();
+   Long64_t nbytes = 0, nb = 0;
+   for (Long64_t jentry=0; jentry<nentries;jentry++) {
+      Long64_t ientry = LoadTree(jentry);
+      if (ientry < 0) break;
+      nb = fChain->GetEntry(jentry);   nbytes += nb;
+      // if (Cut(ientry) < 0) continue;
+      //h1->Fill(ZZMass);
+	if(ZZMass>=105 && ZZMass<=140){
+		if(Z1Flav==-169 && Z2Flav==-169){
+			//data.add(ZZMass);
+		}
+	}
+
+   }*/
+
+
+
+
+
+
+
+
+
    
    //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
-	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
+	//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 	
 	
 	// Construct formula to calculate (fake) weight for events
    RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * KFactor_QCD_ggZZ_Nominal * overallEventWeight * L1prefiringWeight ) / genHEPMCweight * ggH_NNLOPS_weight",RooArgSet(LumiNumber,xsec, KFactor_QCD_ggZZ_Nominal, overallEventWeight,L1prefiringWeight,genHEPMCweight,ggH_NNLOPS_weight)) ;
    
    // Add column with variable w to previously generated dataset
-   RooRealVar* w = (RooRealVar*) data.addColumn(wFunc) ;
+   RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
    // Dataset d is now a dataset with two observable (x,w) with 1000 entries
 
    
    // Instruct dataset wdata in interpret w as event weight rather than as observable
-   RooDataSet wdata(data.GetName(),data.GetTitle(),&data, *data.get(),0,w->GetName()) ;
+   RooDataSet wdata(test.GetName(),test.GetTitle(),&test, *test.get(),0,w->GetName()) ;
 
    //wdata.printArgs(cout);
    //mean.setConstant(kTRUE) ;
@@ -104,16 +131,16 @@ void Analyzer::runArgusModel() {
 
    // --- Plot toy data and composite PDF overlaid ---
    //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
-	ZZMass.setRange("signal",105,140);
-	RooAbsReal *integral=CBall.createIntegral(ZZMass,ZZMass, "signal");
-cout<<endl<<"INTEGRAL:::::::::	"<<integral->getVal()<<endl<<endl;
-   RooPlot* mesframe = ZZMass.frame();
+	x.setRange("signal",105,140);
+	//RooAbsReal *integral=CBall.createIntegral(ZZMass,ZZMass, "signal");
+//cout<<endl<<"INTEGRAL:::::::::	"<<integral->getVal()<<endl<<endl;
+   RooPlot* mesframe = x.frame();
    wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
    CBall.plotOn(mesframe,Range(105,140),  LineColor(kRed));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   c1->SaveAs("signal-weighted.pdf");
+   c1->SaveAs("signal-weighted1.pdf");
 }
 void Analyzer::ZZTo4lext1()
 {
@@ -137,7 +164,6 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	
 	//RooRealVar ZZMass("ZZMass","ZZMass",0,250) ;
 	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
-	
 
    
 	//RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
@@ -358,12 +384,15 @@ myfile1.open ("example1.txt");
 // METHOD2: replace line
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
+ //RooRealVar  x("x","x",105,140) ;
+//RooDataSet test("test","test", RooArgSet(x));
    if (fChain == 0) return;
 myfile <<"JENTRY: "<<"	LumiNumber : "<<"	overallEventWeight_data : "<<endl;
 myfile1<<"jentry: "<<"		data"<<"		weight( (LumiNumber * 1000 * xsec * overallEventWeight) / genHEPMCweight * ggH_NNLOPS_weight"<<endl;
    Long64_t nentries = fChain->GetEntriesFast();
 double min=9000,max=-1000;
 double suma=0.0;
+int counter=0;
    Long64_t nbytes = 0, nb = 0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
@@ -375,7 +404,7 @@ double suma=0.0;
 	if(ZZMass>= 105.0 && ZZMass<=140.0){
 		//myfile <<jentry<<"	"<<LumiNumber<<"	 "<<overallEventWeight<<endl;
 		//myfile1<<jentry<<"		"<<ZZMass<<"		"<<(LumiNumber * 1000 * 0.0133352 * overallEventWeight) / 28744188.0 * ggH_NNLOPS_weight<<endl;		
-suma = suma+((137.0 * 1000 * 0.00158549 * KFactor_QCD_ggZZ_Nominal * overallEventWeight ) / 594858.56);
+//suma = suma+((137.0 * 1000 * 0.00158549 * KFactor_QCD_ggZZ_Nominal * overallEventWeight ) / 594858.56);
 //cout<<jentry<<" : "<<L1prefiringWeight<<endl;
 	}
 	/*if(ZZMass>= 105.0 && ZZMass<=140.0){
@@ -386,11 +415,15 @@ if(L1prefiringWeight>max){
 max=L1prefiringWeight;}
 	}*/
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	cout<<"jentry: "<<jentry<<"	"<<KFactor_QCD_ggZZ_Nominal<<endl;
+	if(Z2Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<Z2Flav<<endl;
+x=ZZMass;
+				test.add(RooArgSet(x));
+counter++;}
 	}	
    }
    cout<<"min: "<<min<<"  max: "<<max<<endl; 
 	cout<<"suma: "<<suma<<endl;
+cout<<"counter: "<<counter<<endl;
 myfile.close();
 myfile1.close();
    //h1->Draw();
