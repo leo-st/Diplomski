@@ -26,13 +26,6 @@ int main(){
 	//suma: 9.23738
 
 
-	//Analyzer *signal = new Analyzer("/home/public/data/HiggsMassMeasurement/2018/ggH125/");
-	//signal->Loop();
-	//signal->runArgusModel();
-
-	//Analyzer *a = new Analyzer("/home/public/data/2018_MC/ZZTo4lext1/");
-	//a->Loop();
-	//a->ZZTo4lext1();
 	
 	
 	Analyzer *b = new Analyzer("/home/public/data/2018_MC/ggTo4mu_Contin_MCFM701/");
@@ -40,11 +33,6 @@ int main(){
 	//b->Loop();
 	
 
-	//a->runArgusModel();
-	//a->runArgusModel();
-	//a->Theoretical_noHiggs();
-	//a->Expected_p_value_scan();
-	//a->PlotMass();
 	
 return 0;
 }

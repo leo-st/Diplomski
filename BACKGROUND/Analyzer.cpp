@@ -23,7 +23,11 @@
 #include <iostream>
 #include <fstream>
  RooRealVar  x("x","x",105,140) ;
+RooRealVar  y("y","y",-80.0,600.0) ;
+RooRealVar  z("z","z",-2.0,8.0) ;
 RooDataSet test("test","test", RooArgSet(x));
+RooDataSet ggH_NNLOPS_weight_data("ggH_NNLOPS_weight_data","ggH_NNLOPS_weight_data", RooArgSet(y));
+RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(z)) ;
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
@@ -35,12 +39,12 @@ void Analyzer::runArgusModel() {
    
 	//RooRealVar x("x","x",105,140) ;
 	//RooRealVar x("x","x",0,250) ;
-	RooRealVar mean("mean","Mean of Gaussian",125,105,140) ;
-	RooRealVar sigma("sigma","Width of Gaussian",1,0,100) ;
-	RooRealVar alpha("alpha","alpha",10,0,250) ;
+	RooRealVar mean("mean","Mean of Gaussian",125,120,130) ;
+	RooRealVar sigma("sigma","Width of Gaussian",1.2,-2.0,2.5) ;
+	RooRealVar alpha("alpha","alpha",0.1,-3.0,4.0) ;
 	RooRealVar n("n","n",100,0,250) ;
-	RooRealVar alpha2("alpha2","alpha2",10,0,250) ;
-	RooRealVar n2("n2","n2",100,0,250) ;
+	RooRealVar alpha2("alpha2","alpha2",0.2,-5.0,5.2) ;
+	RooRealVar n2("n2","n2",10,-100,250) ;
 	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
 
 
@@ -52,20 +56,20 @@ void Analyzer::runArgusModel() {
 	//L1prefiringWeight zadan je kao u branchu  = 1
 	//ggH_NNLOPS_weight=1 za signal, a za pozadinu je zadan u branchu
 	//gen_sum_weights vrijednost 40-og bina u histogramu u ROOT file-u
-	RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",-1.0,4.0);
+	RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",-2.0,8.0);
 	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
 	RooRealVar xsec("xsec","xsec",0.0133352) ;
 	RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",1.0) ;
-	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-66,550) ;
-	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
+	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-80.0,600.0) ;
+	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1.0) ;
 	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
 	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",28744188.0) ;
 	
 	//RooDataSet LumiNumber_data("LumiNumber_data","LumiNumber_data", fChain, LumiNumber);
-	RooDataSet ggH_NNLOPS_weight_data("ggH_NNLOPS_weight_data","ggH_NNLOPS_weight_data", fChain, ggH_NNLOPS_weight);
+	//RooDataSet ggH_NNLOPS_weight_data("ggH_NNLOPS_weight_data","ggH_NNLOPS_weight_data", fChain, ggH_NNLOPS_weight);
 	//RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
 	//RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",fChain,KFactor_QCD_ggZZ_Nominal) ;
-	RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",fChain,overallEventWeight) ;
+	//RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",fChain,overallEventWeight) ;
 	//RooDataSet L1prefiringWeight_data("L1prefiringWeight_data","L1prefiringWeight_data",fChain,L1prefiringWeight) ;
 	//RooDataSet genHEPMCweight_data("genHEPMCweight_data","genHEPMCweight_data",fChain,genHEPMCweight) ;
 	
@@ -102,7 +106,7 @@ void Analyzer::runArgusModel() {
 	
 	
 	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * KFactor_QCD_ggZZ_Nominal * overallEventWeight * L1prefiringWeight ) / genHEPMCweight * ggH_NNLOPS_weight",RooArgSet(LumiNumber,xsec, KFactor_QCD_ggZZ_Nominal, overallEventWeight,L1prefiringWeight,genHEPMCweight,ggH_NNLOPS_weight)) ;
+   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec  * y * L1prefiringWeight ) / genHEPMCweight * z",RooArgSet(LumiNumber,xsec, y,L1prefiringWeight,genHEPMCweight,z)) ;
    
    // Add column with variable w to previously generated dataset
    RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
@@ -140,7 +144,7 @@ void Analyzer::runArgusModel() {
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   c1->SaveAs("signal-weighted1.pdf");
+   c1->SaveAs("signal-weighted5.pdf");
 }
 void Analyzer::ZZTo4lext1()
 {
@@ -151,7 +155,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
 	RooRealVar xsec("xsec","xsec",0.00158549) ;
 	RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",2.0,2.4) ;
-	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",0.0,46.0) ;
+	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-80.0,600.0) ;
 	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
 	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
 	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
@@ -390,7 +394,7 @@ myfile1.open ("example1.txt");
 myfile <<"JENTRY: "<<"	LumiNumber : "<<"	overallEventWeight_data : "<<endl;
 myfile1<<"jentry: "<<"		data"<<"		weight( (LumiNumber * 1000 * xsec * overallEventWeight) / genHEPMCweight * ggH_NNLOPS_weight"<<endl;
    Long64_t nentries = fChain->GetEntriesFast();
-double min=9000,max=-1000;
+double min=900000,max=-1000000;
 double suma=0.0;
 int counter=0;
    Long64_t nbytes = 0, nb = 0;
@@ -407,17 +411,20 @@ int counter=0;
 //suma = suma+((137.0 * 1000 * 0.00158549 * KFactor_QCD_ggZZ_Nominal * overallEventWeight ) / 594858.56);
 //cout<<jentry<<" : "<<L1prefiringWeight<<endl;
 	}
-	/*if(ZZMass>= 105.0 && ZZMass<=140.0){
-	cout<<"jentry: "<<jentry<<"	ggH_NNLOPS_weight: "<<ggH_NNLOPS_weight<<endl;
-/*if(L1prefiringWeight<min){
-min=L1prefiringWeight;}
-if(L1prefiringWeight>max){
-max=L1prefiringWeight;}
-	}*/
+	if(ZZMass>= 105.0 && ZZMass<=140.0){
+	//cout<<"jentry: "<<jentry<<"	ggH_NNLOPS_weight: "<<ggH_NNLOPS_weight<<endl;
+if(ggH_NNLOPS_weight<min){
+min=ggH_NNLOPS_weight;}
+if(ggH_NNLOPS_weight>max){
+max=ggH_NNLOPS_weight;}
+	}
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	if(Z2Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<Z2Flav<<endl;
+	if(Z2Flav==-169 && Z1Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<ggH_NNLOPS_weight<<endl;
 x=ZZMass;
+y=overallEventWeight;
+z=ggH_NNLOPS_weight;
 				test.add(RooArgSet(x));
+suma= suma + (137.0 * 1000 * 0.0133352 * overallEventWeight  ) / 28744188.0 * ggH_NNLOPS_weight;
 counter++;}
 	}	
    }

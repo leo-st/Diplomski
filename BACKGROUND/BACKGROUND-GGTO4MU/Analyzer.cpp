@@ -42,7 +42,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
 	RooRealVar xsec("xsec","xsec",0.00158549) ;
 	RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",1.5,2.8) ;
-	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",0.0,46.0) ;
+	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-10.0,79.0) ;
 	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
 	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
 	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
@@ -70,7 +70,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
    
 	
 	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * KFactor_QCD_ggZZ_Nominal * overallEventWeight * L1prefiringWeight ) / genHEPMCweight",RooArgSet(LumiNumber,xsec, KFactor_QCD_ggZZ_Nominal, overallEventWeight,L1prefiringWeight,genHEPMCweight)) ;
+   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * KFactor_QCD_ggZZ_Nominal * overallEventWeight * L1prefiringWeight ) / 594858.56",RooArgSet(LumiNumber,xsec, KFactor_QCD_ggZZ_Nominal, overallEventWeight,L1prefiringWeight)) ;
    
    // Add column with variable w to previously generated dataset
    RooRealVar* w = (RooRealVar*) data.addColumn(wFunc) ;
@@ -104,7 +104,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	//RooChi2Var chi2("chi2","chi2",g,data) ;
    mesframe->Draw();
-   c1->SaveAs("test-background-gg.pdf");
+   c1->SaveAs("test-background-gg2.pdf");
 	//cout<<chi2.getVal()<<endl;
 	//cout<<mesframe->chiSquare("g","data",3)<<endl;
 
@@ -167,13 +167,13 @@ suma = suma+((137.0 * 1000 * 0.00158549 * KFactor_QCD_ggZZ_Nominal * overallEven
 	}
 	if(ZZMass>= 105.0 && ZZMass<=140.0){
 	//cout<<"jentry: "<<jentry<<"	ggH_NNLOPS_weight: "<<ggH_NNLOPS_weight<<endl;
-if(KFactor_QCD_ggZZ_Nominal<min){
-min=KFactor_QCD_ggZZ_Nominal;}
-if(KFactor_QCD_ggZZ_Nominal>max){
-max=KFactor_QCD_ggZZ_Nominal;}
+if(genHEPMCweight<min){
+min=genHEPMCweight;}
+if(genHEPMCweight>max){
+max=genHEPMCweight;}
 	}
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	cout<<"jentry: "<<jentry<<"	"<<KFactor_QCD_ggZZ_Nominal<<endl;
+	cout<<"jentry: "<<jentry<<"	"<<genHEPMCweight<<endl;
 	}	
    }
    cout<<"min: "<<min<<"  max: "<<max<<endl; 
