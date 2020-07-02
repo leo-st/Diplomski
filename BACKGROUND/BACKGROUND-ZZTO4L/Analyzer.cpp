@@ -174,7 +174,7 @@ if(L1prefiringWeight>max){
 max=L1prefiringWeight;}
 	}
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	if(Z2Flav==-169 && Z1Flav==-169){ //cout<<"jentry: "<<jentry<<"	"<<xsec<<endl;
+	if(Z2Flav==-169 && Z1Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<xsec<<endl;
 x=ZZMass;
 y=KFactor_EW_qqZZ;
 z=overallEventWeight;

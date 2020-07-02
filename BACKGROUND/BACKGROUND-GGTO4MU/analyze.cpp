@@ -29,8 +29,9 @@ int main(){
 	
 	
 	Analyzer *b = new Analyzer("/home/public/data/2018_MC/ggTo4mu_Contin_MCFM701/");
+	b->Loop();
 	b->ggTo4mu();
-	//b->Loop();
+	
 	
 
 	

@@ -106,7 +106,7 @@ void Analyzer::runArgusModel() {
 	
 	
 	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec  * y * L1prefiringWeight ) / genHEPMCweight * z",RooArgSet(LumiNumber,xsec, y,L1prefiringWeight,genHEPMCweight,z)) ;
+   RooFormulaVar wFunc("gen","(137.0 * 1000 * 0.0133352  * y ) / 28744188.0 * z",RooArgSet( y,z)) ;
    
    // Add column with variable w to previously generated dataset
    RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
@@ -144,7 +144,7 @@ void Analyzer::runArgusModel() {
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   c1->SaveAs("signal-weighted5.pdf");
+   c1->SaveAs("signal-weighted6.pdf");
 }
 void Analyzer::ZZTo4lext1()
 {
@@ -424,6 +424,9 @@ x=ZZMass;
 y=overallEventWeight;
 z=ggH_NNLOPS_weight;
 				test.add(RooArgSet(x));
+ggH_NNLOPS_weight_data.add(RooArgSet(y));
+overallEventWeight_data.add(RooArgSet(z));
+
 suma= suma + (137.0 * 1000 * 0.0133352 * overallEventWeight  ) / 28744188.0 * ggH_NNLOPS_weight;
 counter++;}
 	}	
