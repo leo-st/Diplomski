@@ -20,6 +20,7 @@
 #include "RooChi2Var.h"
 #include "RooDataHist.h"
 #include "RooFormulaVar.h"
+#include "RooMinimizer.h"
 #include <iostream>
 #include <fstream>
  RooRealVar  x("x","x",105,140) ;
@@ -31,15 +32,15 @@ RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
-	TCanvas *c1 = new TCanvas("c1","c1");
+	//TCanvas *canv = new TCanvas("c1","c1");
 	
-	c1->cd();
+	//canv->cd();
 	 
 
    
 	//RooRealVar x("x","x",105,140) ;
 	//RooRealVar x("x","x",0,250) ;
-	RooRealVar mean("mean","Mean of Gaussian",125,120,130) ;
+	/*RooRealVar mean("mean","Mean of Gaussian",125,120,130) ;
 	RooRealVar sigma("sigma","Width of Gaussian",1.2,-2.0,2.5) ;
 	RooRealVar alpha("alpha","alpha",0.1,-3.0,4.0) ;
 	RooRealVar n("n","n",100,0,250) ;
@@ -47,7 +48,29 @@ void Analyzer::runArgusModel() {
 	RooRealVar n2("n2","n2",10,-100,250) ;
 	RooRealVar shift("shift","shift",0.15) ;
 	RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
-	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mH, sigma, alpha, n, alpha2 ,n2);
+	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mH, sigma, alpha, n, alpha2 ,n2);*/
+
+
+	//RooRealVar Masa("Masa","Masa",105,140) ;
+		//RooRealVar x("x","x",0,250) ;
+		RooRealVar mean("mean","Mean of Gaussian",124.85,124.65,125.05) ;
+		//RooRealVar mean("mean","Mean of Gaussian",124.85) ;
+		/*RooRealVar sigma("sigma","Width of Gaussian",1.13,0.92,1.34) ;
+		RooRealVar alpha("alpha","alpha",1.24,0.75,1.73) ;
+		RooRealVar n("n","n",2.0,0.7,3.3) ;
+		RooRealVar alpha2("alpha2","alpha2",1.72,1.0,2.44) ;
+		RooRealVar n2("n2","n2",3.5,-0.8,7.8) ;*/
+
+		RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
+		RooRealVar alpha("alpha","alpha",1.24) ;
+		RooRealVar n("n","n",2.0) ;
+		RooRealVar alpha2("alpha2","alpha2",1.72) ;
+		RooRealVar n2("n2","n2",3.5) ;
+
+		//RooRealVar shift("shift","shift",0.15);
+		//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
+		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
+
 
 
 
@@ -123,7 +146,7 @@ void Analyzer::runArgusModel() {
  //g.fitTo(wdata, Range(110,140));
    
    //mean.setConstant(kTRUE) ;
- CBall.fitTo(wdata, Range(105,140));
+ /*CBall.fitTo(wdata, Range(105,140));
  //CBall.fitTo(data, Range(110,140));
 
 	//samo gausijan test
@@ -146,7 +169,21 @@ cout<<mH.evaluate()<<endl;
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   c1->SaveAs("signal-weighted7.pdf");
+   canv->SaveAs("signal-weighted7.pdf");*/
+RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
+	RooMinimizer(*nll).migrad();
+	 RooPlot* frame1 = mean.frame(Bins(10),Range(124.7,125.0),Title("LL and profileLL in mean")) ;
+   nll->plotOn(frame1,ShiftToZero()) ;
+	RooAbsReal* pll_frac = nll->createProfile(mean) ;
+	pll_frac->plotOn(frame1,LineColor(kRed)) ;
+	frame1->SetMinimum(0);
+	frame1->SetMaximum(0.25);
+	 TCanvas *canv = new TCanvas("rf605_profilell","rf605_profilell",800, 400);
+     canv->cd(1) ; frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
+canv->SaveAs("maxlike-signal10.pdf");
+   delete pll_frac ;
+   delete nll ;
+
 }
 void Analyzer::ZZTo4lext1()
 {
