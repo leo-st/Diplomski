@@ -45,7 +45,9 @@ void Analyzer::runArgusModel() {
 	RooRealVar n("n","n",100,0,250) ;
 	RooRealVar alpha2("alpha2","alpha2",0.2,-5.0,5.2) ;
 	RooRealVar n2("n2","n2",10,-100,250) ;
-	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
+	RooRealVar shift("shift","shift",0.15) ;
+	RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
+	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mH, sigma, alpha, n, alpha2 ,n2);
 
 
 
@@ -130,7 +132,7 @@ void Analyzer::runArgusModel() {
 	//gauss.plotOn(xframe);
 	//xframe->Draw();
 
-
+cout<<mH.evaluate()<<endl;
 
 
    // --- Plot toy data and composite PDF overlaid ---
@@ -144,7 +146,7 @@ void Analyzer::runArgusModel() {
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   c1->SaveAs("signal-weighted6.pdf");
+   c1->SaveAs("signal-weighted7.pdf");
 }
 void Analyzer::ZZTo4lext1()
 {

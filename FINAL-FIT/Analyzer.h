@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon May  4 15:02:43 2020 by ROOT version 6.20/04
+// Fri Jul  3 12:44:12 2020 by ROOT version 6.20/06
 // from TTree candTree/Event Summary
-// found on file: /home/public/data/HiggsMassMeasurement/2018/ggH125/ZZ4lAnalysis.root
+// found on file: /home/public/data/Data_Run2/ZZ4lAnalysis.root
 //////////////////////////////////////////////////////////
 
 #ifndef Analyzer_h
@@ -11,10 +11,6 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
-#include "RooDoubleCB.h"
-#include "RooGenericPdf.h"
-
-
 
 // Header file for the classes stored in the TTree if any.
 #include "vector"
@@ -30,7 +26,6 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
-	
 
    // Declaration of leaf types
    Int_t           RunNumber;
@@ -189,118 +184,6 @@ public :
    vector<float>   *ExtraLepPhi;
    vector<short>   *ExtraLepLepId;
    Float_t         ZXFakeweight;
-   Float_t         KFactor_QCD_ggZZ_Nominal;
-   Float_t         KFactor_QCD_ggZZ_PDFScaleDn;
-   Float_t         KFactor_QCD_ggZZ_PDFScaleUp;
-   Float_t         KFactor_QCD_ggZZ_QCDScaleDn;
-   Float_t         KFactor_QCD_ggZZ_QCDScaleUp;
-   Float_t         KFactor_QCD_ggZZ_AsDn;
-   Float_t         KFactor_QCD_ggZZ_AsUp;
-   Float_t         KFactor_QCD_ggZZ_PDFReplicaDn;
-   Float_t         KFactor_QCD_ggZZ_PDFReplicaUp;
-   Short_t         genFinalState;
-   Int_t           genProcessId;
-   Float_t         genHEPMCweight;
-   Float_t         genHEPMCweight_NNLO;
-   Float_t         genHEPMCweight_POWHEGonly;
-   Float_t         PUWeight;
-   Float_t         PUWeight_Dn;
-   Float_t         PUWeight_Up;
-   Float_t         dataMCWeight;
-   Float_t         trigEffWeight;
-   Float_t         overallEventWeight;
-   Float_t         L1prefiringWeight;
-   Float_t         L1prefiringWeightUp;
-   Float_t         L1prefiringWeightDn;
-   Float_t         HqTMCweight;
-   Float_t         xsec;
-   Float_t         genxsec;
-   Float_t         genBR;
-   Short_t         genExtInfo;
-   Float_t         GenHMass;
-   Float_t         GenHPt;
-   Float_t         GenHRapidity;
-   Float_t         GenZ1Mass;
-   Float_t         GenZ1Pt;
-   Float_t         GenZ1Phi;
-   Float_t         GenZ1Flav;
-   Float_t         GenZ2Mass;
-   Float_t         GenZ2Pt;
-   Float_t         GenZ2Phi;
-   Float_t         GenZ2Flav;
-   Float_t         GenLep1Pt;
-   Float_t         GenLep1Eta;
-   Float_t         GenLep1Phi;
-   Short_t         GenLep1Id;
-   Float_t         GenLep2Pt;
-   Float_t         GenLep2Eta;
-   Float_t         GenLep2Phi;
-   Short_t         GenLep2Id;
-   Float_t         GenLep3Pt;
-   Float_t         GenLep3Eta;
-   Float_t         GenLep3Phi;
-   Short_t         GenLep3Id;
-   Float_t         GenLep4Pt;
-   Float_t         GenLep4Eta;
-   Float_t         GenLep4Phi;
-   Short_t         GenLep4Id;
-   Float_t         GenAssocLep1Pt;
-   Float_t         GenAssocLep1Eta;
-   Float_t         GenAssocLep1Phi;
-   Short_t         GenAssocLep1Id;
-   Float_t         GenAssocLep2Pt;
-   Float_t         GenAssocLep2Eta;
-   Float_t         GenAssocLep2Phi;
-   Short_t         GenAssocLep2Id;
-   Int_t           htxs_errorCode;
-   Int_t           htxs_prodMode;
-   Int_t           htxsNJets;
-   Float_t         htxsHPt;
-   Int_t           htxs_stage0_cat;
-   Int_t           htxs_stage1p1_cat;
-   Int_t           htxs_stage1p2_cat;
-   Float_t         ggH_NNLOPS_weight;
-   Float_t         ggH_NNLOPS_weight_unc;
-   vector<float>   *qcd_ggF_uncertSF;
-   vector<float>   *LHEMotherPz;
-   vector<float>   *LHEMotherE;
-   vector<short>   *LHEMotherId;
-   vector<float>   *LHEDaughterPt;
-   vector<float>   *LHEDaughterEta;
-   vector<float>   *LHEDaughterPhi;
-   vector<float>   *LHEDaughterMass;
-   vector<short>   *LHEDaughterId;
-   vector<float>   *LHEAssociatedParticlePt;
-   vector<float>   *LHEAssociatedParticleEta;
-   vector<float>   *LHEAssociatedParticlePhi;
-   vector<float>   *LHEAssociatedParticleMass;
-   vector<short>   *LHEAssociatedParticleId;
-   Float_t         LHEPDFScale;
-   Float_t         LHEweight_QCDscale_muR1_muF1;
-   Float_t         LHEweight_QCDscale_muR1_muF2;
-   Float_t         LHEweight_QCDscale_muR1_muF0p5;
-   Float_t         LHEweight_QCDscale_muR2_muF1;
-   Float_t         LHEweight_QCDscale_muR2_muF2;
-   Float_t         LHEweight_QCDscale_muR2_muF0p5;
-   Float_t         LHEweight_QCDscale_muR0p5_muF1;
-   Float_t         LHEweight_QCDscale_muR0p5_muF2;
-   Float_t         LHEweight_QCDscale_muR0p5_muF0p5;
-   Float_t         LHEweight_PDFVariation_Up;
-   Float_t         LHEweight_PDFVariation_Dn;
-   Float_t         LHEweight_AsMZ_Up;
-   Float_t         LHEweight_AsMZ_Dn;
-   Float_t         PythiaWeight_isr_muR4;
-   Float_t         PythiaWeight_isr_muR2;
-   Float_t         PythiaWeight_isr_muRsqrt2;
-   Float_t         PythiaWeight_isr_muRoneoversqrt2;
-   Float_t         PythiaWeight_isr_muR0p5;
-   Float_t         PythiaWeight_isr_muR0p25;
-   Float_t         PythiaWeight_fsr_muR4;
-   Float_t         PythiaWeight_fsr_muR2;
-   Float_t         PythiaWeight_fsr_muRsqrt2;
-   Float_t         PythiaWeight_fsr_muRoneoversqrt2;
-   Float_t         PythiaWeight_fsr_muR0p5;
-   Float_t         PythiaWeight_fsr_muR0p25;
    Float_t         pConst_GG_SIG_ghg2_1_ghz1_1_JHUGen;
    Float_t         p_GG_SIG_ghg2_1_ghz1_1_JHUGen;
    Float_t         p_GG_SIG_ghg2_1_ghz1prime2_1E4_JHUGen;
@@ -899,46 +782,6 @@ public :
    Float_t         p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ;
    Float_t         pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;
    Float_t         p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;
-   Float_t         p_Gen_CPStoBWPropRewgt;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM;
-   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM;
-   Float_t         p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM;
-   Float_t         p_Gen_GG_BKG_MCFM;
-   Float_t         p_Gen_QQB_BKG_MCFM;
-   Float_t         p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen;
-   Float_t         p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen;
 
    // List of branches
    TBranch        *b_RunNumber;   //!
@@ -1097,118 +940,6 @@ public :
    TBranch        *b_ExtraLepPhi;   //!
    TBranch        *b_ExtraLepLepId;   //!
    TBranch        *b_ZXFakeweight;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_Nominal;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_PDFScaleDn;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_PDFScaleUp;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_QCDScaleDn;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_QCDScaleUp;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_AsDn;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_AsUp;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_PDFReplicaDn;   //!
-   TBranch        *b_KFactor_QCD_ggZZ_PDFReplicaUp;   //!
-   TBranch        *b_genFinalState;   //!
-   TBranch        *b_genProcessId;   //!
-   TBranch        *b_genHEPMCweight;   //!
-   TBranch        *b_genHEPMCweight_NNLO;   //!
-   TBranch        *b_genHEPMCweight_POWHEGonly;   //!
-   TBranch        *b_PUWeight;   //!
-   TBranch        *b_PUWeight_Dn;   //!
-   TBranch        *b_PUWeight_Up;   //!
-   TBranch        *b_dataMCWeight;   //!
-   TBranch        *b_trigEffWeight;   //!
-   TBranch        *b_overallEventWeight;   //!
-   TBranch        *b_L1prefiringWeight;   //!
-   TBranch        *b_L1prefiringWeightUp;   //!
-   TBranch        *b_L1prefiringWeightDn;   //!
-   TBranch        *b_HqTMCweight;   //!
-   TBranch        *b_xsec;   //!
-   TBranch        *b_genxsec;   //!
-   TBranch        *b_genBR;   //!
-   TBranch        *b_genExtInfo;   //!
-   TBranch        *b_GenHMass;   //!
-   TBranch        *b_GenHPt;   //!
-   TBranch        *b_GenHRapidity;   //!
-   TBranch        *b_GenZ1Mass;   //!
-   TBranch        *b_GenZ1Pt;   //!
-   TBranch        *b_GenZ1Phi;   //!
-   TBranch        *b_GenZ1Flav;   //!
-   TBranch        *b_GenZ2Mass;   //!
-   TBranch        *b_GenZ2Pt;   //!
-   TBranch        *b_GenZ2Phi;   //!
-   TBranch        *b_GenZ2Flav;   //!
-   TBranch        *b_GenLep1Pt;   //!
-   TBranch        *b_GenLep1Eta;   //!
-   TBranch        *b_GenLep1Phi;   //!
-   TBranch        *b_GenLep1Id;   //!
-   TBranch        *b_GenLep2Pt;   //!
-   TBranch        *b_GenLep2Eta;   //!
-   TBranch        *b_GenLep2Phi;   //!
-   TBranch        *b_GenLep2Id;   //!
-   TBranch        *b_GenLep3Pt;   //!
-   TBranch        *b_GenLep3Eta;   //!
-   TBranch        *b_GenLep3Phi;   //!
-   TBranch        *b_GenLep3Id;   //!
-   TBranch        *b_GenLep4Pt;   //!
-   TBranch        *b_GenLep4Eta;   //!
-   TBranch        *b_GenLep4Phi;   //!
-   TBranch        *b_GenLep4Id;   //!
-   TBranch        *b_GenAssocLep1Pt;   //!
-   TBranch        *b_GenAssocLep1Eta;   //!
-   TBranch        *b_GenAssocLep1Phi;   //!
-   TBranch        *b_GenAssocLep1Id;   //!
-   TBranch        *b_GenAssocLep2Pt;   //!
-   TBranch        *b_GenAssocLep2Eta;   //!
-   TBranch        *b_GenAssocLep2Phi;   //!
-   TBranch        *b_GenAssocLep2Id;   //!
-   TBranch        *b_htxs_errorCode;   //!
-   TBranch        *b_htxs_prodMode;   //!
-   TBranch        *b_htxsNJets;   //!
-   TBranch        *b_htxsHPt;   //!
-   TBranch        *b_htxs_stage0_cat;   //!
-   TBranch        *b_htxs_stage1p1_cat;   //!
-   TBranch        *b_htxs_stage1p2_cat;   //!
-   TBranch        *b_ggH_NNLOPS_weight;   //!
-   TBranch        *b_ggH_NNLOPS_weight_unc;   //!
-   TBranch        *b_qcd_ggF_uncertSF;   //!
-   TBranch        *b_LHEMotherPz;   //!
-   TBranch        *b_LHEMotherE;   //!
-   TBranch        *b_LHEMotherId;   //!
-   TBranch        *b_LHEDaughterPt;   //!
-   TBranch        *b_LHEDaughterEta;   //!
-   TBranch        *b_LHEDaughterPhi;   //!
-   TBranch        *b_LHEDaughterMass;   //!
-   TBranch        *b_LHEDaughterId;   //!
-   TBranch        *b_LHEAssociatedParticlePt;   //!
-   TBranch        *b_LHEAssociatedParticleEta;   //!
-   TBranch        *b_LHEAssociatedParticlePhi;   //!
-   TBranch        *b_LHEAssociatedParticleMass;   //!
-   TBranch        *b_LHEAssociatedParticleId;   //!
-   TBranch        *b_LHEPDFScale;   //!
-   TBranch        *b_LHEweight_QCDscale_muR1_muF1;   //!
-   TBranch        *b_LHEweight_QCDscale_muR1_muF2;   //!
-   TBranch        *b_LHEweight_QCDscale_muR1_muF0p5;   //!
-   TBranch        *b_LHEweight_QCDscale_muR2_muF1;   //!
-   TBranch        *b_LHEweight_QCDscale_muR2_muF2;   //!
-   TBranch        *b_LHEweight_QCDscale_muR2_muF0p5;   //!
-   TBranch        *b_LHEweight_QCDscale_muR0p5_muF1;   //!
-   TBranch        *b_LHEweight_QCDscale_muR0p5_muF2;   //!
-   TBranch        *b_LHEweight_QCDscale_muR0p5_muF0p5;   //!
-   TBranch        *b_LHEweight_PDFVariation_Up;   //!
-   TBranch        *b_LHEweight_PDFVariation_Dn;   //!
-   TBranch        *b_LHEweight_AsMZ_Up;   //!
-   TBranch        *b_LHEweight_AsMZ_Dn;   //!
-   TBranch        *b_PythiaWeight_isr_muR4;   //!
-   TBranch        *b_PythiaWeight_isr_muR2;   //!
-   TBranch        *b_PythiaWeight_isr_muRsqrt2;   //!
-   TBranch        *b_PythiaWeight_isr_muRoneoversqrt2;   //!
-   TBranch        *b_PythiaWeight_isr_muR0p5;   //!
-   TBranch        *b_PythiaWeight_isr_muR0p25;   //!
-   TBranch        *b_PythiaWeight_fsr_muR4;   //!
-   TBranch        *b_PythiaWeight_fsr_muR2;   //!
-   TBranch        *b_PythiaWeight_fsr_muRsqrt2;   //!
-   TBranch        *b_PythiaWeight_fsr_muRoneoversqrt2;   //!
-   TBranch        *b_PythiaWeight_fsr_muR0p5;   //!
-   TBranch        *b_PythiaWeight_fsr_muR0p25;   //!
    TBranch        *b_pConst_GG_SIG_ghg2_1_ghz1_1_JHUGen;   //!
    TBranch        *b_p_GG_SIG_ghg2_1_ghz1_1_JHUGen;   //!
    TBranch        *b_p_GG_SIG_ghg2_1_ghz1prime2_1E4_JHUGen;   //!
@@ -1807,60 +1538,17 @@ public :
    TBranch        *b_p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ;   //!
    TBranch        *b_pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;   //!
    TBranch        *b_p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;   //!
-   TBranch        *b_p_Gen_CPStoBWPropRewgt;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM;   //!
-   TBranch        *b_p_Gen_GG_BKG_MCFM;   //!
-   TBranch        *b_p_Gen_QQB_BKG_MCFM;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen;   //!
-   TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen;   //!
 
-   Analyzer(TString path,TTree *tree=0);
+   Analyzer(TString path, TTree *tree=0);
    virtual ~Analyzer();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   
+   virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
-virtual void sumall();
-
-
-
+	virtual void sumall();
 };
 
 #endif
@@ -1868,16 +1556,14 @@ virtual void sumall();
 #ifdef Analyzer_cxx
 Analyzer::Analyzer(TString path, TTree *tree) : fChain(0) 
 {
-
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(path+ "ZZ4lAnalysis.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(path+"ZZ4lAnalysis.root");
       if (!f || !f->IsOpen()) {
          f = new TFile(path+"ZZ4lAnalysis.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get(path+ "ZZ4lAnalysis.root:/ZZTree");
-      dir->GetObject("candTree",tree);
+      f->GetObject("candTree",tree);
 
    }
    Init(tree);
@@ -1991,20 +1677,6 @@ void Analyzer::Init(TTree *tree)
    ExtraLepEta = 0;
    ExtraLepPhi = 0;
    ExtraLepLepId = 0;
-   qcd_ggF_uncertSF = 0;
-   LHEMotherPz = 0;
-   LHEMotherE = 0;
-   LHEMotherId = 0;
-   LHEDaughterPt = 0;
-   LHEDaughterEta = 0;
-   LHEDaughterPhi = 0;
-   LHEDaughterMass = 0;
-   LHEDaughterId = 0;
-   LHEAssociatedParticlePt = 0;
-   LHEAssociatedParticleEta = 0;
-   LHEAssociatedParticlePhi = 0;
-   LHEAssociatedParticleMass = 0;
-   LHEAssociatedParticleId = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -2167,118 +1839,6 @@ void Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("ExtraLepPhi", &ExtraLepPhi, &b_ExtraLepPhi);
    fChain->SetBranchAddress("ExtraLepLepId", &ExtraLepLepId, &b_ExtraLepLepId);
    fChain->SetBranchAddress("ZXFakeweight", &ZXFakeweight, &b_ZXFakeweight);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_Nominal", &KFactor_QCD_ggZZ_Nominal, &b_KFactor_QCD_ggZZ_Nominal);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFScaleDn", &KFactor_QCD_ggZZ_PDFScaleDn, &b_KFactor_QCD_ggZZ_PDFScaleDn);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFScaleUp", &KFactor_QCD_ggZZ_PDFScaleUp, &b_KFactor_QCD_ggZZ_PDFScaleUp);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_QCDScaleDn", &KFactor_QCD_ggZZ_QCDScaleDn, &b_KFactor_QCD_ggZZ_QCDScaleDn);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_QCDScaleUp", &KFactor_QCD_ggZZ_QCDScaleUp, &b_KFactor_QCD_ggZZ_QCDScaleUp);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_AsDn", &KFactor_QCD_ggZZ_AsDn, &b_KFactor_QCD_ggZZ_AsDn);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_AsUp", &KFactor_QCD_ggZZ_AsUp, &b_KFactor_QCD_ggZZ_AsUp);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFReplicaDn", &KFactor_QCD_ggZZ_PDFReplicaDn, &b_KFactor_QCD_ggZZ_PDFReplicaDn);
-   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFReplicaUp", &KFactor_QCD_ggZZ_PDFReplicaUp, &b_KFactor_QCD_ggZZ_PDFReplicaUp);
-   fChain->SetBranchAddress("genFinalState", &genFinalState, &b_genFinalState);
-   fChain->SetBranchAddress("genProcessId", &genProcessId, &b_genProcessId);
-   fChain->SetBranchAddress("genHEPMCweight", &genHEPMCweight, &b_genHEPMCweight);
-   fChain->SetBranchAddress("genHEPMCweight_NNLO", &genHEPMCweight_NNLO, &b_genHEPMCweight_NNLO);
-   fChain->SetBranchAddress("genHEPMCweight_POWHEGonly", &genHEPMCweight_POWHEGonly, &b_genHEPMCweight_POWHEGonly);
-   fChain->SetBranchAddress("PUWeight", &PUWeight, &b_PUWeight);
-   fChain->SetBranchAddress("PUWeight_Dn", &PUWeight_Dn, &b_PUWeight_Dn);
-   fChain->SetBranchAddress("PUWeight_Up", &PUWeight_Up, &b_PUWeight_Up);
-   fChain->SetBranchAddress("dataMCWeight", &dataMCWeight, &b_dataMCWeight);
-   fChain->SetBranchAddress("trigEffWeight", &trigEffWeight, &b_trigEffWeight);
-   fChain->SetBranchAddress("overallEventWeight", &overallEventWeight, &b_overallEventWeight);
-   fChain->SetBranchAddress("L1prefiringWeight", &L1prefiringWeight, &b_L1prefiringWeight);
-   fChain->SetBranchAddress("L1prefiringWeightUp", &L1prefiringWeightUp, &b_L1prefiringWeightUp);
-   fChain->SetBranchAddress("L1prefiringWeightDn", &L1prefiringWeightDn, &b_L1prefiringWeightDn);
-   fChain->SetBranchAddress("HqTMCweight", &HqTMCweight, &b_HqTMCweight);
-   fChain->SetBranchAddress("xsec", &xsec, &b_xsec);
-   fChain->SetBranchAddress("genxsec", &genxsec, &b_genxsec);
-   fChain->SetBranchAddress("genBR", &genBR, &b_genBR);
-   fChain->SetBranchAddress("genExtInfo", &genExtInfo, &b_genExtInfo);
-   fChain->SetBranchAddress("GenHMass", &GenHMass, &b_GenHMass);
-   fChain->SetBranchAddress("GenHPt", &GenHPt, &b_GenHPt);
-   fChain->SetBranchAddress("GenHRapidity", &GenHRapidity, &b_GenHRapidity);
-   fChain->SetBranchAddress("GenZ1Mass", &GenZ1Mass, &b_GenZ1Mass);
-   fChain->SetBranchAddress("GenZ1Pt", &GenZ1Pt, &b_GenZ1Pt);
-   fChain->SetBranchAddress("GenZ1Phi", &GenZ1Phi, &b_GenZ1Phi);
-   fChain->SetBranchAddress("GenZ1Flav", &GenZ1Flav, &b_GenZ1Flav);
-   fChain->SetBranchAddress("GenZ2Mass", &GenZ2Mass, &b_GenZ2Mass);
-   fChain->SetBranchAddress("GenZ2Pt", &GenZ2Pt, &b_GenZ2Pt);
-   fChain->SetBranchAddress("GenZ2Phi", &GenZ2Phi, &b_GenZ2Phi);
-   fChain->SetBranchAddress("GenZ2Flav", &GenZ2Flav, &b_GenZ2Flav);
-   fChain->SetBranchAddress("GenLep1Pt", &GenLep1Pt, &b_GenLep1Pt);
-   fChain->SetBranchAddress("GenLep1Eta", &GenLep1Eta, &b_GenLep1Eta);
-   fChain->SetBranchAddress("GenLep1Phi", &GenLep1Phi, &b_GenLep1Phi);
-   fChain->SetBranchAddress("GenLep1Id", &GenLep1Id, &b_GenLep1Id);
-   fChain->SetBranchAddress("GenLep2Pt", &GenLep2Pt, &b_GenLep2Pt);
-   fChain->SetBranchAddress("GenLep2Eta", &GenLep2Eta, &b_GenLep2Eta);
-   fChain->SetBranchAddress("GenLep2Phi", &GenLep2Phi, &b_GenLep2Phi);
-   fChain->SetBranchAddress("GenLep2Id", &GenLep2Id, &b_GenLep2Id);
-   fChain->SetBranchAddress("GenLep3Pt", &GenLep3Pt, &b_GenLep3Pt);
-   fChain->SetBranchAddress("GenLep3Eta", &GenLep3Eta, &b_GenLep3Eta);
-   fChain->SetBranchAddress("GenLep3Phi", &GenLep3Phi, &b_GenLep3Phi);
-   fChain->SetBranchAddress("GenLep3Id", &GenLep3Id, &b_GenLep3Id);
-   fChain->SetBranchAddress("GenLep4Pt", &GenLep4Pt, &b_GenLep4Pt);
-   fChain->SetBranchAddress("GenLep4Eta", &GenLep4Eta, &b_GenLep4Eta);
-   fChain->SetBranchAddress("GenLep4Phi", &GenLep4Phi, &b_GenLep4Phi);
-   fChain->SetBranchAddress("GenLep4Id", &GenLep4Id, &b_GenLep4Id);
-   fChain->SetBranchAddress("GenAssocLep1Pt", &GenAssocLep1Pt, &b_GenAssocLep1Pt);
-   fChain->SetBranchAddress("GenAssocLep1Eta", &GenAssocLep1Eta, &b_GenAssocLep1Eta);
-   fChain->SetBranchAddress("GenAssocLep1Phi", &GenAssocLep1Phi, &b_GenAssocLep1Phi);
-   fChain->SetBranchAddress("GenAssocLep1Id", &GenAssocLep1Id, &b_GenAssocLep1Id);
-   fChain->SetBranchAddress("GenAssocLep2Pt", &GenAssocLep2Pt, &b_GenAssocLep2Pt);
-   fChain->SetBranchAddress("GenAssocLep2Eta", &GenAssocLep2Eta, &b_GenAssocLep2Eta);
-   fChain->SetBranchAddress("GenAssocLep2Phi", &GenAssocLep2Phi, &b_GenAssocLep2Phi);
-   fChain->SetBranchAddress("GenAssocLep2Id", &GenAssocLep2Id, &b_GenAssocLep2Id);
-   fChain->SetBranchAddress("htxs_errorCode", &htxs_errorCode, &b_htxs_errorCode);
-   fChain->SetBranchAddress("htxs_prodMode", &htxs_prodMode, &b_htxs_prodMode);
-   fChain->SetBranchAddress("htxsNJets", &htxsNJets, &b_htxsNJets);
-   fChain->SetBranchAddress("htxsHPt", &htxsHPt, &b_htxsHPt);
-   fChain->SetBranchAddress("htxs_stage0_cat", &htxs_stage0_cat, &b_htxs_stage0_cat);
-   fChain->SetBranchAddress("htxs_stage1p1_cat", &htxs_stage1p1_cat, &b_htxs_stage1p1_cat);
-   fChain->SetBranchAddress("htxs_stage1p2_cat", &htxs_stage1p2_cat, &b_htxs_stage1p2_cat);
-   fChain->SetBranchAddress("ggH_NNLOPS_weight", &ggH_NNLOPS_weight, &b_ggH_NNLOPS_weight);
-   fChain->SetBranchAddress("ggH_NNLOPS_weight_unc", &ggH_NNLOPS_weight_unc, &b_ggH_NNLOPS_weight_unc);
-   fChain->SetBranchAddress("qcd_ggF_uncertSF", &qcd_ggF_uncertSF, &b_qcd_ggF_uncertSF);
-   fChain->SetBranchAddress("LHEMotherPz", &LHEMotherPz, &b_LHEMotherPz);
-   fChain->SetBranchAddress("LHEMotherE", &LHEMotherE, &b_LHEMotherE);
-   fChain->SetBranchAddress("LHEMotherId", &LHEMotherId, &b_LHEMotherId);
-   fChain->SetBranchAddress("LHEDaughterPt", &LHEDaughterPt, &b_LHEDaughterPt);
-   fChain->SetBranchAddress("LHEDaughterEta", &LHEDaughterEta, &b_LHEDaughterEta);
-   fChain->SetBranchAddress("LHEDaughterPhi", &LHEDaughterPhi, &b_LHEDaughterPhi);
-   fChain->SetBranchAddress("LHEDaughterMass", &LHEDaughterMass, &b_LHEDaughterMass);
-   fChain->SetBranchAddress("LHEDaughterId", &LHEDaughterId, &b_LHEDaughterId);
-   fChain->SetBranchAddress("LHEAssociatedParticlePt", &LHEAssociatedParticlePt, &b_LHEAssociatedParticlePt);
-   fChain->SetBranchAddress("LHEAssociatedParticleEta", &LHEAssociatedParticleEta, &b_LHEAssociatedParticleEta);
-   fChain->SetBranchAddress("LHEAssociatedParticlePhi", &LHEAssociatedParticlePhi, &b_LHEAssociatedParticlePhi);
-   fChain->SetBranchAddress("LHEAssociatedParticleMass", &LHEAssociatedParticleMass, &b_LHEAssociatedParticleMass);
-   fChain->SetBranchAddress("LHEAssociatedParticleId", &LHEAssociatedParticleId, &b_LHEAssociatedParticleId);
-   fChain->SetBranchAddress("LHEPDFScale", &LHEPDFScale, &b_LHEPDFScale);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR1_muF1", &LHEweight_QCDscale_muR1_muF1, &b_LHEweight_QCDscale_muR1_muF1);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR1_muF2", &LHEweight_QCDscale_muR1_muF2, &b_LHEweight_QCDscale_muR1_muF2);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR1_muF0p5", &LHEweight_QCDscale_muR1_muF0p5, &b_LHEweight_QCDscale_muR1_muF0p5);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR2_muF1", &LHEweight_QCDscale_muR2_muF1, &b_LHEweight_QCDscale_muR2_muF1);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR2_muF2", &LHEweight_QCDscale_muR2_muF2, &b_LHEweight_QCDscale_muR2_muF2);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR2_muF0p5", &LHEweight_QCDscale_muR2_muF0p5, &b_LHEweight_QCDscale_muR2_muF0p5);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR0p5_muF1", &LHEweight_QCDscale_muR0p5_muF1, &b_LHEweight_QCDscale_muR0p5_muF1);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR0p5_muF2", &LHEweight_QCDscale_muR0p5_muF2, &b_LHEweight_QCDscale_muR0p5_muF2);
-   fChain->SetBranchAddress("LHEweight_QCDscale_muR0p5_muF0p5", &LHEweight_QCDscale_muR0p5_muF0p5, &b_LHEweight_QCDscale_muR0p5_muF0p5);
-   fChain->SetBranchAddress("LHEweight_PDFVariation_Up", &LHEweight_PDFVariation_Up, &b_LHEweight_PDFVariation_Up);
-   fChain->SetBranchAddress("LHEweight_PDFVariation_Dn", &LHEweight_PDFVariation_Dn, &b_LHEweight_PDFVariation_Dn);
-   fChain->SetBranchAddress("LHEweight_AsMZ_Up", &LHEweight_AsMZ_Up, &b_LHEweight_AsMZ_Up);
-   fChain->SetBranchAddress("LHEweight_AsMZ_Dn", &LHEweight_AsMZ_Dn, &b_LHEweight_AsMZ_Dn);
-   fChain->SetBranchAddress("PythiaWeight_isr_muR4", &PythiaWeight_isr_muR4, &b_PythiaWeight_isr_muR4);
-   fChain->SetBranchAddress("PythiaWeight_isr_muR2", &PythiaWeight_isr_muR2, &b_PythiaWeight_isr_muR2);
-   fChain->SetBranchAddress("PythiaWeight_isr_muRsqrt2", &PythiaWeight_isr_muRsqrt2, &b_PythiaWeight_isr_muRsqrt2);
-   fChain->SetBranchAddress("PythiaWeight_isr_muRoneoversqrt2", &PythiaWeight_isr_muRoneoversqrt2, &b_PythiaWeight_isr_muRoneoversqrt2);
-   fChain->SetBranchAddress("PythiaWeight_isr_muR0p5", &PythiaWeight_isr_muR0p5, &b_PythiaWeight_isr_muR0p5);
-   fChain->SetBranchAddress("PythiaWeight_isr_muR0p25", &PythiaWeight_isr_muR0p25, &b_PythiaWeight_isr_muR0p25);
-   fChain->SetBranchAddress("PythiaWeight_fsr_muR4", &PythiaWeight_fsr_muR4, &b_PythiaWeight_fsr_muR4);
-   fChain->SetBranchAddress("PythiaWeight_fsr_muR2", &PythiaWeight_fsr_muR2, &b_PythiaWeight_fsr_muR2);
-   fChain->SetBranchAddress("PythiaWeight_fsr_muRsqrt2", &PythiaWeight_fsr_muRsqrt2, &b_PythiaWeight_fsr_muRsqrt2);
-   fChain->SetBranchAddress("PythiaWeight_fsr_muRoneoversqrt2", &PythiaWeight_fsr_muRoneoversqrt2, &b_PythiaWeight_fsr_muRoneoversqrt2);
-   fChain->SetBranchAddress("PythiaWeight_fsr_muR0p5", &PythiaWeight_fsr_muR0p5, &b_PythiaWeight_fsr_muR0p5);
-   fChain->SetBranchAddress("PythiaWeight_fsr_muR0p25", &PythiaWeight_fsr_muR0p25, &b_PythiaWeight_fsr_muR0p25);
    fChain->SetBranchAddress("pConst_GG_SIG_ghg2_1_ghz1_1_JHUGen", &pConst_GG_SIG_ghg2_1_ghz1_1_JHUGen, &b_pConst_GG_SIG_ghg2_1_ghz1_1_JHUGen);
    fChain->SetBranchAddress("p_GG_SIG_ghg2_1_ghz1_1_JHUGen", &p_GG_SIG_ghg2_1_ghz1_1_JHUGen, &b_p_GG_SIG_ghg2_1_ghz1_1_JHUGen);
    fChain->SetBranchAddress("p_GG_SIG_ghg2_1_ghz1prime2_1E4_JHUGen", &p_GG_SIG_ghg2_1_ghz1prime2_1E4_JHUGen, &b_p_GG_SIG_ghg2_1_ghz1prime2_1E4_JHUGen);
@@ -2877,46 +2437,6 @@ void Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ", &p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ, &b_p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ);
    fChain->SetBranchAddress("pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ", &pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ, &b_pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ);
    fChain->SetBranchAddress("p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ", &p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ, &b_p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ);
-   fChain->SetBranchAddress("p_Gen_CPStoBWPropRewgt", &p_Gen_CPStoBWPropRewgt, &b_p_Gen_CPStoBWPropRewgt);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_BKG_MCFM", &p_Gen_GG_BKG_MCFM, &b_p_Gen_GG_BKG_MCFM);
-   fChain->SetBranchAddress("p_Gen_QQB_BKG_MCFM", &p_Gen_QQB_BKG_MCFM, &b_p_Gen_QQB_BKG_MCFM);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen", &p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen, &b_p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen", &p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen, &b_p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen", &p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen, &b_p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen", &p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen, &b_p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen", &p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen, &b_p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen);
-   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen", &p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen, &b_p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen);
    Notify();
 }
 

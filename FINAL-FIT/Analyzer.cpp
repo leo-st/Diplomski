@@ -21,25 +21,21 @@
 #include "RooDataHist.h"
 #include "RooFormulaVar.h"
 #include "RooLandau.h"
-#include "RooMinimizer.h"
-#include <fstream>
+#include "RooRealSumPdf.h"
 
-
+RooRealVar  x("x","x",105,140) ;
+RooDataSet test("test","test", RooArgSet(x));
 
 using namespace RooFit;
-
 void Analyzer::sumall(){
-
-	
-		
-		TCanvas *canv = new TCanvas("canv","canv");
+TCanvas *canv = new TCanvas("canv","canv");
 	
 		canv->cd();
 		
 	 
 
    
-		RooRealVar Masa("Masa","Masa",105,140) ;
+		//RooRealVar Masa("Masa","Masa",105,140) ;
 		//RooRealVar x("x","x",0,250) ;
 		RooRealVar mean("mean","Mean of Gaussian",124.85,124.65,125.05) ;
 		RooRealVar sigma("sigma","Width of Gaussian",1.13,0.92,1.34) ;
@@ -47,18 +43,11 @@ void Analyzer::sumall(){
 		RooRealVar n("n","n",2.0,0.7,3.3) ;
 		RooRealVar alpha2("alpha2","alpha2",1.72,1.0,2.44) ;
 		RooRealVar n2("n2","n2",3.5,-0.8,7.8) ;
-
-		/*RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
-		RooRealVar alpha("alpha","alpha",1.24) ;
-		RooRealVar n("n","n",2.0) ;
-		RooRealVar alpha2("alpha2","alpha2",1.72) ;
-		RooRealVar n2("n2","n2",3.5) ;*/
-
 		RooRealVar shift("shift","shift",0.15);
 		RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
-		RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, mH, sigma, alpha, n, alpha2 ,n2);
+		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mH, sigma, alpha, n, alpha2 ,n2);
    
-	   	
+	   
 	   //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 
@@ -96,13 +85,7 @@ void Analyzer::sumall(){
 		RooRealVar a1("a1","a1",-1.010,-1.59,-0.43) ;
 		RooRealVar b1("b1","b1",252.0,115.0,389.0) ;
 		RooRealVar c1("c1","c1",-14493,-22205.0,-6781.0) ;
-		
-		/*RooRealVar a1("a1","a1",-1.010) ;
-		RooRealVar b1("b1","b1",252.0) ;
-		RooRealVar c1("c1","c1",-14493) ;*/
-
-
-		RooGenericPdf g1("g1","a1*Masa*Masa + b1*Masa + c1", RooArgSet(Masa,a1,b1,c1));
+		RooGenericPdf g1("g1","a1*x*x + b1*x + c1", RooArgSet(x,a1,b1,c1));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
 	   
@@ -129,7 +112,6 @@ void Analyzer::sumall(){
 	   data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
 	   g1.plotOn(mesframe,Range(110,140),  LineColor(kRed));
 		g1.paramOn(mesframe, Layout(0.25));
-
 	   //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 		//RooChi2Var chi2("chi2","chi2",g,data) ;
 	   mesframe->Draw();
@@ -147,13 +129,10 @@ void Analyzer::sumall(){
 	   
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a2("a2","a2",0.1,-2.7,2.9) ;
-		RooRealVar b2("b2","b2",38,-326,402) ;
-
-		/*RooRealVar a2("a2","a2",0.1) ;
-		RooRealVar b2("b2","b2",38) ;*/
+		RooRealVar a2("a2","a2",0.1,0.-0.1,0.3) ;
+		RooRealVar b2("b2","b2",0.095,0.07,0.12) ;
 		
-		RooGenericPdf g2("g2","a2*Masa + b2", RooArgSet(Masa,a2,b2));
+		RooGenericPdf g2("g2","a2*x + b2", RooArgSet(x,a2,b2));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
 	   
@@ -169,11 +148,11 @@ void Analyzer::sumall(){
 		//RooPlot* xframe = x.frame();
 		//gauss.plotOn(xframe);
 		//xframe->Draw();
-
-		RooRealVar mean_l("mean_l","mean_l",133.6) ;
+	RooRealVar mean_l("mean_l","mean_l",133.6) ;
 		RooRealVar sigma_l("sigma_l","sigma_l",18.8) ;
 		
-		RooLandau landau("landau","landau(Masa,mean_l,sigma_l)", Masa, mean_l,sigma_l);
+		RooLandau landau("landau","landau(Masa,mean_l,sigma_l)", x, mean_l,sigma_l);
+
 
 
 	   // --- Plot toy data and composite PDF overlaid ---
@@ -183,7 +162,6 @@ void Analyzer::sumall(){
 	   data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
 	   g2.plotOn(mesframe,Range(110,140),  LineColor(kYellow));
 		g2.paramOn(mesframe, Layout(0.25));
-
 	   //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 		//RooChi2Var chi2("chi2","chi2",g,data) ;
 	   mesframe->Draw();
@@ -193,31 +171,19 @@ void Analyzer::sumall(){
 		
 	
 	//RooRealVar masa("masa","masa",110,140);
-	/*RooRealVar nsig("nsig","#signal events",77.589);
+	RooRealVar nsig("nsig","#signal events",77.589);
   	RooRealVar nbkg1("nbkg1","#background events1",82.252);
   	RooRealVar nbkg2("nbkg2","#background events2",9.23738);
-  	RooRealVar nbkg3("nbkg3","#background events3",37.3);*/
-
-	RooRealVar nsig("nsig","#signal events",0.37596);
-  	RooRealVar nbkg1("nbkg1","#background events1",0.39855);
-  	RooRealVar nbkg2("nbkg2","#background events2",0.0447595);
-  	//oRealVar nbkg3("nbkg3","#background events3",37.3);
-
+  	RooRealVar nbkg3("nbkg3","#background events3",37.3);
    	//RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3));
-	RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2),true);
+   	RooRealSumPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3), false);
    	
-   	RooDataSet *podaci = model.generate(Masa, 10000);
+   	RooDataSet *podaci = model.generate(x, 1000);
+   	//model.fitTo(test);
    	model.fitTo(*podaci);
-	//Masa.setRange("signal",105,140);
-	//RooAbsReal* ig = g1.createIntegral(Masa,"signal");
-
-//ovo se nemoze radit jer on racuna integral prije fita a ne nakon i zato ne valja ništa
-	//RooAbsReal* ig = g1.createIntegral(Masa);
-	//cout<<ig->getVal()<<" :::::::::::::::::::::::::::::::::"<<endl;	
-
-
-   	RooPlot* masaframe = Masa.frame();
+   	RooPlot* masaframe = x.frame();
    	
+   	//test.plotOn(masaframe);
    	podaci->plotOn(masaframe);
    	model.plotOn(masaframe);
    	//model.plotOn(masaframe, Components(g1), LineStyle(ELineStyle::kDashed));
@@ -229,24 +195,58 @@ void Analyzer::sumall(){
 	model.paramOn(masaframe, Layout(0.7));
 
    masaframe->Draw();
-   canv->SaveAs("simulacija-8.pdf");
-	/*RooAbsReal* nll = model.createNLL(*podaci, NumCPU(2));
-	RooMinimizer(*nll).migrad();
-	 RooPlot* frame1 = mean.frame(Bins(5),Range(124.0,126.0),Title("LL and profileLL in frac")) ;
-   nll->plotOn(frame1,ShiftToZero()) ;
-	RooAbsReal* pll_frac = nll->createProfile(mean) ;
-	pll_frac->plotOn(frame1,LineColor(kRed)) ;
-	frame1->SetMinimum(0);
-	frame1->SetMaximum(10);
-
-	 TCanvas *canv = new TCanvas("rf605_profilell","rf605_profilell",800, 400);
-     canv->cd(1) ; frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
-canv->SaveAs("maximum.pdf");
-   delete pll_frac ;
-   delete nll ;*/
+   canv->SaveAs("final-test84.pdf");
 
 
 
 }
 
+void Analyzer::Loop()
+{
+int counter=0;
+//   In a ROOT session, you can do:
+//      root> .L Analyzer.C
+//      root> Analyzer t
+//      root> t.GetEntry(12); // Fill t data members with entry number 12
+//      root> t.Show();       // Show values of entry 12
+//      root> t.Show(16);     // Read and show values of entry 16
+//      root> t.Loop();       // Loop on all entries
+//
 
+//     This is the loop skeleton where:
+//    jentry is the global entry number in the chain
+//    ientry is the entry number in the current Tree
+//  Note that the argument to GetEntry must be:
+//    jentry for TChain::GetEntry
+//    ientry for TTree::GetEntry and TBranch::GetEntry
+//
+//       To read only selected branches, Insert statements like:
+// METHOD1:
+//    fChain->SetBranchStatus("*",0);  // disable all branches
+//    fChain->SetBranchStatus("branchname",1);  // activate branchname
+// METHOD2: replace line
+//    fChain->GetEntry(jentry);       //read all branches
+//by  b_branchname->GetEntry(ientry); //read only this branch
+   if (fChain == 0) return;
+
+   Long64_t nentries = fChain->GetEntriesFast();
+
+   Long64_t nbytes = 0, nb = 0;
+   for (Long64_t jentry=0; jentry<nentries;jentry++) {
+      Long64_t ientry = LoadTree(jentry);
+      if (ientry < 0) break;
+      nb = fChain->GetEntry(jentry);   nbytes += nb;
+      // if (Cut(ientry) < 0) continue;
+
+	if(ZZMass>=105.0 && ZZMass<=140.0){
+		cout<<jentry<<"		"<<ZZMass<<endl;
+		if(Z1Flav==-169 && Z2Flav==-169){
+			x=ZZMass;
+			test.add(RooArgSet(x));
+counter++;
+		}
+
+	}
+   }
+cout<<counter<<":::::::::::::::::::::::::::: "<<endl;
+}
