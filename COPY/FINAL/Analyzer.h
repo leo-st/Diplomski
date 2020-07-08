@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon Jun 29 13:29:37 2020 by ROOT version 6.20/04
+// Mon May  4 15:02:43 2020 by ROOT version 6.20/04
 // from TTree candTree/Event Summary
-// found on file: /home/public/data/2018_MC/ZZTo4lext1/ZZ4lAnalysis.root
+// found on file: /home/public/data/HiggsMassMeasurement/2018/ggH125/ZZ4lAnalysis.root
 //////////////////////////////////////////////////////////
 
 #ifndef Analyzer_h
@@ -11,6 +11,10 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include "RooDoubleCB.h"
+#include "RooGenericPdf.h"
+
+
 
 // Header file for the classes stored in the TTree if any.
 #include "vector"
@@ -18,12 +22,15 @@
 #include "vector"
 #include "vector"
 
+using namespace std;
+
 class Analyzer {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
+	
 
    // Declaration of leaf types
    Int_t           RunNumber;
@@ -182,11 +189,15 @@ public :
    vector<float>   *ExtraLepPhi;
    vector<short>   *ExtraLepLepId;
    Float_t         ZXFakeweight;
-   Float_t         KFactor_EW_qqZZ;
-   Float_t         KFactor_EW_qqZZ_unc;
-   Float_t         KFactor_QCD_qqZZ_dPhi;
-   Float_t         KFactor_QCD_qqZZ_M;
-   Float_t         KFactor_QCD_qqZZ_Pt;
+   Float_t         KFactor_QCD_ggZZ_Nominal;
+   Float_t         KFactor_QCD_ggZZ_PDFScaleDn;
+   Float_t         KFactor_QCD_ggZZ_PDFScaleUp;
+   Float_t         KFactor_QCD_ggZZ_QCDScaleDn;
+   Float_t         KFactor_QCD_ggZZ_QCDScaleUp;
+   Float_t         KFactor_QCD_ggZZ_AsDn;
+   Float_t         KFactor_QCD_ggZZ_AsUp;
+   Float_t         KFactor_QCD_ggZZ_PDFReplicaDn;
+   Float_t         KFactor_QCD_ggZZ_PDFReplicaUp;
    Short_t         genFinalState;
    Int_t           genProcessId;
    Float_t         genHEPMCweight;
@@ -248,6 +259,22 @@ public :
    Int_t           htxs_stage0_cat;
    Int_t           htxs_stage1p1_cat;
    Int_t           htxs_stage1p2_cat;
+   Float_t         ggH_NNLOPS_weight;
+   Float_t         ggH_NNLOPS_weight_unc;
+   vector<float>   *qcd_ggF_uncertSF;
+   vector<float>   *LHEMotherPz;
+   vector<float>   *LHEMotherE;
+   vector<short>   *LHEMotherId;
+   vector<float>   *LHEDaughterPt;
+   vector<float>   *LHEDaughterEta;
+   vector<float>   *LHEDaughterPhi;
+   vector<float>   *LHEDaughterMass;
+   vector<short>   *LHEDaughterId;
+   vector<float>   *LHEAssociatedParticlePt;
+   vector<float>   *LHEAssociatedParticleEta;
+   vector<float>   *LHEAssociatedParticlePhi;
+   vector<float>   *LHEAssociatedParticleMass;
+   vector<short>   *LHEAssociatedParticleId;
    Float_t         LHEPDFScale;
    Float_t         LHEweight_QCDscale_muR1_muF1;
    Float_t         LHEweight_QCDscale_muR1_muF2;
@@ -872,6 +899,46 @@ public :
    Float_t         p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ;
    Float_t         pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;
    Float_t         p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;
+   Float_t         p_Gen_CPStoBWPropRewgt;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM;
+   Float_t         p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM;
+   Float_t         p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM;
+   Float_t         p_Gen_GG_BKG_MCFM;
+   Float_t         p_Gen_QQB_BKG_MCFM;
+   Float_t         p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen;
+   Float_t         p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen;
 
    // List of branches
    TBranch        *b_RunNumber;   //!
@@ -1030,11 +1097,15 @@ public :
    TBranch        *b_ExtraLepPhi;   //!
    TBranch        *b_ExtraLepLepId;   //!
    TBranch        *b_ZXFakeweight;   //!
-   TBranch        *b_KFactor_EW_qqZZ;   //!
-   TBranch        *b_KFactor_EW_qqZZ_unc;   //!
-   TBranch        *b_KFactor_QCD_qqZZ_dPhi;   //!
-   TBranch        *b_KFactor_QCD_qqZZ_M;   //!
-   TBranch        *b_KFactor_QCD_qqZZ_Pt;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_Nominal;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_PDFScaleDn;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_PDFScaleUp;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_QCDScaleDn;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_QCDScaleUp;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_AsDn;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_AsUp;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_PDFReplicaDn;   //!
+   TBranch        *b_KFactor_QCD_ggZZ_PDFReplicaUp;   //!
    TBranch        *b_genFinalState;   //!
    TBranch        *b_genProcessId;   //!
    TBranch        *b_genHEPMCweight;   //!
@@ -1096,6 +1167,22 @@ public :
    TBranch        *b_htxs_stage0_cat;   //!
    TBranch        *b_htxs_stage1p1_cat;   //!
    TBranch        *b_htxs_stage1p2_cat;   //!
+   TBranch        *b_ggH_NNLOPS_weight;   //!
+   TBranch        *b_ggH_NNLOPS_weight_unc;   //!
+   TBranch        *b_qcd_ggF_uncertSF;   //!
+   TBranch        *b_LHEMotherPz;   //!
+   TBranch        *b_LHEMotherE;   //!
+   TBranch        *b_LHEMotherId;   //!
+   TBranch        *b_LHEDaughterPt;   //!
+   TBranch        *b_LHEDaughterEta;   //!
+   TBranch        *b_LHEDaughterPhi;   //!
+   TBranch        *b_LHEDaughterMass;   //!
+   TBranch        *b_LHEDaughterId;   //!
+   TBranch        *b_LHEAssociatedParticlePt;   //!
+   TBranch        *b_LHEAssociatedParticleEta;   //!
+   TBranch        *b_LHEAssociatedParticlePhi;   //!
+   TBranch        *b_LHEAssociatedParticleMass;   //!
+   TBranch        *b_LHEAssociatedParticleId;   //!
    TBranch        *b_LHEPDFScale;   //!
    TBranch        *b_LHEweight_QCDscale_muR1_muF1;   //!
    TBranch        *b_LHEweight_QCDscale_muR1_muF2;   //!
@@ -1720,31 +1807,76 @@ public :
    TBranch        *b_p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ;   //!
    TBranch        *b_pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;   //!
    TBranch        *b_p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ;   //!
+   TBranch        *b_p_Gen_CPStoBWPropRewgt;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM;   //!
+   TBranch        *b_p_Gen_GG_BKG_MCFM;   //!
+   TBranch        *b_p_Gen_QQB_BKG_MCFM;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen;   //!
+   TBranch        *b_p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen;   //!
 
-   Analyzer(TTree *tree=0);
+   Analyzer(TString path,TTree *tree=0);
    virtual ~Analyzer();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop();
+   
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
+virtual void sumall();
+
+
+
 };
 
 #endif
 
 #ifdef Analyzer_cxx
-Analyzer::Analyzer(TTree *tree) : fChain(0) 
+Analyzer::Analyzer(TString path, TTree *tree) : fChain(0) 
 {
+
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/public/data/2018_MC/ZZTo4lext1/ZZ4lAnalysis.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(path+ "ZZ4lAnalysis.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("/home/public/data/2018_MC/ZZTo4lext1/ZZ4lAnalysis.root");
+         f = new TFile(path+"ZZ4lAnalysis.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get("/home/public/data/2018_MC/ZZTo4lext1/ZZ4lAnalysis.root:/ZZTree");
+      TDirectory * dir = (TDirectory*)f->Get(path+ "ZZ4lAnalysis.root:/ZZTree");
       dir->GetObject("candTree",tree);
 
    }
@@ -1859,6 +1991,20 @@ void Analyzer::Init(TTree *tree)
    ExtraLepEta = 0;
    ExtraLepPhi = 0;
    ExtraLepLepId = 0;
+   qcd_ggF_uncertSF = 0;
+   LHEMotherPz = 0;
+   LHEMotherE = 0;
+   LHEMotherId = 0;
+   LHEDaughterPt = 0;
+   LHEDaughterEta = 0;
+   LHEDaughterPhi = 0;
+   LHEDaughterMass = 0;
+   LHEDaughterId = 0;
+   LHEAssociatedParticlePt = 0;
+   LHEAssociatedParticleEta = 0;
+   LHEAssociatedParticlePhi = 0;
+   LHEAssociatedParticleMass = 0;
+   LHEAssociatedParticleId = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -2021,11 +2167,15 @@ void Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("ExtraLepPhi", &ExtraLepPhi, &b_ExtraLepPhi);
    fChain->SetBranchAddress("ExtraLepLepId", &ExtraLepLepId, &b_ExtraLepLepId);
    fChain->SetBranchAddress("ZXFakeweight", &ZXFakeweight, &b_ZXFakeweight);
-   fChain->SetBranchAddress("KFactor_EW_qqZZ", &KFactor_EW_qqZZ, &b_KFactor_EW_qqZZ);
-   fChain->SetBranchAddress("KFactor_EW_qqZZ_unc", &KFactor_EW_qqZZ_unc, &b_KFactor_EW_qqZZ_unc);
-   fChain->SetBranchAddress("KFactor_QCD_qqZZ_dPhi", &KFactor_QCD_qqZZ_dPhi, &b_KFactor_QCD_qqZZ_dPhi);
-   fChain->SetBranchAddress("KFactor_QCD_qqZZ_M", &KFactor_QCD_qqZZ_M, &b_KFactor_QCD_qqZZ_M);
-   fChain->SetBranchAddress("KFactor_QCD_qqZZ_Pt", &KFactor_QCD_qqZZ_Pt, &b_KFactor_QCD_qqZZ_Pt);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_Nominal", &KFactor_QCD_ggZZ_Nominal, &b_KFactor_QCD_ggZZ_Nominal);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFScaleDn", &KFactor_QCD_ggZZ_PDFScaleDn, &b_KFactor_QCD_ggZZ_PDFScaleDn);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFScaleUp", &KFactor_QCD_ggZZ_PDFScaleUp, &b_KFactor_QCD_ggZZ_PDFScaleUp);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_QCDScaleDn", &KFactor_QCD_ggZZ_QCDScaleDn, &b_KFactor_QCD_ggZZ_QCDScaleDn);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_QCDScaleUp", &KFactor_QCD_ggZZ_QCDScaleUp, &b_KFactor_QCD_ggZZ_QCDScaleUp);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_AsDn", &KFactor_QCD_ggZZ_AsDn, &b_KFactor_QCD_ggZZ_AsDn);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_AsUp", &KFactor_QCD_ggZZ_AsUp, &b_KFactor_QCD_ggZZ_AsUp);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFReplicaDn", &KFactor_QCD_ggZZ_PDFReplicaDn, &b_KFactor_QCD_ggZZ_PDFReplicaDn);
+   fChain->SetBranchAddress("KFactor_QCD_ggZZ_PDFReplicaUp", &KFactor_QCD_ggZZ_PDFReplicaUp, &b_KFactor_QCD_ggZZ_PDFReplicaUp);
    fChain->SetBranchAddress("genFinalState", &genFinalState, &b_genFinalState);
    fChain->SetBranchAddress("genProcessId", &genProcessId, &b_genProcessId);
    fChain->SetBranchAddress("genHEPMCweight", &genHEPMCweight, &b_genHEPMCweight);
@@ -2087,6 +2237,22 @@ void Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("htxs_stage0_cat", &htxs_stage0_cat, &b_htxs_stage0_cat);
    fChain->SetBranchAddress("htxs_stage1p1_cat", &htxs_stage1p1_cat, &b_htxs_stage1p1_cat);
    fChain->SetBranchAddress("htxs_stage1p2_cat", &htxs_stage1p2_cat, &b_htxs_stage1p2_cat);
+   fChain->SetBranchAddress("ggH_NNLOPS_weight", &ggH_NNLOPS_weight, &b_ggH_NNLOPS_weight);
+   fChain->SetBranchAddress("ggH_NNLOPS_weight_unc", &ggH_NNLOPS_weight_unc, &b_ggH_NNLOPS_weight_unc);
+   fChain->SetBranchAddress("qcd_ggF_uncertSF", &qcd_ggF_uncertSF, &b_qcd_ggF_uncertSF);
+   fChain->SetBranchAddress("LHEMotherPz", &LHEMotherPz, &b_LHEMotherPz);
+   fChain->SetBranchAddress("LHEMotherE", &LHEMotherE, &b_LHEMotherE);
+   fChain->SetBranchAddress("LHEMotherId", &LHEMotherId, &b_LHEMotherId);
+   fChain->SetBranchAddress("LHEDaughterPt", &LHEDaughterPt, &b_LHEDaughterPt);
+   fChain->SetBranchAddress("LHEDaughterEta", &LHEDaughterEta, &b_LHEDaughterEta);
+   fChain->SetBranchAddress("LHEDaughterPhi", &LHEDaughterPhi, &b_LHEDaughterPhi);
+   fChain->SetBranchAddress("LHEDaughterMass", &LHEDaughterMass, &b_LHEDaughterMass);
+   fChain->SetBranchAddress("LHEDaughterId", &LHEDaughterId, &b_LHEDaughterId);
+   fChain->SetBranchAddress("LHEAssociatedParticlePt", &LHEAssociatedParticlePt, &b_LHEAssociatedParticlePt);
+   fChain->SetBranchAddress("LHEAssociatedParticleEta", &LHEAssociatedParticleEta, &b_LHEAssociatedParticleEta);
+   fChain->SetBranchAddress("LHEAssociatedParticlePhi", &LHEAssociatedParticlePhi, &b_LHEAssociatedParticlePhi);
+   fChain->SetBranchAddress("LHEAssociatedParticleMass", &LHEAssociatedParticleMass, &b_LHEAssociatedParticleMass);
+   fChain->SetBranchAddress("LHEAssociatedParticleId", &LHEAssociatedParticleId, &b_LHEAssociatedParticleId);
    fChain->SetBranchAddress("LHEPDFScale", &LHEPDFScale, &b_LHEPDFScale);
    fChain->SetBranchAddress("LHEweight_QCDscale_muR1_muF1", &LHEweight_QCDscale_muR1_muF1, &b_LHEweight_QCDscale_muR1_muF1);
    fChain->SetBranchAddress("LHEweight_QCDscale_muR1_muF2", &LHEweight_QCDscale_muR1_muF2, &b_LHEweight_QCDscale_muR1_muF2);
@@ -2711,6 +2877,46 @@ void Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ", &p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ, &b_p_JJVBF_SIG_ghv1_1_JHUGen_JERDn_BestDJJ);
    fChain->SetBranchAddress("pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ", &pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ, &b_pConst_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ);
    fChain->SetBranchAddress("p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ", &p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ, &b_p_JJQCD_SIG_ghg2_1_JHUGen_JERDn_BestDJJ);
+   fChain->SetBranchAddress("p_Gen_CPStoBWPropRewgt", &p_Gen_CPStoBWPropRewgt, &b_p_Gen_CPStoBWPropRewgt);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1prime2_1E4_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghza1prime2_1E4_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghza2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghza4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_gha2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_gha4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz1prime2_1E4_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghz4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza1prime2_1E4_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_ghza4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM", &p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM, &b_p_Gen_GG_SIG_kappaTopBot_1_ghz1_1_gha4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz1_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz1prime2_1E4_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghz4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghza1prime2_1E4_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghza2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_ghza4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_gha2_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM", &p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM, &b_p_Gen_GG_BSI_kappaTopBot_1_gha4_1_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_BKG_MCFM", &p_Gen_GG_BKG_MCFM, &b_p_Gen_GG_BKG_MCFM);
+   fChain->SetBranchAddress("p_Gen_QQB_BKG_MCFM", &p_Gen_QQB_BKG_MCFM, &b_p_Gen_QQB_BKG_MCFM);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz1_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen", &p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen, &b_p_Gen_GG_SIG_gXg2_1_gXz2_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen", &p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen, &b_p_Gen_GG_SIG_gXg3_1_gXz3_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen", &p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen, &b_p_Gen_GG_SIG_gXg4_1_gXz4_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz5_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz1_1_gXz5_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz6_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen", &p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen, &b_p_Gen_GG_SIG_gXg1_1_gXz7_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen", &p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen, &b_p_Gen_GG_SIG_gXg5_1_gXz8_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen", &p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen, &b_p_Gen_GG_SIG_gXg5_1_gXz9_1_JHUGen);
+   fChain->SetBranchAddress("p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen", &p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen, &b_p_Gen_GG_SIG_gXg5_1_gXz10_1_JHUGen);
    Notify();
 }
 

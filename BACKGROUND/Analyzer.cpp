@@ -53,19 +53,19 @@ void Analyzer::runArgusModel() {
 
 	//RooRealVar Masa("Masa","Masa",105,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar mean("mean","Mean of Gaussian",124.85,124.65,125.05) ;
+		RooRealVar mean("mean","Mean of Gaussian",124.85,105.0,140.0) ;
 		//RooRealVar mean("mean","Mean of Gaussian",124.85) ;
-		/*RooRealVar sigma("sigma","Width of Gaussian",1.13,0.92,1.34) ;
-		RooRealVar alpha("alpha","alpha",1.24,0.75,1.73) ;
-		RooRealVar n("n","n",2.0,0.7,3.3) ;
-		RooRealVar alpha2("alpha2","alpha2",1.72,1.0,2.44) ;
-		RooRealVar n2("n2","n2",3.5,-0.8,7.8) ;*/
+		RooRealVar sigma("sigma","Width of Gaussian",1.13,0.9,1.4) ;
+		RooRealVar alpha("alpha","alpha",1.24,0.95,1.55) ;
+		RooRealVar n("n","n",2.0,1.4,2.9) ;
+		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,2.4) ;
+		RooRealVar n2("n2","n2",3.5,1.2,15.0) ;
 
-		RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
+		/*RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
 		RooRealVar alpha("alpha","alpha",1.24) ;
 		RooRealVar n("n","n",2.0) ;
 		RooRealVar alpha2("alpha2","alpha2",1.72) ;
-		RooRealVar n2("n2","n2",3.5) ;
+		RooRealVar n2("n2","n2",3.5) ;*/
 
 		//RooRealVar shift("shift","shift",0.15);
 		//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
@@ -170,17 +170,17 @@ cout<<mH.evaluate()<<endl;
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
    canv->SaveAs("signal-weighted7.pdf");*/
-RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
+RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(4), Timer(kTRUE));
 	RooMinimizer(*nll).migrad();
-	 RooPlot* frame1 = mean.frame(Bins(10),Range(124.7,125.0),Title("LL and profileLL in mean")) ;
+	 RooPlot* frame1 = mean.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in mean")) ;
    nll->plotOn(frame1,ShiftToZero()) ;
 	RooAbsReal* pll_frac = nll->createProfile(mean) ;
-	pll_frac->plotOn(frame1,LineColor(kRed)) ;
+	pll_frac->plotOn(frame1,ShiftToZero(),LineColor(kRed)) ;
 	frame1->SetMinimum(0);
-	frame1->SetMaximum(0.25);
+	frame1->SetMaximum(5);
 	 TCanvas *canv = new TCanvas("rf605_profilell","rf605_profilell",800, 400);
      canv->cd(1) ; frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
-canv->SaveAs("maxlike-signal10.pdf");
+canv->SaveAs("maxlike-signal3.pdf");
    delete pll_frac ;
    delete nll ;
 
@@ -458,7 +458,7 @@ if(ggH_NNLOPS_weight>max){
 max=ggH_NNLOPS_weight;}
 	}
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	if(Z2Flav==-169 && Z1Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<ggH_NNLOPS_weight<<endl;
+	if(Z2Flav==-169 && Z1Flav==-169){ //cout<<"jentry: "<<jentry<<"	"<<ggH_NNLOPS_weight<<endl;
 x=ZZMass;
 y=overallEventWeight;
 z=ggH_NNLOPS_weight;
