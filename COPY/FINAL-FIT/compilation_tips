@@ -1,0 +1,7 @@
+Create dictionaries:
+
+rootcint -f dictDoubleCB.cxx -c -I$ROOFITSYS/include RooDoubleCB.h LinkDef.h
+
+Compile shared object:
+
+g++ -fPIC -shared -o RooDoubleCB.so `root-config --ldflags --cflags --glibs` -L $ROOFITSYS/lib -lRooFit -lRooFitCore -lRooStats -lMinuit -I `root-config --incdir` -I $ROOFITSYS/include RooDoubleCB.cxx dictDoubleCB.cxx

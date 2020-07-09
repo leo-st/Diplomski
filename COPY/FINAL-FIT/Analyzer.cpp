@@ -38,22 +38,24 @@ TCanvas *canv = new TCanvas("canv","canv");
 		//RooRealVar Masa("Masa","Masa",105,140) ;
 		//RooRealVar x("x","x",0,250) ;
 		RooRealVar mean("mean","Mean of Gaussian",125.0,105,140) ;
-		RooRealVar sigma("sigma","Width of Gaussian",1.13,-10.1,1.4) ;
-		RooRealVar alpha("alpha","alpha",1.24,-20.95,20.55) ;
-		RooRealVar n("n","n",2.0,1.4,500.9) ;
-		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,20.2) ;
-		RooRealVar n2("n2","n2",3.5,1.2,250.0) ;
+		/*RooRealVar sigma("sigma","Width of Gaussian",1.13,0.9,1.4) ;
+		RooRealVar alpha("alpha","alpha",1.24,0.95,1.55) ;
+		RooRealVar n("n","n",2.0,1.4,2.9) ;
+		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,2.4) ;
+		RooRealVar n2("n2","n2",3.5,1.2,15.0) ;
+		RooRealVar c("c","c",0.37,0.0,1.0) ;*/
 
-		/*RooRealVar sigma("sigma","Width of Gaussian",0.9) ;
+		RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
 		RooRealVar alpha("alpha","alpha",1.24) ;
 		RooRealVar n("n","n",2.0) ;
 		RooRealVar alpha2("alpha2","alpha2",1.72) ;
-		RooRealVar n2("n2","n2",3.5) ;*/
+		RooRealVar n2("n2","n2",3.5) ;
+		RooRealVar c("c","c",0.37,0.0,1.0) ;
 
 
 		//RooRealVar shift("shift","shift",0.15);
 		//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
-		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
+		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2,c);
    
 	   
 	   //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
@@ -91,13 +93,13 @@ TCanvas *canv = new TCanvas("canv","canv");
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
 		
-		RooRealVar a1("a1","a1",-1.010,-1.59,-0.43) ;
+		/*RooRealVar a1("a1","a1",-1.010,-1.59,-0.43) ;
 		RooRealVar b1("b1","b1",252.0,115.0,389.0) ;
-		RooRealVar c1("c1","c1",-14493,-22205.0,-6781.0) ;
+		RooRealVar c1("c1","c1",-14493,-22205.0,-6781.0) ;*/
 
-		/*RooRealVar a1("a1","a1",-1.010) ;
+		RooRealVar a1("a1","a1",-1.010) ;
 		RooRealVar b1("b1","b1",252.0) ;
-		RooRealVar c1("c1","c1",-14493) ;*/
+		RooRealVar c1("c1","c1",-14493) ;
 
 		RooGenericPdf g1("g1","a1*x*x + b1*x + c1", RooArgSet(x,a1,b1,c1));
 
@@ -144,11 +146,11 @@ TCanvas *canv = new TCanvas("canv","canv");
 	   
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a2("a2","a2",0.1,-2.7,2.9) ;
-		RooRealVar b2("b2","b2",38,-326,402) ;
+		/*RooRealVar a2("a2","a2",0.1,-2.7,2.9) ;
+		RooRealVar b2("b2","b2",38,-326,402) ;*/
 
-		/*RooRealVar a2("a2","a2",0.1) ;
-		RooRealVar b2("b2","b2",38.0) ;*/
+		RooRealVar a2("a2","a2",0.1) ;
+		RooRealVar b2("b2","b2",38.0) ;
 		
 		
 		RooGenericPdf g2("g2","a2*x + b2", RooArgSet(x,a2,b2));
@@ -190,11 +192,11 @@ TCanvas *canv = new TCanvas("canv","canv");
 		
 	
 	//RooRealVar masa("masa","masa",110,140);
-	//RooRealVar nsig("nsig","#signal events",77.589);
+	RooRealVar nsig("nsig","#signal events",77.589);
   	RooRealVar nbkg1("nbkg1","#background events1",82.252);
   	RooRealVar nbkg2("nbkg2","#background events2",9.23738);
   	RooRealVar nbkg3("nbkg3","#background events3",37.3);
-	//RooRealVar nbkg("nbkg","#nbkg",128.789);
+	RooRealVar nbkg("nbkg","#nbkg",128.789);
 
 	/*RooRealVar nsig("nsig","#signal events",88.35);
   	RooRealVar nbkg1("nbkg1","#background events1",93.66);
@@ -203,10 +205,11 @@ TCanvas *canv = new TCanvas("canv","canv");
 	RooRealVar nbkg("nbkg","#nbkg",146.65);*/
 
 	RooAddPdf model_backg("model_backg","b1+b2+b3",RooArgList(g1,g2,landau),RooArgList(nbkg1,nbkg2,nbkg3));
-	RooRealVar coeff("coeff","#coeff", 0.373,0.0,1.0);
+	//RooRealVar coeff("coeff","#coeff", 0.373,0.0,1.0);
 
    	//RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3));
-   	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
+   	//RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
+	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),RooArgList(nsig,nbkg));
    	
    	//RooDataSet *podaci = model.generate(x, 1000);
    	model.fitTo(test);
@@ -226,7 +229,7 @@ TCanvas *canv = new TCanvas("canv","canv");
 	model.paramOn(masaframe, Layout(0.7));
 
    masaframe->Draw();
-   canv->SaveAs("final-fit6.pdf");
+   canv->SaveAs("final-fit-copy-fixed.pdf");
 
 
 

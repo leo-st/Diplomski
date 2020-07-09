@@ -27,14 +27,14 @@
 RooRealVar  y("y","y",-80.0,600.0) ;
 RooRealVar  z("z","z",-2.0,8.0) ;
 RooDataSet test("test","test", RooArgSet(x));
-RooDataSet ggH_NNLOPS_weight_data("ggH_NNLOPS_weight_data","ggH_NNLOPS_weight_data", RooArgSet(y));
-RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(z)) ;
+RooDataSet ggH_NNLOPS_weight_data("ggH_NNLOPS_weight_data","ggH_NNLOPS_weight_data", RooArgSet(z));
+RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(y)) ;
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
-	//TCanvas *canv = new TCanvas("c1","c1");
+	TCanvas *canv = new TCanvas("c1","c1");
 	
-	//canv->cd();
+	canv->cd();
 	 
 
    
@@ -146,7 +146,7 @@ void Analyzer::runArgusModel() {
  //g.fitTo(wdata, Range(110,140));
    
    //mean.setConstant(kTRUE) ;
- /*CBall.fitTo(wdata, Range(105,140));
+ CBall.fitTo(wdata, Range(105,140));
  //CBall.fitTo(data, Range(110,140));
 
 	//samo gausijan test
@@ -155,7 +155,7 @@ void Analyzer::runArgusModel() {
 	//gauss.plotOn(xframe);
 	//xframe->Draw();
 
-cout<<mH.evaluate()<<endl;
+//cout<<mH.evaluate()<<endl;
 
 
    // --- Plot toy data and composite PDF overlaid ---
@@ -169,8 +169,8 @@ cout<<mH.evaluate()<<endl;
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   canv->SaveAs("signal-weighted7.pdf");*/
-RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(4), Timer(kTRUE));
+   canv->SaveAs("signal-weighted7.pdf");
+/*RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(4), Timer(kTRUE));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in mean")) ;
    nll->plotOn(frame1,ShiftToZero()) ;
@@ -182,7 +182,7 @@ RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(4), Timer(kTRUE));
      canv->cd(1) ; frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
 canv->SaveAs("maxlike-signal3.pdf");
    delete pll_frac ;
-   delete nll ;
+   delete nll ;*/
 
 }
 void Analyzer::ZZTo4lext1()
@@ -463,8 +463,8 @@ x=ZZMass;
 y=overallEventWeight;
 z=ggH_NNLOPS_weight;
 				test.add(RooArgSet(x));
-ggH_NNLOPS_weight_data.add(RooArgSet(y));
-overallEventWeight_data.add(RooArgSet(z));
+ggH_NNLOPS_weight_data.add(RooArgSet(z));
+overallEventWeight_data.add(RooArgSet(y));
 
 suma= suma + (137.0 * 1000 * 0.0133352 * overallEventWeight  ) / 28744188.0 * ggH_NNLOPS_weight;
 counter++;}
