@@ -56,6 +56,8 @@ TCanvas *canv = new TCanvas("canv","canv");
 		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
    
 	   
+
+
 	   //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 
@@ -189,24 +191,28 @@ TCanvas *canv = new TCanvas("canv","canv");
 		//cout<<mesframe->chiSquare("g","data",3)<<endl;*/
 		
 	
-	//RooRealVar masa("masa","masa",110,140);
 	//RooRealVar nsig("nsig","#signal events",77.589);
+	//RooRealVar nsig_vbfh("nsig_vbfh","#signal events_vbfh",6.71966);
   	RooRealVar nbkg1("nbkg1","#background events1",82.252);
   	RooRealVar nbkg2("nbkg2","#background events2",9.23738);
   	RooRealVar nbkg3("nbkg3","#background events3",37.3);
-	//RooRealVar nbkg("nbkg","#nbkg",128.789);
+	RooRealVar nbkg("nbkg","#nbkg",128.789);
+	RooRealVar nsg("nsg","#nsg",84.30866);
 
-	/*RooRealVar nsig("nsig","#signal events",88.35);
-  	RooRealVar nbkg1("nbkg1","#background events1",93.66);
-  	RooRealVar nbkg2("nbkg2","#background events2",10.52);
-  	RooRealVar nbkg3("nbkg3","#background events3",42.47);
-	RooRealVar nbkg("nbkg","#nbkg",146.65);*/
 
+	/*RooRealVar nsig("nsig","#signal events",0.37596);
+  	RooRealVar nbkg1("nbkg1","#background events1",0.39855);
+  	RooRealVar nbkg2("nbkg2","#background events2",0.0447595);
+  	//oRealVar nbkg3("nbkg3","#background events3",37.3);*/
 	RooAddPdf model_backg("model_backg","b1+b2+b3",RooArgList(g1,g2,landau),RooArgList(nbkg1,nbkg2,nbkg3));
-	RooRealVar coeff("coeff","#coeff", 0.373,0.0,1.0);
+	//RooAddPdf model_sig("model_sig","s1+s2",RooArgList(CBall,CBall_vbfh),RooArgList(nsig,nsig_vbfh));
 
    	//RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3));
-   	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
+	RooRealVar coeff("coeff","#coeff", 0.396,0.0,1.0);
+	
+	//RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),RooArgList(nsig,nbkg));
+	//RooAddPdf model("model","s+b",RooArgList(model_sig,model_backg),RooArgList(nsig,nbkg));
+	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
    	
    	//RooDataSet *podaci = model.generate(x, 1000);
    	model.fitTo(test);
@@ -226,7 +232,7 @@ TCanvas *canv = new TCanvas("canv","canv");
 	model.paramOn(masaframe, Layout(0.7));
 
    masaframe->Draw();
-   canv->SaveAs("final-fit6.pdf");
+   canv->SaveAs("final-fit7.pdf");
 
 
 

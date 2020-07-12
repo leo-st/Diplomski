@@ -1,0 +1,345 @@
+%\usepackage{showframe} % pokaži marigine
+
+% za brojanje
+\usepackage[page,figure,table]{totalcount}
+
+% prored: 1.5
+\usepackage{setspace} 
+\onehalfspacing
+
+% omogućeni svi hr-znakovi
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% tekst-font: Times New Roman 12pt
+\usepackage{times}
+% promjena veličine fonta
+\newcommand{\prored}[1]{\number\numexpr(#1*123)/100\relax}
+\newcommand{\velicina}[2][22]{\fontfamily{ptm}\fontsize{#1 pt}{\prored{#1}pt}\selectfont#2}%\sffamily
+
+
+% OSTALI POTREBNI PAKETI
+
+%za pisanje formula
+\usepackage{relsize}
+\usepackage{amsmath,mathtools,amsfonts,amssymb,braket}
+\usepackage{aurical,calrsfs} %kaligrafija \mathcal{}, \pazocal{}
+\numberwithin{equation}{section}
+
+%za liste
+\usepackage{enumitem}
+
+%za slike
+\usepackage{graphicx,wrapfig,sidecap}
+\usepackage[labelfont=bf,textfont={it},font=small]{caption}
+\usepackage{pgf,tikz,pgfplots}
+%\pgfplotsset{compat=1.11}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows,positioning,shadows}
+
+
+% za tablice s više redova i definirane širine
+\usepackage{multirow,array,colortbl,booktabs}
+%\setlength\extrarowheight{3pt}
+\newcommand{\urediTablicu}{\centering \fontsize{11pt}{17pt}\selectfont} % font 11pt, 17pt udaljene linije
+\setlength{\arrayrulewidth}{0.75pt} % linije debljine 3/4 pt
+\newcommand{\hlineRub}{\specialrule{1.5pt}{0pt}{0pt}} %debela horizontalna linija
+\newcolumntype{?}{!{\vrule width 1.5pt}} %debela vertikalna linija
+
+
+
+% float-naslovi
+%\addtolength{\abovecaptionskip}{-3pt}
+%\addtolength{\belowcaptionskip}{3pt}
+
+%paketi koji omogućuju korištenje boja
+\usepackage{color, xcolor}
+
+%za isticanje i sakrivanje teksta
+\usepackage{ulem}
+\usepackage{comment}
+
+%za pisanje veb adresa
+\usepackage{url}
+\urlstyle{same}
+%\usepackage{hyperref} %otkomentirati za klikabilne linkove
+
+%za lakšu usporedbu stilova
+\usepackage{xstring}
+\usepackage{ifthen}
+
+% PRIJEVODI
+%zamjena engleskih naziva s njihovim prijevodom
+\ifthenelse{\equal{\jezik}{HR}}{
+	\renewcommand\refname{\thesection~~~Literatura}
+	%\renewcommand{\bibname}{Literatura}
+	\renewcommand{\contentsname}{Sadr\v{z}aj}
+	\renewcommand{\listfigurename}{Popis slika}
+	\renewcommand{\listtablename}{Popis tablica}
+	%\renewcommand{\abstractname}{Sa\v{z}etak}
+	\renewcommand{\figurename}{Slika}
+	\renewcommand{\tablename}{Tablica}
+}{
+	\renewcommand\refname{\thesection~~~Bibliography}
+}
+
+% POSTAVKE STRANICA
+
+%zaglavlja
+\usepackage{fancyhdr}
+\fancyhf{} %uklanja defaultno zaglavlje/podnožje
+\renewcommand{\headrulewidth}{0pt} % uklanja horizontalne crte
+\fancyfoot[R]{\thepage}
+
+% marigine
+\usepackage[top=2.5cm, left=2.5cm, bottom=2.5cm, right=2.5cm]{geometry}
+
+% dots in ToC
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+%uvlačenje paragrafa i razmak između
+\setlength{\parindent}{0.4cm}
+\setlength{\parskip}{6pt}
+
+
+%POMOĆNE FUNKCIJE
+%za računanje
+\usepackage[nomessages]{fp}
+\usepackage{calc}
+%pomoći brojači za reference i stranice
+\newcounter{brRef}\setcounter{brRef}{0}
+\newcounter{brStr}\setcounter{brStr}{0}
+%provjera postojanosti zahvale
+\newlength{\duljinaZahvale}
+%provjera postojanosti neposrednog voditelja
+\newlength{\duljinaVoditelj}
+\newlength{\dTabA}
+\newlength{\dTabB}
+%dijeljenje modulo
+\newcommand{\modulo}[2]{%
+	\FPeval{\rezModulo}{trunc(#1-(#2*trunc(#1/#2,0)),0)}%
+}
+\newcommand{\prijelom}[2]{%
+	\ifthenelse{\equal{#1}{DA}\AND\equal{#2}{0}}%
+	{~ \newpage}{}%
+}
+%vraća zadnju znamenku
+\newcommand{\jed}[1]{\number\numexpr#1-10*((#1-5)/10)\relax}
+%vraća zadnje dvije znamenke
+\newcommand{\desJed}[1]{\number\numexpr#1-100*((#1-50)/100)\relax}
+%sufiks za stranica, tablica, slika
+\newcommand{\padez}[2]{%
+	\ifthenelse{\equal{#2}{11}\OR\equal{#2}{12}\OR\equal{#2}{13}\OR\equal{#2}{14}}
+		{a}%
+		{\ifthenelse{\equal{#1}{2}\OR\equal{#1}{3}\OR\equal{#1}{4}}%
+			{e}{\ifthenelse{\equal{#1}{1}}{u}{a}}}}
+%sufiks za literaturni navod
+\newcommand{\padezRef}[2]{%
+	\ifthenelse{\equal{#1}{1}}%
+		{literaturni navod}%
+		{\ifthenelse{\equal{#2}{11}\OR\equal{#2}{12}\OR\equal{#2}{13}\OR\equal{#2}{14}}%
+			{literaturnih navoda}%
+			{\ifthenelse{\equal{#1}{2}\OR\equal{#1}{3}\OR\equal{#1}{4}}%
+				{literaturna navoda}%
+				{literaturnih navoda}}}}
+
+
+% GENERATORI STRANICA
+\newcommand{\kojiRad}{
+	\ifthenelse{\equal{\vrstaRada}{1}}{
+		\newcommand{\radHR}{Završni rad}
+		\newcommand{\radEN}{Bachelor thesis}
+	}{
+		\newcommand{\radHR}{Diplomski rad}
+		\newcommand{\radEN}{Master thesis}
+	}
+}
+
+\newcommand{\naslovnica}{
+	\pagestyle{empty} % bez br. str. 
+	\kojiRad
+	\begin{titlepage}
+		\begin{center}
+			\ifthenelse{\equal{\jezik}{HR}}{
+				{\velicina[18]{Sveu\v{c}ili\v{s}te u Splitu\\
+					Prirodoslovno – matemati\v{c}ki fakultet\\}}
+				\vspace{\stretch{6}}
+				{\velicina{\textbf{\naslovHR\\}}}
+				\vspace{24pt}
+				{\velicina[20]{\radHR\\}}
+			}{
+				{\velicina[18]{University of Split\\
+					Faculty of Science\\}}
+				\vspace{\stretch{6}}
+				{\velicina{\textbf{\naslovEN\\}}}
+				\vspace{24pt}
+				{\velicina[20]{\radEN\\}}
+			}
+			\vspace{\stretch{4}}
+			{\velicina{\student\\}}
+			\vspace{\stretch{11}}
+			{\velicina[14]{\mjestoVrijeme\\}}
+		\end{center}
+	\end{titlepage}
+	\setcounter{brStr}{\arabic{page}}
+	\stepcounter{brStr}
+	\modulo{\thebrStr}{2}
+	\prijelom{\dvostraniIspis}{\rezModulo}
+	\pagestyle{fancy}
+	\pagenumbering{roman}
+}
+
+\newcommand{\zahvale}{%
+	\StrLen{\zahvala}[\duljinaZahvale]%duljina zahvale
+	\ifthenelse{\equal{\duljinaZahvale}{0}}{}{
+		\modulo{\arabic{page}}{2}
+		\prijelom{\dvostraniIspis}{\rezModulo}
+		\zahvala
+		\newpage
+		\modulo{\arabic{page}}{2}
+		\prijelom{\dvostraniIspis}{\rezModulo}}{}
+}
+
+\newcommand{\stvoriTabove}{
+	\StrLen{\neposredniVoditeljHR}[\duljinaVoditelj]
+	\ifthenelse{\equal{\duljinaVoditelj}{0}}{
+		\setlength{\dTabA}{3.0cm}
+		\setlength{\dTabB}{12.7cm}
+	}{
+		\setlength{\dTabA}{3.5cm}
+		\setlength{\dTabB}{12.2cm}
+	}
+}
+
+\newcommand{\tdkHR}{
+	\modulo{\arabic{page}}{2}
+	\prijelom{\dvostraniIspis}{\rezModulo}
+	\noindent
+	\begin{tabular}{@{}l r@{}}
+		\hline
+		\multicolumn{2}{|@{}p{\textwidth}@{}|}{\centering \textbf{Temeljna dokumentacijska kartica}}\\
+		\hline
+		{}                    &  \\[-11pt]
+		Sveu\v{c}ili\v{s}te u Splitu             & \radHR\\[-3pt]
+		Prirodoslovno – matemati\v{c}ki fakultet &  \\[-3pt]
+		Odjel za fiziku                          &  \\[-3pt]
+		Ru\dj{}era Bo\v{s}kovi\'{c}a 33, 21000 Split, Hrvatska &  \\
+	\end{tabular}
+	\begin{center}
+		{\velicina[11]{
+			\textbf{\naslovHR}\\[12pt]
+			\student\\[12pt]
+			\studijHR\\[12pt]
+		}}
+	\end{center}
+	\noindent \textbf{Sa\v{z}etak}:\\
+	{\velicina[11]{\noindent\sazetakHR}}
+	\stvoriTabove
+	{\velicina[11]\begin{tabbing}
+		\hspace{\dTabA}\=\hspace{\dTabB}\\[-12pt]
+		\textbf{Klju\v{c}ne rije\v{c}i}: \> \kljucneRijeciHR\\[6pt]
+		\textbf{Rad sadr\v{z}i}: \> \parbox[t][][t]{\dTabB}{
+			\totalpages~stranic\padez{\jed{\totalpages}}{\desJed{\totalpages}}, 
+			\totalfigures~slik\padez{\jed{\totalfigures}}{\desJed{\totalfigures}}, 
+			\totaltables~tablic\padez{\jed{\totaltables}}{\desJed{\totaltables}}, 
+			\thebrRef~\padezRef{\jed{\thebrRef}}{\desJed{\thebrRef}}.
+			Izvornik je na \ifthenelse{\equal{\jezik}{HR}}{hrvatskom}{engleskom} jeziku.}\\[6pt]
+		\textbf{Mentor}: \> \parbox[t][][t]{\dTabB}{\linespread{2} \mentorHR}
+		\ifthenelse{\equal{\duljinaVoditelj}{0}}{\\[6pt]}{\\[6pt]\textbf{Neposredni voditelj}: \> \parbox[t][][t]{\dTabB}{\linespread{2} \neposredniVoditeljHR}\\[6pt]}
+		\textbf{Ocjenjivači}: \> \parbox[t][][t]{\dTabB}{\linespread{2} \povjerenstvoHR}\\[6pt]
+		\textbf{Rad prihvaćen}: \> \datumPrihvacanja 
+	\end{tabbing}}
+	{\velicina[11]{\noindent
+		Rad je pohranjen u Knji\v{z}nici Prirodoslovno – matemati\v{c}kog fakulteta, Sveučilišta u Splitu.}}
+	\newpage
+	\modulo{\arabic{page}}{2}
+	\prijelom{\dvostraniIspis}{\rezModulo}
+}
+
+\newcommand{\tdkEN}{
+	\modulo{\arabic{page}}{2}
+	\prijelom{\dvostraniIspis}{\rezModulo}
+	\noindent
+	\begin{tabular}{@{}l r@{}}
+		\hline
+		\multicolumn{2}{|@{}p{\textwidth}@{}|}{\centering \textbf{Basic documentation card}}\\
+		\hline
+		{}                    &  \\[-11pt]
+		University of Split   &  \radEN\\[-3pt]
+		Faculty of Science    &  \\[-3pt]
+		Department of Physics &  \\[-3pt]
+		Ru\dj{}era Bo\v{s}kovi\'{c}a 33, 21000 Split, Croatia & \\
+	\end{tabular}
+	\begin{center}
+		{\velicina[11]{
+			\textbf{\naslovEN}\\[12pt]
+			\student\\[12pt]
+			\studijEN\\[12pt]
+		}}
+	\end{center}
+	\noindent \textbf{Abstract}:\\
+	{\velicina[11]{\noindent\sazetakEN}}
+	\stvoriTabove
+	{\velicina[11]\begin{tabbing}
+		\hspace{\dTabA}\=\hspace{\dTabB}\\[-12pt]
+		\textbf{Keywords}: \> \kljucneRijeciEN\\[6pt]
+		\textbf{Thesis consists of}: \> \parbox[t][][t]{\dTabB}{
+			\totalpages~pages, \totalfigures~figures, \totaltables~tables, 
+		\thebrRef~references. 
+		Original language: \ifthenelse{\equal{\jezik}{HR}}{Croatian}{English}.}\\[6pt]
+		\textbf{Supervisor}: \> \parbox[t][][t]{\dTabB}{\linespread{2} \mentorEN}
+		\ifthenelse{\equal{\duljinaVoditelj}{0}}{\\[6pt]}{\\[6pt]\textbf{Leader}: \> \parbox[t][][t]{\dTabB}{\linespread{2} \neposredniVoditeljEN}\\[6pt]}
+		\textbf{Reviewers}: \> \parbox[t][][t]{\dTabB}{\linespread{2} \povjerenstvoEN}\\[6pt]
+		\textbf{Thesis accepted}: \> \datumPrihvacanjaEN 
+	\end{tabbing}}
+	{\velicina[11]{\noindent
+		Thesis is deposited in the library of the Faculty of Science, University of Split.}}
+	\newpage
+	\modulo{\arabic{page}}{2}
+	\prijelom{\dvostraniIspis}{\rezModulo}
+}
+
+
+\newcommand{\pocetak}{
+	\newpage
+	%početak teksta na neparnoj stranici
+	\modulo{\arabic{page}}{2}
+	\prijelom{\dvostraniIspis}{\rezModulo}
+	% horizontalna crta zaglavlja
+	\renewcommand{\headrulewidth}{0.75pt}
+	\fancyhead[L]{\student: \kratkiNaslov}
+	% horizontalna crta zaglavlja
+	\pagenumbering{arabic}
+}
+
+% VARIJABLE ZA OSNOVNE INFORMACIJE
+\def\student{}
+\def\naslovHR{}
+\def\naslovEN{}
+\def\kratkiNaslov{}
+\def\vrstaRada{}
+\def\mjestoVrijeme{}
+\def\zahvala{}
+\def\studijHR{}
+\def\studijEN{}
+\def\sazetakHR{}
+\def\sazetakEN{}
+\def\kljucneRijeciHR{}
+\def\kljucneRijeciEN{}
+\def\mentorHR{}
+\def\mentorEN{}
+\def\povjerenstvoHR{}
+\def\povjerenstvoEN{}
+\def\datumPrihvacanja{}
+\def\datumPrihvacanjaEN{}
+\def\neposredniVoditelj{}
+\def\neposredniVoditeljEN{}
+
+
+% NOVE NAREDBE ZA PISANJE FORMULA
+\newcommand{\vek}[1]{\vec{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\ena}[1]{\exp\left(#1\right)}
+\newcommand{\angstrem}{\textup{ \AA{}}}
+\newcommand{\ddelta}[1]{\delta\left(#1\right)}

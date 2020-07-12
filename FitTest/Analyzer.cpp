@@ -15,28 +15,33 @@
 #include "RooPlot.h"
 #include "RooMinimizer.h"
 
+
 using namespace RooFit;
+
+
+RooRealVar x("x","x",125.0,105.0,140.0) ;
+RooDataSet test("test","test", RooArgSet(x));
 void Analyzer::runArgusModel() {
-	//TCanvas *c1 = new TCanvas("c1","c1");
+	TCanvas *c1 = new TCanvas("c1","c1");
 	
-	//c1->cd();
+	c1->cd();
 	 
 
    
 	//RooRealVar ZZMass("ZZMass","ZZMass",125,105,145) ;
-	RooRealVar x("x","x",125.0,105.0,145.0) ;
-	RooRealVar mean("mean","Mean of Gaussian",125,125.04,125.12) ;
-	RooRealVar sigma("sigma","Width of Gaussian",3.1146,3.0,3.2) ;
+	
+	RooRealVar mean("mean","Mean of Gaussian",125,105.0,140.0) ;
+	RooRealVar sigma("sigma","Width of Gaussian",0.1,5.0) ;
 	RooGaussian gauss("gauss","gauss(x,mean,sigma)",x,mean,sigma) ;
    
    
    //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 	//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
-	RooDataSet *data = gauss.generate(x,1000) ;
+	//RooDataSet *data = gauss.generate(x,1000) ;
 
    
    //mean.setConstant(kTRUE) ;
- /*gauss.fitTo(*data, Range(105,145));
+ gauss.fitTo(test, Range(105.0,140.0));
 
 	//samo gausijan test
 	
@@ -52,13 +57,16 @@ void Analyzer::runArgusModel() {
    //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
 
    RooPlot* mesframe = x.frame();
-   data->plotOn(mesframe,Range(105,145), LineColor(kBlue));
-   gauss.plotOn(mesframe,Range(105,145),  LineColor(kRed));
+   test.plotOn(mesframe,Range(105,140), LineColor(kBlue));
+   gauss.plotOn(mesframe,Range(105,140),  LineColor(kRed));
+	gauss.paramOn(mesframe, Layout(0.7));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-
+	mesframe->SetXTitle("Masa [GeV]");
+	mesframe->SetYTitle("Omjer dogadaja");
+	mesframe->SetTitle("Prilagodba podataka na Gaussovu krivulju");
    mesframe->Draw();
-   c1->SaveAs("test1.pdf");*/
-	RooAbsReal* nll = gauss.createNLL(*data, NumCPU(2));
+   c1->SaveAs("gauss-fit1.pdf");
+	/*RooAbsReal* nll = gauss.createNLL(*data, NumCPU(2));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(10),Range(105,140),Title("LL and profileLL in mean")) ;
    nll->plotOn(frame1,ShiftToZero()) ;
@@ -70,7 +78,7 @@ void Analyzer::runArgusModel() {
      canv->cd(1) ; frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
 canv->SaveAs("maxlike-signal1.pdf");
    delete pll_frac ;
-   delete nll ;
+   delete nll ;*/
 }
 
 void Analyzer::Loop()
@@ -108,6 +116,14 @@ void Analyzer::Loop()
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
+	if(ZZMass>=105.0 && ZZMass<=140.0){
+		if(Z1Flav==-169 && Z2Flav==-169){
+			x=ZZMass;
+			test.add(RooArgSet(x));
+		}
+	}
+
+
    }
    
 

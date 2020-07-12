@@ -1,0 +1,43 @@
+\contentsline {section}{\numberline {1}Uvod}{1}%
+\contentsline {section}{\numberline {2}Teorijski uvod}{1}%
+\contentsline {subsection}{\numberline {2.1}Standardni model}{1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Fermioni}{2}%
+\contentsline {paragraph}{Kvarkovi\newline }{2}%
+\contentsline {paragraph}{Leptoni\newline }{2}%
+\contentsline {subsubsection}{\numberline {2.1.2}Bozoni}{3}%
+\contentsline {paragraph}{Fotoni\newline }{3}%
+\contentsline {paragraph}{W i Z bozoni\newline }{3}%
+\contentsline {paragraph}{Gluoni\newline }{3}%
+\contentsline {subsection}{\numberline {2.2}Lagrangian SM-a}{3}%
+\contentsline {subsubsection}{\numberline {2.2.1}Baždarna invarijantnost}{4}%
+\contentsline {paragraph}{Lagrangian elektromagnetskog međudjelovanja\newline }{4}%
+\contentsline {paragraph}{Lagrangian elektroslabog međudjelovanja\newline }{5}%
+\contentsline {paragraph}{Lagrangian jakog međudjelovanja\newline }{5}%
+\contentsline {subsubsection}{\numberline {2.2.2}Spontano kršenje simetrije}{5}%
+\contentsline {paragraph}{Lagrangian Higgsovog polja\newline }{6}%
+\contentsline {subsection}{\numberline {2.3}Higgsov bozon}{6}%
+\contentsline {subsubsection}{\numberline {2.3.1}Mehanizam produkcije Higgsovog bozona}{7}%
+\contentsline {paragraph}{Gluon fuzija\newline }{7}%
+\contentsline {paragraph}{Ostali načini proizvodnje\newline }{7}%
+\contentsline {subsubsection}{\numberline {2.3.2}Mehanizmi raspada Higgsovog bozona}{8}%
+\contentsline {subsection}{\numberline {2.4}Kanal raspada \begin {math} H \rightarrow ZZ* \rightarrow 4\mu \end {math}}{9}%
+\contentsline {section}{\numberline {3}LHC sudarivač i CMS eksperiment}{10}%
+\contentsline {subsection}{\numberline {3.1}Povijest CERN-a}{10}%
+\contentsline {subsection}{\numberline {3.2}LHC}{10}%
+\contentsline {subsection}{\numberline {3.3}CMS}{11}%
+\contentsline {subsubsection}{\numberline {3.3.1}Sistem okidača}{12}%
+\contentsline {subsubsection}{\numberline {3.3.2}Rekonstrukcija čestica}{13}%
+\contentsline {section}{\numberline {4}Analiza kanala raspada \begin {math} \boldmath {H \rightarrow ZZ^* \rightarrow 4\mu }\end {math} }{14}%
+\contentsline {subsection}{\numberline {4.1}Podaci i Montecarlo simulacije}{14}%
+\contentsline {paragraph}{Težina događaja}{14}%
+\contentsline {subsection}{\numberline {4.2}ROOT i RooFit}{15}%
+\contentsline {subsection}{\numberline {4.3}Statistička analiza}{15}%
+\contentsline {subsubsection}{\numberline {4.3.1}Funkcija gustoće vjerojatnosti}{15}%
+\contentsline {subsubsection}{\numberline {4.3.2}Likelihood funkcija}{16}%
+\contentsline {subsubsection}{\numberline {4.3.3}Statističke i sistematske pogreške}{17}%
+\contentsline {section}{\numberline {5}Rezultati}{18}%
+\contentsline {subsection}{\numberline {5.1}Signal i pozadina}{18}%
+\contentsline {section}{\numberline {6}Novo poglavlje}{23}%
+\contentsline {subsection}{\numberline {6.1}Potpoglavlje}{23}%
+\contentsline {section}{\numberline {7}Zaključak}{27}%
+\contentsline {section}{\numberline {A}Napomene o literaturi}{29}%
