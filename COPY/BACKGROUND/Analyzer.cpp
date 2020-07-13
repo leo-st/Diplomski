@@ -32,9 +32,9 @@ RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight
 
 using namespace RooFit;
 void Analyzer::runArgusModel() {
-	//TCanvas *canv = new TCanvas("c1","c1");
+	TCanvas *canv = new TCanvas("c1","c1");
 	
-	//canv->cd();
+	canv->cd();
 	 
 
    
@@ -53,19 +53,20 @@ void Analyzer::runArgusModel() {
 
 	//RooRealVar Masa("Masa","Masa",105,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar mean("mean","Mean of Gaussian",124.85,105.0,140.0) ;
+		//RooRealVar mean("mean","Mean of Gaussian",124.85,105.0,140.0) ;
 		//RooRealVar mean("mean","Mean of Gaussian",124.85) ;
-		/*RooRealVar sigma("sigma","Width of Gaussian",1.13,0.92,1.34) ;
-		RooRealVar alpha("alpha","alpha",1.24,0.75,1.73) ;
-		RooRealVar n("n","n",2.0,0.7,3.3) ;
-		RooRealVar alpha2("alpha2","alpha2",1.72,1.0,2.44) ;
-		RooRealVar n2("n2","n2",3.5,-0.8,7.8) ;*/
+		RooRealVar mean("mean","Mean of Gaussian",125.0,105,140) ;
+		RooRealVar sigma("sigma","Width of Gaussian",1.13,-10.1,1.4) ;
+		RooRealVar alpha("alpha","alpha",1.24,-20.95,20.55) ;
+		RooRealVar n("n","n",2.0,0.1,500.9) ;
+		RooRealVar alpha2("alpha2","alpha2",1.72,0.1,20.2) ;
+		RooRealVar n2("n2","n2",3.5,0.1,250.0) ;
 
-		RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
+		/*RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
 		RooRealVar alpha("alpha","alpha",1.24) ;
 		RooRealVar n("n","n",2.0) ;
 		RooRealVar alpha2("alpha2","alpha2",1.72) ;
-		RooRealVar n2("n2","n2",3.5) ;
+		RooRealVar n2("n2","n2",3.5) ;*/
 
 		//RooRealVar shift("shift","shift",0.15);
 		//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
@@ -146,16 +147,17 @@ void Analyzer::runArgusModel() {
  //g.fitTo(wdata, Range(110,140));
    
    //mean.setConstant(kTRUE) ;
- /*CBall.fitTo(wdata, Range(105,140));
+ CBall.fitTo(wdata, Range(105,140));
  //CBall.fitTo(data, Range(110,140));
-
+//RooRealVar shift("shift","shift",0.15);
+//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
 	//samo gausijan test
 	
 	//RooPlot* xframe = x.frame();
 	//gauss.plotOn(xframe);
 	//xframe->Draw();
 
-cout<<mH.evaluate()<<endl;
+//cout<<mH.evaluate()<<endl;
 
 
    // --- Plot toy data and composite PDF overlaid ---
@@ -169,8 +171,8 @@ cout<<mH.evaluate()<<endl;
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   canv->SaveAs("signal-weighted7.pdf");*/
-RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
+   canv->SaveAs("signal-weighted9.png");
+/*RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in mean")) ;
    nll->plotOn(frame1,ShiftToZero()) ;
@@ -183,7 +185,7 @@ RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
 canv->SaveAs("maxlike-signal2.pdf");
    delete pll_frac ;
    delete nll ;
-
+*/
 }
 void Analyzer::ZZTo4lext1()
 {
@@ -254,7 +256,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	//RooChi2Var chi2("chi2","chi2",g,data) ;
    mesframe->Draw();
-   c1->SaveAs("background-ZZto4l.pdf");
+   c1->SaveAs("background-ZZto4l.png");
 	//cout<<chi2.getVal()<<endl;
 	//cout<<mesframe->chiSquare("g","data",3)<<endl;
 
