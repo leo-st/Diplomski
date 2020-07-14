@@ -115,7 +115,6 @@ void Analyzer::runArgusModel() {
 			//data.add(ZZMass);
 		}
 	}
-
    }*/
 
 
@@ -132,7 +131,7 @@ void Analyzer::runArgusModel() {
 	
 	
 	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(137.0 * 1000 * 0.0133352  * y ) / 28744188.0 * z",RooArgSet( y,z)) ;
+   RooFormulaVar wFunc("gen","(137.0 * 1000 * 0.0186858  * y ) / 28008536.0 * z",RooArgSet( y,z)) ;
    
    // Add column with variable w to previously generated dataset
    RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
@@ -171,7 +170,7 @@ void Analyzer::runArgusModel() {
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   canv->SaveAs("ggH125-1.png");
+   canv->SaveAs("ggH130-1.png");
 /*RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in mean")) ;
@@ -187,215 +186,6 @@ canv->SaveAs("maxlike-signal2.pdf");
    delete nll ;
 */
 }
-void Analyzer::ZZTo4lext1()
-{
-TCanvas *c1 = new TCanvas("c1","c1");
-	
-	c1->cd();
-	 RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
-	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
-	RooRealVar xsec("xsec","xsec",0.00158549) ;
-	RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",2.0,2.4) ;
-	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-80.0,600.0) ;
-	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
-	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
-	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
-	
-	//RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
-	RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",fChain,KFactor_QCD_ggZZ_Nominal) ;
-	RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",fChain,overallEventWeight) ;
-	//RooDataSet L1prefiringWeight_data("L1prefiringWeight_data","L1prefiringWeight_data",fChain,L1prefiringWeight) ;
-	//RooDataSet genHEPMCweight_data("genHEPMCweight_data","genHEPMCweight_data",fChain,genHEPMCweight) ;
-	
-	//RooRealVar ZZMass("ZZMass","ZZMass",0,250) ;
-	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
-
-   
-	//RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
-	//RooRealVar x("x","x",0,250) ;
-	RooRealVar a("a","a",-1,-5,10) ;
-	RooRealVar b("b","b",225,100,450) ;
-	RooRealVar c("c","c",5000,-15000,15000) ;
-	RooGenericPdf g("g","a*ZZMass*ZZMass + b*ZZMass + c", RooArgSet(ZZMass,a,b,c));
-	//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;  
-   
-   
-	
-	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * KFactor_QCD_ggZZ_Nominal * overallEventWeight * L1prefiringWeight ) / genHEPMCweight",RooArgSet(LumiNumber,xsec, KFactor_QCD_ggZZ_Nominal, overallEventWeight,L1prefiringWeight,genHEPMCweight)) ;
-   
-   // Add column with variable w to previously generated dataset
-   RooRealVar* w = (RooRealVar*) data.addColumn(wFunc) ;
-   // Dataset d is now a dataset with two observable (x,w) with 1000 entries
-   data.Print() ;
-   // Instruct dataset wdata in interpret w as event weight rather than as observable
-   RooDataSet wdata(data.GetName(),data.GetTitle(),&data, *data.get(),0,w->GetName()) ;
-
-
-   
-   //mean.setConstant(kTRUE) ;
- g.fitTo(wdata, Range(105,140));
-
-	//samo gausijan test
-	
-	//RooPlot* xframe = x.frame();
-	//gauss.plotOn(xframe);
-	//xframe->Draw();
-
-
-
-
-   // --- Plot toy data and composite PDF overlaid ---
-   //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
-
-   RooPlot* mesframe = ZZMass.frame();
-   wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
-   g.plotOn(mesframe,Range(105,140),  LineColor(kRed));
-	g.paramOn(mesframe, Layout(0.65));
-
-   //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-	//RooChi2Var chi2("chi2","chi2",g,data) ;
-   mesframe->Draw();
-   c1->SaveAs("background-ZZto4l.png");
-	//cout<<chi2.getVal()<<endl;
-	//cout<<mesframe->chiSquare("g","data",3)<<endl;
-
-}
-
-void Analyzer::ggTo4mu()
-{
-TCanvas *c3 = new TCanvas("c3","c3");
-	
-	c3->cd();
-	 
-
-   
-	RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
-	//RooRealVar x("x","x",0,250) ;
-	RooRealVar a("a","a",0.1,0.001,0.5) ;
-	RooRealVar b("b","b",200,1,500) ;
-	
-	RooGenericPdf g2("g2","a*ZZMass + b", RooArgSet(ZZMass,a,b));
-	//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
-   
-   
-   //RooRealVar ZZMass("ZZMass","ZZMass",0,250) ;
-	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
-
-   
-   //mean.setConstant(kTRUE) ;
- g2.fitTo(data, Range(110,140));
-
-	//samo gausijan test
-	
-	//RooPlot* xframe = x.frame();
-	//gauss.plotOn(xframe);
-	//xframe->Draw();
-
-
-
-
-   // --- Plot toy data and composite PDF overlaid ---
-   //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
-
-   RooPlot* mesframe = ZZMass.frame();
-   data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
-   g2.plotOn(mesframe,Range(110,140),  LineColor(kYellow));
-	g2.paramOn(mesframe, Layout(0.25));
-
-   //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-	//RooChi2Var chi2("chi2","chi2",g,data) ;
-   mesframe->Draw();
-   c3->SaveAs("test-background-gg.pdf");
-	//cout<<chi2.getVal()<<endl;
-	//cout<<mesframe->chiSquare("g","data",3)<<endl;
-
-}
-void Analyzer::ggTo4mutest()
-{
-TCanvas *c1 = new TCanvas("c1","c1");
-	
-	c1->cd();
-	 
-	//_lumi postavljam sam na neku vrijednost
-	//xsec zadan u branchu = 0.00158549
-	//_k_factor = 1 za signal, a za pozadinu je zadan u branchu
-	//overallEventWeight zadan je kao branch
-	//L1prefiringWeight zadan je kao u branchu  = 1
-	//ggH_NNLOPS_weight=1 za signal, a za pozadinu je zadan u branchu
-	//gen_sum_weights vrijednost 40-og bina u histogramu u ROOT file-u
-	RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
-	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
-	RooRealVar xsec("xsec","xsec",0.00158549) ;
-	RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",2.0,2.4) ;
-	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",0.0,46.0) ;
-	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
-	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
-	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
-	
-	//RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
-	RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",fChain,KFactor_QCD_ggZZ_Nominal) ;
-	RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",fChain,overallEventWeight) ;
-	//RooDataSet L1prefiringWeight_data("L1prefiringWeight_data","L1prefiringWeight_data",fChain,L1prefiringWeight) ;
-	//RooDataSet genHEPMCweight_data("genHEPMCweight_data","genHEPMCweight_data",fChain,genHEPMCweight) ;
-	
-	//RooRealVar ZZMass("ZZMass","ZZMass",0,250) ;
-	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
-	
-
-   
-	//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
-	//RooRealVar x("x","x",0,250) ;
-	RooRealVar a("a","a",0.1,0.001,0.5) ;
-	RooRealVar b("b","b",200,1,500) ;
-	
-	RooGenericPdf g("g","a*ZZMass + b", RooArgSet(ZZMass,a,b));
-	//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
-   
-   
-   
-	
-	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * KFactor_QCD_ggZZ_Nominal * overallEventWeight * L1prefiringWeight ) / genHEPMCweight",RooArgSet(LumiNumber,xsec, KFactor_QCD_ggZZ_Nominal, overallEventWeight,L1prefiringWeight,genHEPMCweight)) ;
-   
-   // Add column with variable w to previously generated dataset
-   RooRealVar* w = (RooRealVar*) data.addColumn(wFunc) ;
-   // Dataset d is now a dataset with two observable (x,w) with 1000 entries
-   data.Print() ;
-   // Instruct dataset wdata in interpret w as event weight rather than as observable
-   RooDataSet wdata(data.GetName(),data.GetTitle(),&data, *data.get(),0,w->GetName()) ;
-
-
-   
-   //mean.setConstant(kTRUE) ;
- g.fitTo(wdata, Range(105,140));
-
-	//samo gausijan test
-	
-	//RooPlot* xframe = x.frame();
-	//gauss.plotOn(xframe);
-	//xframe->Draw();
-
-
-
-
-   // --- Plot toy data and composite PDF overlaid ---
-   //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
-
-   RooPlot* mesframe = ZZMass.frame();
-   wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
-   g.plotOn(mesframe,Range(105,140),  LineColor(kRed));
-	g.paramOn(mesframe, Layout(0.65));
-
-   //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-	//RooChi2Var chi2("chi2","chi2",g,data) ;
-   mesframe->Draw();
-   c1->SaveAs("test-background-gg.pdf");
-	//cout<<chi2.getVal()<<endl;
-	//cout<<mesframe->chiSquare("g","data",3)<<endl;
-
-}
-
 void Analyzer::Loop()
 {
 	ofstream myfile;
@@ -468,7 +258,8 @@ z=ggH_NNLOPS_weight;
 overallEventWeight_data.add(RooArgSet(y));
 ggH_NNLOPS_weight_data.add(RooArgSet(z));
 
-suma= suma + (137.0 * 1000 * 0.0133352 * overallEventWeight  ) / 28744188.0 * ggH_NNLOPS_weight;
+
+suma= suma + (137.0 * 1000 * 0.0186858 * overallEventWeight  ) / 28008536.0 * ggH_NNLOPS_weight;
 counter++;}
 	}	
    }
