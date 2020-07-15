@@ -25,7 +25,7 @@ using namespace std;
 int main(){
 
 	Analyzer *signal = new Analyzer("/home/public/data/2018_MC/ggH120/");
-	signal->Loop();
+	//signal->Loop();
 	signal->runArgusModel();
 
 	//Analyzer *a = new Analyzer("/home/public/data/2018_MC/ZZTo4lext1/");

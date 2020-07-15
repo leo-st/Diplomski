@@ -57,11 +57,19 @@ void Analyzer::sumall(){
 		//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
 		 
 		//RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, mean, sigma, alpha, n, alpha2 ,n2);
- 
+ 		
+		//mean
+		RooRealVar p0("p0","p0",1.035,1.0323,1.0614);
+		RooRealVar p1("p1","p1",-4.582,-7.91,-1.254);
+		RooFormulaVar meanH("mH","@0*@1 + @2",RooArgList(mean,p0,p1));
 		
-		RooRealVar shift("shift","shift",-0.044);
-		RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
-		RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, mH, sigma, alpha, n, alpha2 ,n2);
+		//sigma
+		RooRealVar p0s("p0s","p0s",0.009073,-0.021197,0.039343);
+		RooRealVar p1s("p1s","p1s",0.01463,-3.81237,3.84163);
+		RooFormulaVar sigmaH("sigmaH","@0*@1 + @2",RooArgList(sigma,p0s,p1s));
+
+
+		RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, meanH, sigmaH, alpha, n, alpha2 ,n2);
 
 
 	/*RooRealVar mean_vbfh("mean_vbfh","Mean of Gaussian",125,105,140) ;
@@ -258,7 +266,7 @@ void Analyzer::sumall(){
 	model.paramOn(masaframe, Layout(0.7));
 
    masaframe->Draw();
-   canv->SaveAs("test-2.png");
+   canv->SaveAs("test-14-7-mean-sigma.png");
 	/*RooAbsReal* nll = model.createNLL(*podaci, NumCPU(4));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(120.5,130.5),Title("LL and profileLL in frac")) ;
