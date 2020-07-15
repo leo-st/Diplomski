@@ -40,8 +40,8 @@ void Analyzer::sumall(){
 
    
 		RooRealVar Masa("Masa","Masa",105,140) ;
-		RooRealVar mean("mean","Mean of Gaussian",125.0,105,140) ;
-		RooRealVar sigma("sigma","Width of Gaussian",1.13,-10.1,1.4) ;
+		RooRealVar mH("m_{H}","m_{H}",130.0,105,140) ;
+		RooRealVar sigma("#sigma","Width of Gaussian",1.13,-10.1,1.4) ;
 		RooRealVar alpha("alpha","alpha",1.24,-20.95,20.55) ;
 		RooRealVar n("n","n",2.0,1.4,500.9) ;
 		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,20.2) ;
@@ -59,17 +59,13 @@ void Analyzer::sumall(){
 		//RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, mean, sigma, alpha, n, alpha2 ,n2);
  		
 		//mean
-		RooRealVar p0("p0","p0",1.035,1.0323,1.0614);
-		RooRealVar p1("p1","p1",-4.582,-7.91,-1.254);
-		RooFormulaVar meanH("mH","@0*@1 + @2",RooArgList(mean,p0,p1));
+		RooRealVar p0("p0","p0",1.035);
+		RooRealVar p1("p1","p1",-4.582);
+		RooFormulaVar meanH("meanH","@0*@1 + @2",RooArgList(mH,p0,p1));
 		
 		//sigma
-		RooRealVar p0s("p0s","p0s",0.009073,-0.021197,0.039343);
-		RooRealVar p1s("p1s","p1s",0.01463,-3.81237,3.84163);
-		RooFormulaVar sigmaH("sigmaH","@0*@1 + @2",RooArgList(sigma,p0s,p1s));
 
-
-		RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, meanH, sigmaH, alpha, n, alpha2 ,n2);
+		RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, meanH, sigma, alpha, n, alpha2 ,n2);
 
 
 	/*RooRealVar mean_vbfh("mean_vbfh","Mean of Gaussian",125,105,140) ;
@@ -234,11 +230,15 @@ void Analyzer::sumall(){
 	//RooAddPdf model_sig("model_sig","s1+s2",RooArgList(CBall,CBall_vbfh),RooArgList(nsig,nsig_vbfh));
 
    	//RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3));
-	RooRealVar coeff("coeff","#coeff", 0.396,0.0,1.0);
+	
+	//RooRealVar coeff("coeff","#coeff", 0.396,0.0,1.0);
+RooRealVar p0c("p0c","p0c",0.02108,0.0205366,0.0216234);
+		RooRealVar p1c("p1c","p1c",-2.242,-2.30994,-2.17406);
+		RooFormulaVar coeffH("coeffH","@0*@1 + @2",RooArgList(mH,p0c,p1c));
 	
 	//RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),RooArgList(nsig,nbkg));
 	//RooAddPdf model("model","s+b",RooArgList(model_sig,model_backg),RooArgList(nsig,nbkg));
-	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
+	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeffH);
    	
    	RooDataSet *podaci = model.generate(Masa, 10000);
    	model.fitTo(*podaci);
@@ -263,10 +263,14 @@ void Analyzer::sumall(){
 	//model.plotOn(masaframe, Components(CBall_vbfh), LineColor(kOrange));
 	//model.plotOn(masaframe, Components(model_sig), LineColor(kGreen));
 
-	model.paramOn(masaframe, Layout(0.7));
+	model.paramOn(masaframe,Layout(0.1,0.3));
+	masaframe->getAttText()->SetTextSize(0.03);
+		// we want to display the fit parameters
+ 	//gPad->SetLogy(kTRUE);		// set the Y axis in Log scale
+ 	//gPad->Modified();		
 
    masaframe->Draw();
-   canv->SaveAs("test-14-7-mean-sigma.png");
+   canv->SaveAs("test-15-7-mean-coeff130.png");
 	/*RooAbsReal* nll = model.createNLL(*podaci, NumCPU(4));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(120.5,130.5),Title("LL and profileLL in frac")) ;

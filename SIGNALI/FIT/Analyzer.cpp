@@ -32,15 +32,15 @@ void Analyzer::runArgusModel() {
 	c2->cd();
 
 	Double_t x[] = {120.0,124.0,125.0,126.0,130.0};
-	 Double_t y[] = {1.12,1.15,1.13,1.15,1.2};
+	 Double_t y[] = {0.284756304,0.372680184,0.39563202,0.418338960,0.4948448};
 	 Double_t ex[5] = {0,0,0,0,0};
-   Double_t ey[5] = {0.3,0.27,0.2,0.29,0.16};
+   Double_t ey[5] = {0,0,0,0,0};
 	 //TGraph *g = new TGraph((sizeof(x) / sizeof(Double_t)), x, y);
 	TGraphErrors *g = new TGraphErrors(5, x, y,ex,ey);
 	//TGraph *g = new TGraph(5, x, y,ex,ey);
 	 TF1 *f = new TF1("f", "[0] * x + [1]"); 
 	g->Fit(f);
-	g->GetYaxis()->SetTitle("#sigma");
+	g->GetYaxis()->SetTitle("integral");
 	g->GetXaxis()->SetTitle("m_{H}");
 	gStyle->SetOptFit(kTRUE);
 	gStyle->SetStatX(0.5);
@@ -50,7 +50,7 @@ void Analyzer::runArgusModel() {
  	//gPad->Modified();		
  	gPad->Update();
  	g->Draw("A*");
-	c2->SaveAs("higgs-fit-sigma.png");
+	c2->SaveAs("higgs-fit-integral.png");
 
 	
 	
