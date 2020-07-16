@@ -22,6 +22,7 @@
 #include "RooFormulaVar.h"
 #include "RooLandau.h"
 #include "RooRealSumPdf.h"
+#include "RooMinimizer.h"
 
 RooRealVar  x("x","x",105.0,140.0) ;
 RooDataSet test("test","test", RooArgSet(x));
@@ -37,27 +38,44 @@ TCanvas *canv = new TCanvas("canv","canv");
    
 		//RooRealVar Masa("Masa","Masa",105,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar mean("mean","Mean of Gaussian",125.0,105,140) ;
-		RooRealVar sigma("sigma","Width of Gaussian",1.13,-10.1,1.4) ;
+		//RooRealVar mean("mean","Mean of Gaussian",125.0,105,140) ;
+		/*RooRealVar sigma("sigma","Width of Gaussian",1.13,0.9,1.4) ;
+		RooRealVar alpha("alpha","alpha",1.24,0.95,1.55) ;
+		RooRealVar n("n","n",2.0,1.4,2.9) ;
+		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,2.4) ;
+		RooRealVar n2("n2","n2",3.5,1.2,15.0) ;
+		RooRealVar c("c","c",0.37,0.0,1.0) ;*/
+
+		/*RooRealVar mH("m_{H}","m_{H}",125.0,105,140) ;
+		RooRealVar sigma("#sigma","Width of Gaussian",1.13,-10.1,1.4) ;
 		RooRealVar alpha("alpha","alpha",1.24,-20.95,20.55) ;
 		RooRealVar n("n","n",2.0,1.4,500.9) ;
 		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,20.2) ;
-		RooRealVar n2("n2","n2",3.5,1.2,250.0) ;
+		RooRealVar n2("n2","n2",3.5,1.2,250.0) ;*/
 
-		/*RooRealVar sigma("sigma","Width of Gaussian",0.9) ;
-		RooRealVar alpha("alpha","alpha",1.24) ;
-		RooRealVar n("n","n",2.0) ;
-		RooRealVar alpha2("alpha2","alpha2",1.72) ;
-		RooRealVar n2("n2","n2",3.5) ;*/
+
+		RooRealVar mH("m_{H}","m_{H}",125.0,105,140) ;
+		RooRealVar sigma("#sigma","Width of Gaussian",1.148755) ;
+		RooRealVar alpha("alpha","alpha",1.23) ;
+		RooRealVar n("n","n",2.073) ;
+		RooRealVar alpha2("alpha2","alpha2",1.77775) ;
+		RooRealVar n2("n2","n2",3.275) ;
+		
+
+		RooRealVar p0("p0","p0",1.035);
+		RooRealVar p1("p1","p1",-4.582);
+		RooFormulaVar meanH("meanH","@0*@1 + @2",RooArgList(mH,p0,p1));
+
+		/*RooRealVar p0s("p0s","p0s",0.009073);
+		RooRealVar p1s("p1s","p1s",0.01463);
+		RooFormulaVar sigmaH("sigmaH","@0*@1 + @2",RooArgList(mH,p0s,p1s));*/
 
 
 		//RooRealVar shift("shift","shift",0.15);
 		//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
-		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n, alpha2 ,n2);
+		RooDoubleCB CBall("CBall", "Crystal Ball shape", x, meanH, sigma, alpha, n, alpha2 ,n2);
    
 	   
-
-
 	   //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 
@@ -191,31 +209,34 @@ TCanvas *canv = new TCanvas("canv","canv");
 		//cout<<mesframe->chiSquare("g","data",3)<<endl;*/
 		
 	
-	//RooRealVar nsig("nsig","#signal events",77.589);
-	//RooRealVar nsig_vbfh("nsig_vbfh","#signal events_vbfh",6.71966);
+	//RooRealVar masa("masa","masa",110,140);
+	RooRealVar nsig("nsig","#signal events",84.30866);
   	RooRealVar nbkg1("nbkg1","#background events1",82.252);
   	RooRealVar nbkg2("nbkg2","#background events2",9.23738);
   	RooRealVar nbkg3("nbkg3","#background events3",37.3);
 	RooRealVar nbkg("nbkg","#nbkg",128.789);
-	RooRealVar nsg("nsg","#nsg",84.30866);
 
+	/*RooRealVar nsig("nsig","#signal events",88.35);
+  	RooRealVar nbkg1("nbkg1","#background events1",93.66);
+  	RooRealVar nbkg2("nbkg2","#background events2",10.52);
+  	RooRealVar nbkg3("nbkg3","#background events3",42.47);
+	RooRealVar nbkg("nbkg","#nbkg",146.65);*/
 
-	/*RooRealVar nsig("nsig","#signal events",0.37596);
-  	RooRealVar nbkg1("nbkg1","#background events1",0.39855);
-  	RooRealVar nbkg2("nbkg2","#background events2",0.0447595);
-  	//oRealVar nbkg3("nbkg3","#background events3",37.3);*/
 	RooAddPdf model_backg("model_backg","b1+b2+b3",RooArgList(g1,g2,landau),RooArgList(nbkg1,nbkg2,nbkg3));
-	//RooAddPdf model_sig("model_sig","s1+s2",RooArgList(CBall,CBall_vbfh),RooArgList(nsig,nsig_vbfh));
+	//RooRealVar coeff("coeff","#coeff", 0.373,0.0,1.0);
+
+	RooRealVar p0c("p0c","p0c",0.02108);
+		RooRealVar p1c("p1c","p1c",-2.242);
+		RooRealVar mu("mu","mu",1.0,0.1,1.9);
+		RooFormulaVar coeffH("coeffH","@3*(@0*@1 + @2)",RooArgList(mH,p0c,p1c,mu));
+
 
    	//RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3));
-	RooRealVar coeff("coeff","#coeff", 0.396,0.0,1.0);
-	
-	//RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),RooArgList(nsig,nbkg));
-	//RooAddPdf model("model","s+b",RooArgList(model_sig,model_backg),RooArgList(nsig,nbkg));
-	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
+   	//RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeff);
+	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeffH);
    	
    	//RooDataSet *podaci = model.generate(x, 1000);
-   	model.fitTo(test);
+   	/*model.fitTo(test);
    	//model.fitTo(*podaci);
    	RooPlot* masaframe = x.frame();
    	
@@ -232,7 +253,22 @@ TCanvas *canv = new TCanvas("canv","canv");
 	model.paramOn(masaframe, Layout(0.7));
 
    masaframe->Draw();
-   canv->SaveAs("final-fit7.pdf");
+   canv->SaveAs("final-fit-15-7-fixed-all.pdf");*/
+RooAbsReal* nll = model.createNLL(test, NumCPU(6));
+	RooMinimizer(*nll).migrad();
+	 RooPlot* frame1 = sigma.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in sigma")) ;
+   nll->plotOn(frame1,ShiftToZero()) ;
+	RooAbsReal* pll_frac = nll->createProfile(sigma) ;
+	pll_frac->plotOn(frame1,ShiftToZero(),LineColor(kRed)) ;
+	frame1->SetMinimum(0);
+	frame1->SetMaximum(5);
+	 //TCanvas *canv = new TCanvas("rf605_profilell","rf605_profilell",800, 400);
+     //canv->cd(1) ;
+	 frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
+canv->SaveAs("maxliike-sigma.png");
+   delete pll_frac ;
+   delete nll ;
+
 
 
 
