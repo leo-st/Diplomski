@@ -19,7 +19,7 @@
 using namespace RooFit;
 
 
-RooRealVar x("x","x",125.0,105.0,140.0) ;
+RooRealVar x("x","x",105.0,140.0) ;
 RooDataSet test("test","test", RooArgSet(x));
 void Analyzer::runArgusModel() {
 	TCanvas *c1 = new TCanvas("c1","c1");
@@ -30,7 +30,7 @@ void Analyzer::runArgusModel() {
    
 	//RooRealVar ZZMass("ZZMass","ZZMass",125,105,145) ;
 	
-	RooRealVar mean("mean","Mean of Gaussian",125,105.0,140.0) ;
+	RooRealVar mean("mean","Mean of Gaussian",105.0,140.0) ;
 	RooRealVar sigma("sigma","Width of Gaussian",0.1,5.0) ;
 	RooGaussian gauss("gauss","gauss(x,mean,sigma)",x,mean,sigma) ;
    
@@ -62,8 +62,8 @@ void Analyzer::runArgusModel() {
 	gauss.paramOn(mesframe, Layout(0.7));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	mesframe->SetXTitle("Masa [GeV]");
-	mesframe->SetYTitle("Omjer dogadaja");
-	mesframe->SetTitle("Prilagodba podataka na Gaussovu krivulju");
+	mesframe->SetYTitle("Broj dogadaja / (0.3)");
+	mesframe->SetTitle("");
    mesframe->Draw();
    c1->SaveAs("gauss-fit1.pdf");
 	/*RooAbsReal* nll = gauss.createNLL(*data, NumCPU(2));

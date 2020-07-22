@@ -22,6 +22,7 @@
 #include "RooFormulaVar.h"
 #include "RooMinimizer.h"
 #include "TGraphErrors.h"
+#include "TLine.h"
 #include <iostream>
 #include <fstream>
  
@@ -32,16 +33,27 @@ void Analyzer::runArgusModel() {
 	c2->cd();
 
 	Double_t x[] = {120.0,124.0,125.0,126.0,130.0};
-	 Double_t y[] = {0.284756304,0.372680184,0.39563202,0.418338960,0.4948448};
+	 Double_t y[] = {119.83,123.85,124.85,125.85,129.84};
 	 Double_t ex[5] = {0,0,0,0,0};
-   Double_t ey[5] = {0,0,0,0,0};
+   Double_t ey[5] = {0.26,0.22,0.19,0.25,0.14};
 	 //TGraph *g = new TGraph((sizeof(x) / sizeof(Double_t)), x, y);
 	TGraphErrors *g = new TGraphErrors(5, x, y,ex,ey);
 	//TGraph *g = new TGraph(5, x, y,ex,ey);
-	 TF1 *f = new TF1("f", "[0] * x + [1]"); 
+	 TF1 *f = new TF1("f", "[0]*x + [1]"); 
 	g->Fit(f);
-	g->GetYaxis()->SetTitle("integral");
-	g->GetXaxis()->SetTitle("m_{H}");
+	TLine *line = new TLine(118.0,117.57,132.0,131.57);
+	TLine *line2 = new TLine(118.0,118.1,132.0,132.1);
+	TLine *line3 = new TLine(119.0,124.85,131.0,124.85);
+	
+	double x1,x2;
+	x1=(124.85+0.4312)/(1.00001);
+	x2=(124.85-0.09874)/(1.00001);
+	
+	TLine *line4 = new TLine(x1,118.58,x1,124.85);
+	TLine *line5 = new TLine(x2,118.58,x2,124.85);
+
+	g->GetYaxis()->SetTitle("m_H");
+	g->GetXaxis()->SetTitle("x");
 	gStyle->SetOptFit(kTRUE);
 	gStyle->SetStatX(0.5);
 	gStyle->SetStatY(0.9);
@@ -49,8 +61,18 @@ void Analyzer::runArgusModel() {
  	//gPad->SetLogy(kTRUE);		// set the Y axis in Log scale
  	//gPad->Modified();		
  	gPad->Update();
+//	line->DrawLine(120.0,119.57,130.0,129.57);
+	
  	g->Draw("A*");
-	c2->SaveAs("higgs-fit-integral.png");
+	line->Draw("same");
+	line2->Draw("same");
+	line3->Draw("same");
+	line3->SetLineStyle(kDashed);
+	line4->Draw("same");
+	line4->SetLineStyle(kDashed);
+	line5->Draw("same");
+	line5->SetLineStyle(kDashed);
+	c2->SaveAs("higgs-fit-mean5.png");
 
 	
 	
