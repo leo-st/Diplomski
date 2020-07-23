@@ -5,7 +5,7 @@ using namespace std;
 int main(){
 
 	Analyzer *a = new Analyzer();
-	//a->Loop();
+	a->Loop();
 	a->runArgusModel();
 	//a->runArgusModel();
 	//a->Theoretical_noHiggs();

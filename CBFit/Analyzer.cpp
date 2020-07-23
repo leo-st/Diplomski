@@ -16,6 +16,8 @@
 #include "RooPlot.h"
 
 using namespace RooFit;
+RooRealVar x("x","x",105.0,140.0) ;
+RooDataSet test("test","test", RooArgSet(x));
 void Analyzer::runArgusModel() {
 	TCanvas *c1 = new TCanvas("c1","c1");
 	
@@ -23,21 +25,21 @@ void Analyzer::runArgusModel() {
 	 
 
    
-	RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
+	//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 	//RooRealVar x("x","x",0,250) ;
-	RooRealVar mean("mean","Mean of Gaussian",125,110,140) ;
-	RooRealVar sigma("sigma","Width of Gaussian",2,0,250) ;
-	RooRealVar alpha("alpha","alpha",10,0,250) ;
+	RooRealVar mean("#mu","Mean of Gaussian",105,140) ;
+	RooRealVar sigma("#sigma","Width of Gaussian",2,0,250) ;
+	RooRealVar alpha("#alpha","alpha",10,0,250) ;
 	RooRealVar n("n","n",100,0,250) ;
-	RooCBShape CBall("CBall", "Crystal Ball shape", ZZMass, mean, sigma, alpha, n);
+	RooCBShape CBall("CBall", "Crystal Ball shape", x, mean, sigma, alpha, n);
    
    
    //RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
-	RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
+	//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 
    
    //mean.setConstant(kTRUE) ;
- CBall.fitTo(data, Range(110,140));
+ CBall.fitTo(test, Range(105,140));
 
 	//samo gausijan test
 	
@@ -51,16 +53,19 @@ void Analyzer::runArgusModel() {
    // --- Plot toy data and composite PDF overlaid ---
    //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
 
-   RooPlot* mesframe = ZZMass.frame();
-   data.plotOn(mesframe,Range(110,140), LineColor(kBlue));
-   CBall.plotOn(mesframe,Range(110,140),  LineColor(kRed));
+   RooPlot* mesframe = x.frame();
+   test.plotOn(mesframe,Range(105,140), LineColor(kBlue));
+   CBall.plotOn(mesframe,Range(105,140),  LineColor(kRed));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-
+	CBall.paramOn(mesframe, Layout(0.15,0.45,0.9));
+mesframe->SetXTitle("m_{4#mu} [Gev]");
+	mesframe->SetYTitle("Broj dogadaja / (0.35) ");
+	mesframe->SetTitle("");
    mesframe->Draw();
    TPaveText *pt = new TPaveText(.05,.1,.95,.8);
    pt->AddText("proba!");
    pt->Draw();
-   c1->SaveAs("test.pdf");
+   c1->SaveAs("CBFit-23-7-final.png");
 }
 
 void Analyzer::Loop()
@@ -98,6 +103,14 @@ void Analyzer::Loop()
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
+	if(ZZMass>=105.0 && ZZMass<=140.0){
+		if(Z1Flav==-169 && Z2Flav==-169){
+			x=ZZMass;
+			test.add(RooArgSet(x));
+		}
+	}
+
+
    }
    
 
