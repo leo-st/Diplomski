@@ -30,8 +30,8 @@ void Analyzer::runArgusModel() {
    
 	//RooRealVar ZZMass("ZZMass","ZZMass",125,105,145) ;
 	
-	RooRealVar mean("mean","Mean of Gaussian",105.0,140.0) ;
-	RooRealVar sigma("sigma","Width of Gaussian",0.1,5.0) ;
+	RooRealVar mean("#mu","Mean of Gaussian",105.0,140.0) ;
+	RooRealVar sigma("#sigma","Width of Gaussian",0.1,5.0) ;
 	RooGaussian gauss("gauss","gauss(x,mean,sigma)",x,mean,sigma) ;
    
    
@@ -39,7 +39,7 @@ void Analyzer::runArgusModel() {
 	//RooDataSet data("data","dataset with ZZMass",fChain,ZZMass) ;
 	//RooDataSet *data = gauss.generate(x,1000) ;
 
-   
+   //RooArgSet* params = gauss.getParameters(x) ;
    //mean.setConstant(kTRUE) ;
  gauss.fitTo(test, Range(105.0,140.0));
 
@@ -55,17 +55,27 @@ void Analyzer::runArgusModel() {
 
    // --- Plot toy data and composite PDF overlaid ---
    //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
-
    RooPlot* mesframe = x.frame();
    test.plotOn(mesframe,Range(105,140), LineColor(kBlue));
    gauss.plotOn(mesframe,Range(105,140),  LineColor(kRed));
-	gauss.paramOn(mesframe, Layout(0.7));
+	gauss.paramOn(mesframe,Layout(0.65,0.9,0.9));
+	//params->printLatex(Format("NEA", 2));
+//test.statOn(mesframe);
+	//gauss.paramOn(mesframe,Layout(0.65, 0.9, 0.9), Format("NE",2));
+	//gauss.paramOn(mesframe,Layout(0.7, 0.9, 0.9));
+            /*ROOT.RooFit.FillColor(ROOT.kRed),
+            ROOT.RooFit.Label("Global Fit parameters:"),
+            ROOT.RooFit.Layout(0.1, 0.4, 0.9),
+            ROOT.RooFit.Format("NEU", ROOT.RooFit.AutoPrecision(1)),
+            ROOT.RooFit.ShowConstants());*/
+
+	//gauss.paramOn(mesframe, Layout(0.7));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-	mesframe->SetXTitle("Masa [GeV]");
-	mesframe->SetYTitle("Broj dogadaja / (0.3)");
+	mesframe->SetXTitle("m_{4#mu} [Gev]");
+	mesframe->SetYTitle("Broj dogadaja / (0.3) ");
 	mesframe->SetTitle("");
    mesframe->Draw();
-   c1->SaveAs("gauss-fit1.pdf");
+   c1->SaveAs("gauss-fit-23-7-final.png");
 	/*RooAbsReal* nll = gauss.createNLL(*data, NumCPU(2));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(10),Range(105,140),Title("LL and profileLL in mean")) ;
