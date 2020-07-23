@@ -18,9 +18,12 @@
 
 using namespace RooFit;
 
-
-RooRealVar x("x","x",105.0,140.0) ;
+ RooRealVar  x("x","x",105,140) ;
+RooRealVar  y("y","y",-80.0,600.0) ;
+RooRealVar  z("z","z",-2.0,8.0) ;
 RooDataSet test("test","test", RooArgSet(x));
+RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(y)) ;
+RooDataSet ggH_NNLOPS_weight_data("ggH_NNLOPS_weight_data","ggH_NNLOPS_weight_data", RooArgSet(z));
 void Analyzer::runArgusModel() {
 	TCanvas *c1 = new TCanvas("c1","c1");
 	
@@ -41,7 +44,22 @@ void Analyzer::runArgusModel() {
 
    //RooArgSet* params = gauss.getParameters(x) ;
    //mean.setConstant(kTRUE) ;
- gauss.fitTo(test, Range(105.0,140.0));
+ RooFormulaVar wFunc("gen","(137.0 * 1000 * 0.0133352  * y ) / 28744188.0 * z",RooArgSet( y,z)) ;
+   
+   // Add column with variable w to previously generated dataset
+   RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
+   // Dataset d is now a dataset with two observable (x,w) with 1000 entries
+
+   
+   // Instruct dataset wdata in interpret w as event weight rather than as observable
+   RooDataSet wdata(test.GetName(),test.GetTitle(),&test, *test.get(),0,w->GetName()) ;
+
+   //wdata.printArgs(cout);
+   //mean.setConstant(kTRUE) ;
+ //g.fitTo(wdata, Range(110,140));
+   
+   //mean.setConstant(kTRUE) ;
+ gauss.fitTo(wdata, Range(105,140));
 
 	//samo gausijan test
 	
@@ -56,7 +74,7 @@ void Analyzer::runArgusModel() {
    // --- Plot toy data and composite PDF overlaid ---
    //Moze se dodati NormRange ako eksplicitno zelimo normirati inace ce uzet po defaultu range
    RooPlot* mesframe = x.frame();
-   test.plotOn(mesframe,Range(105,140), LineColor(kBlue));
+   wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
    gauss.plotOn(mesframe,Range(105,140),  LineColor(kRed));
 	gauss.paramOn(mesframe,Layout(0.65,0.9,0.9));
 	//params->printLatex(Format("NEA", 2));
@@ -75,7 +93,7 @@ void Analyzer::runArgusModel() {
 	mesframe->SetYTitle("Broj dogadaja / (0.3) ");
 	mesframe->SetTitle("");
    mesframe->Draw();
-   c1->SaveAs("gauss-fit-23-7-final.png");
+   c1->SaveAs("gauss-fit-23-7-final-weighted.png");
 	/*RooAbsReal* nll = gauss.createNLL(*data, NumCPU(2));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(10),Range(105,140),Title("LL and profileLL in mean")) ;
@@ -129,8 +147,11 @@ void Analyzer::Loop()
 	if(ZZMass>=105.0 && ZZMass<=140.0){
 		if(Z1Flav==-169 && Z2Flav==-169){
 			x=ZZMass;
-			test.add(RooArgSet(x));
-		}
+y=overallEventWeight;
+z=ggH_NNLOPS_weight;
+				test.add(RooArgSet(x));
+overallEventWeight_data.add(RooArgSet(y));
+ggH_NNLOPS_weight_data.add(RooArgSet(z));		}
 	}
 
 
