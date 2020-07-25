@@ -89,7 +89,7 @@ void Analyzer::runArgusModel() {
 
 	//gauss.paramOn(mesframe, Layout(0.7));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-	mesframe->SetXTitle("m_{4#mu} [Gev]");
+	mesframe->SetXTitle("m_{4#mu} [GeV]");
 	mesframe->SetYTitle("Broj dogadaja / (0.3) ");
 	mesframe->SetTitle("");
    mesframe->Draw();

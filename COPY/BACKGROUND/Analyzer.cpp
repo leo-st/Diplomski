@@ -171,7 +171,7 @@ void Analyzer::runArgusModel() {
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	CBall.paramOn(mesframe, Layout(0.6));
    mesframe->Draw();
-   canv->SaveAs("ggH125-1.png");
+   canv->SaveAs("testiranje.png");
 /*RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(2));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in mean")) ;

@@ -24,12 +24,12 @@
 #include <fstream>
 
  RooRealVar  x("x","x",105,140) ;
-RooRealVar  y("y","y",-2.0,2.0) ;
-RooRealVar  z("z","z",-2.0,9.0) ;
+RooRealVar  y("y","y",-2.0,9.0) ;
+RooRealVar  z("z","z",-2.0,5.0) ;
 RooDataSet test("test","test", RooArgSet(x));
-RooDataSet KFactor_EW_qqZZ_data("KFactor_EW_qqZZ","KFactor_EW_qqZZ",RooArgSet(y)) ;
-RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(z)) ;
 
+RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(y)) ;
+RooDataSet KFactor_EW_qqZZ_data("KFactor_EW_qqZZ","KFactor_EW_qqZZ",RooArgSet(z)) ;
 using namespace RooFit;
 
 void Analyzer::ZZTo4lext1()
@@ -38,13 +38,13 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	
 	c1->cd();
 	// RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
-	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
-	RooRealVar xsec("xsec","xsec",1.256) ;
+	//RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
+	//RooRealVar xsec("xsec","xsec",1.256) ;
 	//RooRealVar KFactor_EW_qqZZ("KFactor_EW_qqZZ","KFactor_EW_qqZZ",-2.0,2.0) ;
 	//RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-2.0,9.0) ;
-	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1.0) ;
+	//RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1.0) ;
 	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
-	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",8398762.0) ;
+	//RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",8398762.0) ;
 	
 	//RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
 	//RooDataSet KFactor_EW_qqZZ_data("KFactor_EW_qqZZ","KFactor_EW_qqZZ",fChain,KFactor_EW_qqZZ) ;
@@ -68,7 +68,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
    
 	
 	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(LumiNumber * 1000 * xsec * y * z * L1prefiringWeight ) / genHEPMCweight",RooArgSet(LumiNumber,xsec, y, z,L1prefiringWeight,genHEPMCweight)) ;
+   RooFormulaVar wFunc("gen","(137.0 * 1000 * 1.256 * y * z ) / 8398762.0",RooArgSet(y, z)) ;
    
    // Add column with variable w to previously generated dataset
    RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
@@ -97,12 +97,16 @@ TCanvas *c1 = new TCanvas("c1","c1");
    RooPlot* mesframe = x.frame();
    wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
    g.plotOn(mesframe,Range(105,140),  LineColor(kRed));
-	g.paramOn(mesframe, Layout(0.65));
-
+mesframe->SetAxisRange(0.0,1.7,"Y");	
+	g.paramOn(mesframe, Layout(0.15,0.48,0.9));
+	mesframe->SetXTitle("m_{qqZZ} [GeV]");
+	mesframe->SetYTitle("Broj dogadaja / (0.35) ");
+	mesframe->SetTitle("");
+	
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	//RooChi2Var chi2("chi2","chi2",g,data) ;
    mesframe->Draw();
-   c1->SaveAs("background-ZZto4l4.pdf");
+   c1->SaveAs("background-qqZZ-weighted.png");
 	//cout<<chi2.getVal()<<endl;
 	//cout<<mesframe->chiSquare("g","data",3)<<endl;
 
@@ -168,17 +172,22 @@ int counter=0;
 	}
 	if(ZZMass>= 105.0 && ZZMass<=140.0){
 	//cout<<"jentry: "<<jentry<<"	"<<L1prefiringWeight<<endl;
-if(L1prefiringWeight<min){
-min=L1prefiringWeight;}
-if(L1prefiringWeight>max){
-max=L1prefiringWeight;}
+if(overallEventWeight<min){
+min=overallEventWeight;}
+if(overallEventWeight>max){
+max=overallEventWeight;}
 	}
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	if(Z2Flav==-169 && Z1Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<xsec<<endl;
+	if(Z2Flav==-169 && Z1Flav==-169){ cout<<"jentry: "<<jentry<<"	"<<overallEventWeight<<endl;
 x=ZZMass;
-y=KFactor_EW_qqZZ;
-z=overallEventWeight;
+y=overallEventWeight;
+z=KFactor_EW_qqZZ;
+
 				test.add(RooArgSet(x));
+			
+overallEventWeight_data.add(RooArgSet(y));
+KFactor_EW_qqZZ_data.add(RooArgSet(z));
+	
 	suma=suma +((137.0 * 1000 * 1.256 * KFactor_EW_qqZZ * overallEventWeight ) / 8398762.0);
 counter++;}
 	}	

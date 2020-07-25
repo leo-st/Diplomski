@@ -25,7 +25,7 @@ using namespace std;
 int main(){
 
 	Analyzer *signal = new Analyzer("/home/public/data/HiggsMassMeasurement/2018/ggH125/");
-	//signal->Loop();
+	signal->Loop();
 	signal->runArgusModel();
 
 	//Analyzer *a = new Analyzer("/home/public/data/2018_MC/ZZTo4lext1/");
