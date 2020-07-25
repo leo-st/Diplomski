@@ -26,12 +26,13 @@
 using namespace RooFit;
 
  RooRealVar  x("x","x",105,140) ;
-RooRealVar  y("y","y",1.5,2.8) ;
-RooRealVar  z("z","z",-100.0,790.0) ;
-RooDataSet test("test","test", RooArgSet(x));
-RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal_data","KFactor_QCD_ggZZ_Nominal_data",RooArgSet(y)) ;
-RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(z)) ;
+RooRealVar  y("y","y",-100.0,790.0) ;
+RooRealVar  z("z","z",1.5,2.8) ;
 
+RooDataSet test("test","test", RooArgSet(x));
+
+RooDataSet overallEventWeight_data("overallEventWeight_data","overallEventWeight_data",RooArgSet(y)) ;
+RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal_data","KFactor_QCD_ggZZ_Nominal_data",RooArgSet(z)) ;
 
 void Analyzer::ggTo4mu()
 {
@@ -47,13 +48,13 @@ TCanvas *c1 = new TCanvas("c1","c1");
 	//ggH_NNLOPS_weight=1 za signal, a za pozadinu je zadan u branchu
 	//gen_sum_weights vrijednost 40-og bina u histogramu u ROOT file-u
 	//RooRealVar ZZMass("ZZMass","ZZMass",105,140) ;
-	RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
-	RooRealVar xsec("xsec","xsec",0.00158549) ;
-	RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",1.5,2.8) ;
-	RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-100.0,790.0) ;
-	RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
+	//RooRealVar LumiNumber("LumiNumber","LumiNumber",137.0) ;
+	//RooRealVar xsec("xsec","xsec",0.00158549) ;
+	//RooRealVar KFactor_QCD_ggZZ_Nominal("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",1.5,2.8) ;
+	//RooRealVar overallEventWeight("overallEventWeight","overallEventWeight",-100.0,790.0) ;
+	//RooRealVar L1prefiringWeight("L1prefiringWeight","L1prefiringWeight",1) ;
 	//RooRealVar ggH_NNLOPS_weight("ggH_NNLOPS_weight","ggH_NNLOPS_weight",110,140) ;
-	RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
+	//RooRealVar genHEPMCweight("genHEPMCweight","genHEPMCweight",594858.56) ;
 	
 	//RooDataSet xsec_data("xsec_data","xsec_data",fChain,xsec) ;
 	//RooDataSet KFactor_QCD_ggZZ_Nominal_data("KFactor_QCD_ggZZ_Nominal","KFactor_QCD_ggZZ_Nominal",fChain,KFactor_QCD_ggZZ_Nominal) ;
@@ -78,7 +79,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
    
 	
 	// Construct formula to calculate (fake) weight for events
-   RooFormulaVar wFunc("gen","(137.0 * 1000 * 0.00158549 * y * z  ) / 594858.56",RooArgSet(y, z)) ;
+   RooFormulaVar wFunc("gen","(137.0 * 1000 * 0.00158549  * y * z ) / 594858.56",RooArgSet(y, z)) ;
    
    // Add column with variable w to previously generated dataset
    RooRealVar* w = (RooRealVar*) test.addColumn(wFunc) ;
@@ -107,18 +108,19 @@ TCanvas *c1 = new TCanvas("c1","c1");
    RooPlot* mesframe = x.frame();
    wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
    g.plotOn(mesframe,Range(105,140),  LineColor(kRed));
-	g.paramOn(mesframe, Layout(0.65));
-
+	mesframe->SetAxisRange(0.0,0.24,"Y");	
+	g.paramOn(mesframe, Layout(0.15,0.48,0.9));
+	mesframe->SetXTitle("m_{gg->4#mu} [GeV]");
+	mesframe->SetYTitle("Broj dogadaja / (0.3) ");
+	mesframe->SetTitle("");
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
 	//RooChi2Var chi2("chi2","chi2",g,data) ;
    mesframe->Draw();
-   c1->SaveAs("test-background-gg4.pdf");
+   c1->SaveAs("background-ggto4mu-weighted.png");
 	//cout<<chi2.getVal()<<endl;
 	//cout<<mesframe->chiSquare("g","data",3)<<endl;
 
 }
-
-
 
 void Analyzer::Loop()
 {
@@ -153,12 +155,15 @@ myfile1.open ("example1.txt");
 // METHOD2: replace line
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
+ //RooRealVar  x("x","x",105,140) ;
+//RooDataSet test("test","test", RooArgSet(x));
    if (fChain == 0) return;
 myfile <<"JENTRY: "<<"	LumiNumber : "<<"	overallEventWeight_data : "<<endl;
 myfile1<<"jentry: "<<"		data"<<"		weight( (LumiNumber * 1000 * xsec * overallEventWeight) / genHEPMCweight * ggH_NNLOPS_weight"<<endl;
    Long64_t nentries = fChain->GetEntriesFast();
-double min=900000,max=-100000;
+double min=900000,max=-1000000;
 double suma=0.0;
+int counter=0;
    Long64_t nbytes = 0, nb = 0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
@@ -166,7 +171,6 @@ double suma=0.0;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
       //h1->Fill(ZZMass);
-	cout<<jentry<<endl;
 
 	if(ZZMass>= 105.0 && ZZMass<=140.0){
 		//myfile <<jentry<<"	"<<LumiNumber<<"	 "<<overallEventWeight<<endl;
@@ -175,28 +179,34 @@ double suma=0.0;
 //cout<<jentry<<" : "<<L1prefiringWeight<<endl;
 	}
 	if(ZZMass>= 105.0 && ZZMass<=140.0){
-	//cout<<"jentry: "<<jentry<<"	ggH_NNLOPS_weight: "<<ggH_NNLOPS_weight<<endl;
-if(genHEPMCweight<min){
-min=genHEPMCweight;}
-if(genHEPMCweight>max){
-max=genHEPMCweight;}
+	//cout<<"jentry: "<<jentry<<"	"<<L1prefiringWeight<<endl;
+if(overallEventWeight<min){
+min=overallEventWeight;}
+if(overallEventWeight>max){
+max=overallEventWeight;}
 	}
       if(ZZMass>= 105.0 && ZZMass<=140.0){
-	//cout<<"jentry: "<<jentry<<"	"<<xsec<<endl;
+	if(Z2Flav==-169 && Z1Flav==-169){ //cout<<"jentry: "<<jentry<<"	"<<xsec<<endl;
 x=ZZMass;
-y=KFactor_QCD_ggZZ_Nominal;
-z=overallEventWeight;
+y=overallEventWeight;
+z=KFactor_QCD_ggZZ_Nominal;
+
 				test.add(RooArgSet(x));
-KFactor_QCD_ggZZ_Nominal_data.add(RooArgSet(y));
-overallEventWeight_data.add(RooArgSet(z));
+			
+overallEventWeight_data.add(RooArgSet(y));
+KFactor_QCD_ggZZ_Nominal_data.add(RooArgSet(z));
+	
 	suma=suma +((137.0 * 1000 * 0.00158549  * KFactor_QCD_ggZZ_Nominal * overallEventWeight ) / 594858.56);
+counter++;}
 	}	
    }
    cout<<"min: "<<min<<"  max: "<<max<<endl; 
 	cout<<"suma: "<<suma<<endl;
+cout<<"counter: "<<counter<<endl;
 myfile.close();
 myfile1.close();
    //h1->Draw();
    //c1->SaveAs("KFactor_QCD_ggZZ_Nominal_histo.pdf");
 
 }
+
