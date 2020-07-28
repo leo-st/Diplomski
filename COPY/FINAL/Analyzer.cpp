@@ -22,6 +22,7 @@
 #include "RooFormulaVar.h"
 #include "RooLandau.h"
 #include "RooMinimizer.h"
+#include "TLegend.h"
 #include <fstream>
 
 
@@ -42,10 +43,10 @@ void Analyzer::sumall(){
 		RooRealVar Masa("Masa","Masa",105,140) ;
 		RooRealVar mH("m_{H}","m_{H}",130.0,105,140) ;
 		RooRealVar sigma("#sigma","Width of Gaussian",1.13,-10.1,1.4) ;
-		RooRealVar alpha("alpha","alpha",1.24,-20.95,20.55) ;
-		RooRealVar n("n","n",2.0,1.4,500.9) ;
-		RooRealVar alpha2("alpha2","alpha2",1.72,1.2,20.2) ;
-		RooRealVar n2("n2","n2",3.5,1.2,250.0) ;
+		RooRealVar alpha("#alpha_{1}","alpha",1.24,-20.95,20.55) ;
+		RooRealVar n("n_{1}","n",2.0,1.4,500.9) ;
+		RooRealVar alpha2("#alpha_{2}","alpha2",1.72,1.2,20.2) ;
+		RooRealVar n2("n_{2}","n2",3.5,1.2,250.0) ;
 
 		/*RooRealVar sigma("sigma","Width of Gaussian",1.13) ;
 		RooRealVar alpha("alpha","alpha",1.24) ;
@@ -59,8 +60,8 @@ void Analyzer::sumall(){
 		//RooDoubleCB CBall("CBall", "Crystal Ball shape", Masa, mean, sigma, alpha, n, alpha2 ,n2);
  		
 		//mean
-		RooRealVar p0("p0","p0",1.035);
-		RooRealVar p1("p1","p1",-4.582);
+		RooRealVar p0("p_0","p0",1.035);
+		RooRealVar p1("p_1","p1",-4.582);
 		RooFormulaVar meanH("meanH","@0*@1 + @2",RooArgList(mH,p0,p1));
 		
 		//sigma
@@ -112,16 +113,16 @@ void Analyzer::sumall(){
 
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a1("a1","a1",-1.010,-1.59,-0.43) ;
-		RooRealVar b1("b1","b1",252.0,115.0,389.0) ;
-		RooRealVar c1("c1","c1",-14493,-22205.0,-6781.0) ;
+		RooRealVar a("a","a",-1.010,-1.59,-0.43) ;
+		RooRealVar b("b","b",252.0,115.0,389.0) ;
+		RooRealVar c("c","c",-14493,-22205.0,-6781.0) ;
 		
 		/*RooRealVar a1("a1","a1",-1.010) ;
 		RooRealVar b1("b1","b1",252.0) ;
 		RooRealVar c1("c1","c1",-14493) ;*/
 
 
-		RooGenericPdf g1("g1","a1*Masa*Masa + b1*Masa + c1", RooArgSet(Masa,a1,b1,c1));
+		RooGenericPdf g1("g1","a*Masa*Masa + b*Masa + c", RooArgSet(Masa,a,b,c));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
 	   
@@ -166,13 +167,13 @@ void Analyzer::sumall(){
 	   
 		//RooRealVar ZZMass("ZZMass","ZZMass",110,140) ;
 		//RooRealVar x("x","x",0,250) ;
-		RooRealVar a2("a2","a2",0.1,-2.7,2.9) ;
-		RooRealVar b2("b2","b2",38,-326,402) ;
+		RooRealVar e("e","e",0.1,-2.7,2.9) ;
+		RooRealVar f("f","f",38,-326,402) ;
 
 		/*RooRealVar a2("a2","a2",0.1) ;
 		RooRealVar b2("b2","b2",38) ;*/
 		
-		RooGenericPdf g2("g2","a2*Masa + b2", RooArgSet(Masa,a2,b2));
+		RooGenericPdf g2("g2","e*Masa + f", RooArgSet(Masa,e,f));
 		//RooGaussian gauss("gauss","gauss(x,mean,sigma)",ZZMass,mean,sigma) ;
 	   
 	   
@@ -232,8 +233,8 @@ void Analyzer::sumall(){
    	//RooAddPdf model("model","s+b1+b2+b3",RooArgList(CBall,g1,g2,landau),RooArgList(nsig,nbkg1,nbkg2,nbkg3));
 	
 	//RooRealVar coeff("coeff","#coeff", 0.396,0.0,1.0);
-RooRealVar p0c("p0c","p0c",0.02108,0.0205366,0.0216234);
-		RooRealVar p1c("p1c","p1c",-2.242,-2.30994,-2.17406);
+RooRealVar p0c("p_{0c}","p0c",0.02108,0.0205366,0.0216234);
+		RooRealVar p1c("p_{1c}","p1c",-2.242,-2.30994,-2.17406);
 		RooFormulaVar coeffH("coeffH","@0*@1 + @2",RooArgList(mH,p0c,p1c));
 	
 	//RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),RooArgList(nsig,nbkg));
@@ -262,15 +263,36 @@ RooRealVar p0c("p0c","p0c",0.02108,0.0205366,0.0216234);
 	model.plotOn(masaframe, Components(model_backg), LineColor(kBlack));
 	//model.plotOn(masaframe, Components(CBall_vbfh), LineColor(kOrange));
 	//model.plotOn(masaframe, Components(model_sig), LineColor(kGreen));
-
-	model.paramOn(masaframe,Layout(0.1,0.3));
-	masaframe->getAttText()->SetTextSize(0.03);
+	//model.paramOn(masaframe, Layout(0.15,0.48,0.9));
+masaframe->SetXTitle("m_{H} [GeV]");
+	masaframe->SetYTitle("Broj dogadaja / (0.35) ");
+	masaframe->SetTitle("");
 		// we want to display the fit parameters
  	//gPad->SetLogy(kTRUE);		// set the Y axis in Log scale
  	//gPad->Modified();		
 
    masaframe->Draw();
-   canv->SaveAs("test-15-7-mean-coeff130.png");
+ /*TLegend *legend=new TLegend(0.1,0.45,0.88,0.85);
+    legend->SetTextFont(72);
+    legend->SetTextSize(0.04);
+    legend->AddEntry(podaci,"Data","lpe");
+    legend->AddEntry("g1","Background fit","l");
+    legend->AddEntry("model","global","l");
+    legend->AddEntry("g2","b2","l");
+	legend->AddEntry("landau","landau","l");
+	legend->AddEntry("CBall","CBall","l");
+legend->AddEntry("model_backg","model_backg","l");
+    legend->Draw("same");*/
+canv->BuildLegend(0.2,0.2,0.5,0.9,"","L");
+/*TLegend *leg1 = new TLegend(0.65,0.73,0.86,0.87);
+leg1->SetFillColor(kWhite);
+leg1->SetLineColor(kWhite);
+leg1->AddEntry(podaci,"Data", "P");
+leg1->AddEntry("model","Signal + background","LP");
+leg1->AddEntry("model_backg","Background only", "LP");
+leg1->AddEntry("CBall","Signal only", "LP");
+leg1->Draw("same");*/
+   canv->SaveAs("simulation-legenda-130.png");
 	/*RooAbsReal* nll = model.createNLL(*podaci, NumCPU(4));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(120.5,130.5),Title("LL and profileLL in frac")) ;
