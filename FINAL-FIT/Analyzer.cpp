@@ -63,7 +63,7 @@ TCanvas *canv = new TCanvas("canv","canv");
 		RooRealVar n2("n2","n2",3.192) ;
 		
 
-		RooRealVar p0("p0","p0",1.0001);
+		RooRealVar p0("p0","p0",1.0);
 		RooRealVar p1("p1","p1",-0.158);
 		RooFormulaVar meanH("meanH","@0*@1 + @2",RooArgList(mH,p0,p1));
 
@@ -223,11 +223,11 @@ TCanvas *canv = new TCanvas("canv","canv");
 	RooRealVar nbkg("nbkg","#nbkg",146.65);*/
 
 	RooAddPdf model_backg("model_backg","b1+b2+b3",RooArgList(g1,g2,landau),RooArgList(nbkg1,nbkg2,nbkg3));
-	//RooRealVar coeff("coeff","#coeff", 0.373,0.0,1.0);
+	//RooRealVar coeff("coeff","#coeff", 0.395);
 
 	RooRealVar p0c("p0c","p0c",0.02108);
 		RooRealVar p1c("p1c","p1c",-2.242);
-		RooRealVar mu("mu","mu",1.0,0.1,1.9);
+		RooRealVar mu("mu","mu",1.0);
 		RooFormulaVar coeffH("coeffH","@3*(@0*@1 + @2)",RooArgList(mH,p0c,p1c,mu));
 
 
@@ -236,7 +236,7 @@ TCanvas *canv = new TCanvas("canv","canv");
 	RooAddPdf model("model","s+b",RooArgList(CBall,model_backg),coeffH);
    	
    	//RooDataSet *podaci = model.generate(x, 1000);
-   	model.fitTo(test);
+   		model.fitTo(test);
    	//model.fitTo(*podaci);
    	RooPlot* masaframe = x.frame();
    	
@@ -250,23 +250,31 @@ TCanvas *canv = new TCanvas("canv","canv");
 	model.plotOn(masaframe, Components(landau), LineColor(kYellow));
 	model.plotOn(masaframe, Components(model_backg), LineColor(kBlack));
 
-	model.paramOn(masaframe, Layout(0.7));
+	model.paramOn(masaframe, Layout(0.15,0.48,0.9));
+	masaframe->SetXTitle("m_{H} [GeV]");
+	masaframe->SetYTitle("Broj dogadaja / (0.35) ");
+	masaframe->SetTitle("");;
+	
 
    masaframe->Draw();
-   canv->SaveAs("final-fit-22-7-fixed-all.png");
+   canv->SaveAs("sistematska-pogreska.png");
 /*RooAbsReal* nll = model.createNLL(test, NumCPU(6));
 	RooMinimizer(*nll).migrad();
-	 RooPlot* frame1 = sigma.frame(Bins(100),Range(124.0,126.0),Title("LL and profileLL in sigma")) ;
+	 RooPlot* frame1 = mH.frame(Bins(100),Range(124.0,126.0),Title("")) ;
    nll->plotOn(frame1,ShiftToZero()) ;
-	RooAbsReal* pll_frac = nll->createProfile(sigma) ;
-	pll_frac->plotOn(frame1,ShiftToZero(),LineColor(kRed)) ;
+	//RooAbsReal* pll_frac = nll->createProfile(sigma) ;
+	//pll_frac->plotOn(frame1,ShiftToZero(),LineColor(kRed)) ;
 	frame1->SetMinimum(0);
-	frame1->SetMaximum(5);
+	frame1->SetMaximum(3);
 	 //TCanvas *canv = new TCanvas("rf605_profilell","rf605_profilell",800, 400);
      //canv->cd(1) ;
+		frame1->SetTitle("");
+		frame1->GetYaxis()->SetTitle("Projekcija -log(likelihood)");
 	 frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
-canv->SaveAs("maxliike-sigma.png");
-   delete pll_frac ;
+	//double broj = nll->getVal(0.5);
+	//cout<<broj<<endl;
+canv->SaveAs("maxliike-sigma1.png");
+   //delete pll_frac ;
    delete nll ;*/
 
 

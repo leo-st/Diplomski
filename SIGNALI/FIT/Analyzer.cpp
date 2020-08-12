@@ -32,39 +32,49 @@ void Analyzer::runArgusModel() {
 	TCanvas *c2 = new TCanvas("c2","c2");
 	c2->cd();
 
-	Double_t x[] = {120.0,124.0,125.0,126.0,130.0};
+	/*Double_t x[] = {120.0,124.0,125.0,126.0,130.0};
 	 Double_t y[] = {119.83,123.85,124.85,125.85,129.84};
 	 Double_t ex[5] = {0,0,0,0,0};
-   Double_t ey[5] = {0.26,0.22,0.19,0.25,0.14};
+   Double_t ey[5] = {0.26,0.22,0.19,0.25,0.14};*/
+	Double_t x[] = {120.0,124.0,125.0,126.0,130.0};
+	 Double_t y[] = {2.1,2.1,2.0,2.3,1.98};
+	 Double_t ex[5] = {0,0,0,0,0};
+   Double_t ey[5] = {2.2,1.6,1.2,1.7,0.72};
+
+
 	 //TGraph *g = new TGraph((sizeof(x) / sizeof(Double_t)), x, y);
 	TGraphErrors *g = new TGraphErrors(5, x, y,ex,ey);
 	//TGraph *g = new TGraph(5, x, y,ex,ey);
-	 TF1 *f = new TF1("f", "[0]*x + [1]"); 
+	 TF1 *f = new TF1("f", "[0]"); 
+	f->SetParNames("p_{0}");
 	g->Fit(f);
-	TLine *line = new TLine(118.0,117.57,132.0,131.57);
-	TLine *line2 = new TLine(118.0,118.1,132.0,132.1);
-	TLine *line3 = new TLine(119.0,124.85,131.0,124.85);
+	/*TLine *line = new TLine(119.0,118.57,131.0,130.57);
+	TLine *line2 = new TLine(119.0,119.1,131.0,131.1);
+	TLine *line3 = new TLine(119.0,124.802,131.0,124.802);
 	
 	double x1,x2;
-	x1=(124.85+0.4312)/(1.00001);
-	x2=(124.85-0.09874)/(1.00001);
+	x1=(124.802+0.43)/(1.0);
+	x2=(124.802-0.1)/(1.0);
 	
 	TLine *line4 = new TLine(x1,118.58,x1,124.85);
 	TLine *line5 = new TLine(x2,118.58,x2,124.85);
+	TLine *line6 = new TLine(124.96,118.58,124.96,124.802);	*/
 
-	g->GetYaxis()->SetTitle("m_H");
-	g->GetXaxis()->SetTitle("x");
+	g->GetXaxis()->SetTitle("m_{H} [GeV]");
+	g->GetYaxis()->SetTitle("n_{1}");
 	gStyle->SetOptFit(kTRUE);
-	gStyle->SetStatX(0.5);
+	gStyle->SetStatX(0.9);
 	gStyle->SetStatY(0.9);
-	gStyle->SetStatW(0.2);		// we want to display the fit parameters
- 	//gPad->SetLogy(kTRUE);		// set the Y axis in Log scale
- 	//gPad->Modified();		
+	gStyle->SetStatW(0.18);		// we want to display the fit parameters		
+	gStyle->SetStatH(0.19);
+	gStyle->SetStatFormat("#6.2f"); gStyle->SetFitFormat("#6.2f");
+	g->SetTitle("");
  	gPad->Update();
-//	line->DrawLine(120.0,119.57,130.0,129.57);
+	//line->DrawLine(120.0,119.57,130.0,129.57);
 	
- 	g->Draw("A*");
-	line->Draw("same");
+	g->SetMarkerStyle(kFullCircle);
+ 	g->Draw("AP");
+	/*line->Draw("same");
 	line2->Draw("same");
 	line3->Draw("same");
 	line3->SetLineStyle(kDashed);
@@ -72,7 +82,9 @@ void Analyzer::runArgusModel() {
 	line4->SetLineStyle(kDashed);
 	line5->Draw("same");
 	line5->SetLineStyle(kDashed);
-	c2->SaveAs("higgs-fit-mean5.png");
+	line6->Draw("same");
+	line6->SetLineStyle(kDashed);*/
+	c2->SaveAs("fitanje-n1-4-8.png");
 
 	
 	

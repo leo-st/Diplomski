@@ -40,12 +40,12 @@ void Analyzer::runArgusModel() {
    
 	//RooRealVar x("x","x",105,140) ;
 	//RooRealVar x("x","x",0,250) ;
-	RooRealVar mean_vbfh("mean_vbfh","Mean of Gaussian",125,105,140) ;
-	RooRealVar sigma_vbfh("sigma_vbfh","Width of Gaussian_vbfh",1.2,-6.1,5.0) ;
-	RooRealVar alpha_vbfh("alpha_vbfh","alpha_vbfh",0.1,-20.0,20.0) ;
-	RooRealVar n_vbfh("n_vbfh","n_vbfh",2.0,-20.1,120.0) ;
-	RooRealVar alpha2_vbfh("alpha2_vbfh","alpha2_vbfh",1.5,-20.1,20.2) ;
-	RooRealVar n2_vbfh("n2_vbfh","n2_vbfh",4.0,-20.2,250.0) ;
+	RooRealVar mean_vbfh("#mu_{VBFH}","Mean of Gaussian",105,140) ;
+	RooRealVar sigma_vbfh("#sigma_{VBFH}","Width of Gaussian_vbfh",1.2,0.1,3.2) ;
+	RooRealVar alpha_vbfh("#alpha_{1VBFH}","alpha_vbfh",1.3,-3.4,4.5) ;
+	RooRealVar n_vbfh("n_{1VBFH}","n_vbfh",2.0,-5.1,7.0) ;
+	RooRealVar alpha2_vbfh("#alpha_{2VBFH}","alpha2_vbfh",1.7,-2.1,5.2) ;
+	RooRealVar n2_vbfh("n_{2VBFH}","n2_vbfh",4.0,-18.2,22.0) ;
 	//RooRealVar shift("shift","shift",0.15) ;
 	//RooFormulaVar mH("mH","@0+@1",RooArgList(mean,shift));
 	RooDoubleCB CBall("CBall", "Crystal Ball shape", x, mean_vbfh, sigma_vbfh, alpha_vbfh, n_vbfh, alpha2_vbfh ,n2_vbfh);
@@ -137,9 +137,12 @@ void Analyzer::runArgusModel() {
    wdata.plotOn(mesframe,Range(105,140), LineColor(kBlue));
    CBall.plotOn(mesframe,Range(105,140),  LineColor(kRed));
    //model.plotOn(mesframe, Components(background), LineStyle(ELineStyle::kDashed));
-	CBall.paramOn(mesframe, Layout(0.65));
+CBall.paramOn(mesframe, Layout(0.15,0.48,0.9));
+mesframe->SetXTitle("m_{4#mu} [GeV]");
+	mesframe->SetYTitle("Broj dogadaja / (0.3) ");
+	mesframe->SetTitle("");
    mesframe->Draw();
-   canv->SaveAs("signal-vbfh-weighted.pdf");
+   canv->SaveAs("signal-vbfh-weighted1.png");
 
 
 /*RooAbsReal* nll = CBall.createNLL(wdata, NumCPU(4), Timer(kTRUE));
