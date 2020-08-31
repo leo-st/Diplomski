@@ -152,7 +152,7 @@ namespace {
     static const char* includePaths[] = {
 "/include",
 "/usr/include/root",
-"/home/livas/Diplomski/DCBTest2/",
+"/home/livas/Diplomski/BACKGROUND/BACKGROUND-ZZTO4L/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(
@@ -160,7 +160,7 @@ namespace {
 #pragma clang diagnostic ignored "-Wkeyword-compat"
 #pragma clang diagnostic ignored "-Wignored-attributes"
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
-extern int __Cling_Autoloading_Map;
+extern int __Cling_AutoLoading_Map;
 class __attribute__((annotate(R"ATTRDUMP(Your description goes here...)ATTRDUMP"))) __attribute__((annotate("$clingAutoload$RooDoubleCB.h")))  RooDoubleCB;
 )DICTFWDDCLS";
     static const char* payloadCode = R"DICTPAYLOAD(

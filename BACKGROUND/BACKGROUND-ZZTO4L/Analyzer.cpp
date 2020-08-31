@@ -99,7 +99,7 @@ TCanvas *c1 = new TCanvas("c1","c1");
    g.plotOn(mesframe,Range(105,140),  LineColor(kRed));
 mesframe->SetAxisRange(0.0,1.7,"Y");	
 	g.paramOn(mesframe, Layout(0.15,0.48,0.9));
-	mesframe->SetXTitle("m_{qqZZ} [GeV]");
+	mesframe->SetXTitle("m_{4#mu} [GeV]");
 	mesframe->SetYTitle("Broj dogadaja / (0.35) ");
 	mesframe->SetTitle("");
 	

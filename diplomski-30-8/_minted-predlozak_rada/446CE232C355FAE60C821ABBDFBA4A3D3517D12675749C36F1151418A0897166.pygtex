@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}RooAddPdf.h\PYGZdq{}}
+		\PYG{p}{......................}
+		\PYG{n}{RooRealVar} \PYG{n}{ngauss}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}nsig\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZsh{}gauss events\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mf}{84.30866}\PYG{p}{);} \PYG{c+c1}{//predstavlja integral funkcije nakon prilagodbe funkcije}
+		\PYG{n}{RooRealVar} \PYG{n+nf}{nbkg}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}nbkg\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZsh{}nbkg events\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mf}{128.789}\PYG{p}{);}
+		\PYG{n}{RooAddPdf} \PYG{n+nf}{model}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}model\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}s+b\PYGZdq{}}\PYG{p}{,}\PYG{n}{RooArgList}\PYG{p}{(}\PYG{n}{gauss}\PYG{p}{,}\PYG{n}{backg}\PYG{p}{),}\PYG{n}{RooArgList}\PYG{p}{(}\PYG{n}{ngauss}\PYG{p}{,}\PYG{n}{nbkg}\PYG{p}{));}
+		\PYG{n}{model}\PYG{p}{.}\PYG{n}{fitTo}\PYG{p}{(}\PYG{o}{*}\PYG{n}{data}\PYG{p}{);}
+\end{Verbatim}

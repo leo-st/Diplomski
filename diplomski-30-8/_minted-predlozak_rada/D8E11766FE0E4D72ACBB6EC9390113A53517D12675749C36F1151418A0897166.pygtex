@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{n}{RooDataSet} \PYG{o}{*}\PYG{n+nf}{data}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}data\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}dataset with ZZMass\PYGZdq{}}\PYG{p}{,}\PYG{n}{fChain}\PYG{p}{,}\PYG{n}{ZZMass}\PYG{p}{)} \PYG{p}{;} \PYG{c+c1}{//učitavanje iz fChain\PYGZhy{}a}
+		\PYG{n}{RooDataSet} \PYG{o}{*}\PYG{n}{data} \PYG{o}{=} \PYG{n}{gauss}\PYG{p}{.}\PYG{n}{generate}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{l+m+mi}{1000}\PYG{p}{)} \PYG{p}{;} \PYG{c+c1}{//generiranje 1000 toy podataka po Gauss\PYGZhy{}u}
+\end{Verbatim}

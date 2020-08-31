@@ -33,7 +33,7 @@ void Analyzer::sumall(){
 
 	
 		
-		TCanvas *canv = new TCanvas("canv","canv");
+		TCanvas *canv = new TCanvas("canv","canv",1044,708);
 	
 		canv->cd();
 		
@@ -41,7 +41,7 @@ void Analyzer::sumall(){
 
    
 		RooRealVar Masa("Masa","Masa",105,140) ;
-		RooRealVar mH("m_{H}","m_{H}",120.0,105,140) ;
+		RooRealVar mH("m_{H}","m_{H}",130.0,105,140) ;
 		RooRealVar sigma("#sigma","Width of Gaussian",1.13,-10.1,1.4) ;
 		RooRealVar alpha("#alpha_{1}","alpha",1.24,-20.95,20.55) ;
 		RooRealVar n("n_{1}","n",2.0,1.4,500.9) ;
@@ -264,10 +264,13 @@ RooRealVar p0c("p_{0c}","p0c",0.02108,0.0205366,0.0216234);
 	//model.plotOn(masaframe, Components(CBall_vbfh), LineColor(kOrange));
 	//model.plotOn(masaframe, Components(model_sig), LineColor(kGreen));
 	//model.paramOn(masaframe, Layout(0.15,0.48,0.9));
+	//model.paramOn(masaframe, podaci, "", 2, "ELU", 0.6,0.9,0.9);
+	//model.paramOn(masaframe);
+	//gStyle->SetOptStat(1011);
 	
-//masaframe->SetXTitle("m_{H} [GeV]");
-	//masaframe->SetYTitle("Broj dogadaja / (0.35) ");
-	//masaframe->SetTitle("");
+masaframe->SetXTitle("m_{H} [GeV]");
+	masaframe->SetYTitle("Broj dogadaja / (0.35) ");
+	masaframe->SetTitle("");
 		// we want to display the fit parameters
  	//gPad->SetLogy(kTRUE);		// set the Y axis in Log scale
  	//gPad->Modified();		
@@ -293,7 +296,7 @@ leg1->AddEntry("model","Signal + background","LP");
 leg1->AddEntry("model_backg","Background only", "LP");
 leg1->AddEntry("CBall","Signal only", "LP");
 leg1->Draw("same");*/
-   canv->SaveAs("test-12-7.png");
+   canv->SaveAs("simulation-130-bez-param.png");
 	/*RooAbsReal* nll = model.createNLL(*podaci, NumCPU(4));
 	RooMinimizer(*nll).migrad();
 	 RooPlot* frame1 = mean.frame(Bins(100),Range(120.5,130.5),Title("LL and profileLL in frac")) ;

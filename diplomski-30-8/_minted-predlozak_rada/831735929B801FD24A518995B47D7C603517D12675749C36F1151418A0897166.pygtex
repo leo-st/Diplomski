@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}RooPlot.h\PYGZdq{}}
+		\PYG{p}{....................}
+		\PYG{n}{RooPlot}\PYG{o}{*} \PYG{n}{mesframe} \PYG{o}{=} \PYG{n}{x}\PYG{p}{.}\PYG{n}{frame}\PYG{p}{();}
+		\PYG{n}{data}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{plotOn}\PYG{p}{(}\PYG{n}{mesframe}\PYG{p}{);} \PYG{c+c1}{//prikazuje podatke kao točkice na grafu}
+		\PYG{n}{gauss}\PYG{p}{.}\PYG{n}{plotOn}\PYG{p}{(}\PYG{n}{mesframe}\PYG{p}{,} \PYG{n}{LineColor}\PYG{p}{(}\PYG{n}{kRed}\PYG{p}{));} \PYG{c+c1}{//prikazuje prilagodbe funkcijenu Gaussovu krivulju crvene boje}
+		\PYG{n}{gauss}\PYG{p}{.}\PYG{n}{paramOn}\PYG{p}{(}\PYG{n}{mesframe}\PYG{p}{,} \PYG{n}{Layout}\PYG{p}{(}\PYG{l+m+mf}{0.7}\PYG{p}{));} \PYG{c+c1}{//prikazuje parametre i statističke pogreške istih na platnu}
+		\PYG{n}{mesframe}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetXTitle}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Oznaka na osi X\PYGZdq{}}\PYG{p}{);}
+		\PYG{n}{mesframe}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetYTitle}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Oznaka na osi Y\PYGZdq{}}\PYG{p}{);}
+		\PYG{n}{mesframe}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetTitle}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Naslov grafa\PYGZdq{}}\PYG{p}{);}
+		\PYG{n}{mesframe}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{();}
+\end{Verbatim}

@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}RooFormulaVar.h\PYGZdq{}}
+		\PYG{p}{..........................}
+		\PYG{n}{RooRealVar}  \PYG{n}{x}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{105}\PYG{p}{,}\PYG{l+m+mi}{140}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooRealVar}  \PYG{n+nf}{a}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}a\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}a\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mf}{0.1}\PYG{p}{,}\PYG{l+m+mf}{2.1}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooRealVar}  \PYG{n+nf}{b}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}b\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}b\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{125}\PYG{p}{,}\PYG{l+m+mi}{140}\PYG{p}{,}\PYG{l+m+mi}{160}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooRealVar}  \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}c\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}c\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1500}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{l+m+mi}{6250}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooDataSet} \PYG{n+nf}{test}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}test\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}test\PYGZdq{}}\PYG{p}{,} \PYG{n}{RooArgSet}\PYG{p}{(}\PYG{n}{x}\PYG{p}{));}
+		\PYG{n}{RooFormulaVar} \PYG{n+nf}{wFunc}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}gen\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}a*(b+c)\PYGZdq{},RooArgSet(a,b,c)) }\PYG{p}{;}
+		\PYG{c+c1}{//alternativni načina zapisa za RooFormulaVar:}
+		\PYG{c+c1}{//RooFormulaVar wFunc(\PYGZdq{}gen\PYGZdq{},\PYGZdq{}@0*(@1 + @2)\PYGZdq{},RooArgList(a,b,c));}
+		\PYG{n}{RooRealVar}\PYG{o}{*} \PYG{n}{w} \PYG{o}{=} \PYG{p}{(}\PYG{n}{RooRealVar}\PYG{o}{*}\PYG{p}{)} \PYG{n}{test}\PYG{p}{.}\PYG{n}{addColumn}\PYG{p}{(}\PYG{n}{wFunc}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooDataSet} \PYG{n+nf}{wdata}\PYG{p}{(}\PYG{n}{test}\PYG{p}{.}\PYG{n}{GetName}\PYG{p}{(),}\PYG{n}{test}\PYG{p}{.}\PYG{n}{GetTitle}\PYG{p}{(),}\PYG{o}{\PYGZam{}}\PYG{n}{test}\PYG{p}{,} \PYG{o}{*}\PYG{n}{test}\PYG{p}{.}\PYG{n}{get}\PYG{p}{(),}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{w}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetName}\PYG{p}{())} \PYG{p}{;}
+		\PYG{n}{gauss}\PYG{p}{.}\PYG{n}{fitTo}\PYG{p}{(}\PYG{n}{wdata}\PYG{p}{);}
+\end{Verbatim}

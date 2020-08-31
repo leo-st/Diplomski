@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}RooGenericPdf.h\PYGZdq{}}
+		\PYG{p}{.........................}
+		\PYG{n}{RooRealVar}  \PYG{n}{x}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}x\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{105}\PYG{p}{,}\PYG{l+m+mi}{140}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooRealVar} \PYG{n+nf}{a}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}a\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}a\PYGZdq{}}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooRealVar} \PYG{n+nf}{b}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}b\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}b\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{250}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{50}\PYG{p}{,}\PYG{l+m+mi}{450}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooRealVar} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}c\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}c\PYGZdq{}}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{15000}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20000}\PYG{p}{,}\PYG{l+m+mi}{10000}\PYG{p}{)} \PYG{p}{;}
+		\PYG{n}{RooGenericPdf} \PYG{n+nf}{backg}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}backg\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}a*x*x + b*x + c\PYGZdq{}}\PYG{p}{,} \PYG{n}{RooArgSet}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{a}\PYG{p}{,}\PYG{n}{b}\PYG{p}{,}\PYG{n}{c}\PYG{p}{));}
+\end{Verbatim}

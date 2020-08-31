@@ -29,7 +29,7 @@ int main(){
 
 	Analyzer *a = new Analyzer("/home/public/data/2018_MC/ZZTo4lext1/");
 	a->Loop();
-	//a->ZZTo4lext1();
+	a->ZZTo4lext1();
 	
 	
 	

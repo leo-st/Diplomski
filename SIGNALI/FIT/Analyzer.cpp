@@ -37,16 +37,16 @@ void Analyzer::runArgusModel() {
 	 Double_t ex[5] = {0,0,0,0,0};
    Double_t ey[5] = {0.26,0.22,0.19,0.25,0.14};*/
 	Double_t x[] = {120.0,124.0,125.0,126.0,130.0};
-	 Double_t y[] = {2.1,2.1,2.0,2.3,1.98};
+	 Double_t y[] = {0.284756304,0.372680184,0.39563202,0.418338960,0.4948448};
 	 Double_t ex[5] = {0,0,0,0,0};
-   Double_t ey[5] = {2.2,1.6,1.2,1.7,0.72};
+   Double_t ey[5] = {0.0284756304,0.0372680184,0.039563202,0.0418338960,0.04948448};
 
 
 	 //TGraph *g = new TGraph((sizeof(x) / sizeof(Double_t)), x, y);
 	TGraphErrors *g = new TGraphErrors(5, x, y,ex,ey);
 	//TGraph *g = new TGraph(5, x, y,ex,ey);
-	 TF1 *f = new TF1("f", "[0]"); 
-	f->SetParNames("p_{0}");
+	 TF1 *f = new TF1("f", "[0]*x + [1]"); 
+	f->SetParNames("p_{0}", "p_{1}");
 	g->Fit(f);
 	/*TLine *line = new TLine(119.0,118.57,131.0,130.57);
 	TLine *line2 = new TLine(119.0,119.1,131.0,131.1);
@@ -61,9 +61,9 @@ void Analyzer::runArgusModel() {
 	TLine *line6 = new TLine(124.96,118.58,124.96,124.802);	*/
 
 	g->GetXaxis()->SetTitle("m_{H} [GeV]");
-	g->GetYaxis()->SetTitle("n_{1}");
+	g->GetYaxis()->SetTitle("Udio signalnih dogadaja (%)");
 	gStyle->SetOptFit(kTRUE);
-	gStyle->SetStatX(0.9);
+	gStyle->SetStatX(0.5);
 	gStyle->SetStatY(0.9);
 	gStyle->SetStatW(0.18);		// we want to display the fit parameters		
 	gStyle->SetStatH(0.19);
@@ -84,7 +84,7 @@ void Analyzer::runArgusModel() {
 	line5->SetLineStyle(kDashed);
 	line6->Draw("same");
 	line6->SetLineStyle(kDashed);*/
-	c2->SaveAs("fitanje-n1-4-8.png");
+	c2->SaveAs("fit-integrali-19-8.png");
 
 	
 	

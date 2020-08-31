@@ -1,0 +1,46 @@
+\contentsline {section}{\numberline {1}Uvod}{1}%
+\contentsline {section}{\numberline {2}Teorijski uvod}{2}%
+\contentsline {subsection}{\numberline {2.1}Standardni model}{2}%
+\contentsline {subsubsection}{\numberline {2.1.1}Fermioni}{2}%
+\contentsline {paragraph}{Kvarkovi\newline }{2}%
+\contentsline {paragraph}{Leptoni\newline }{3}%
+\contentsline {subsubsection}{\numberline {2.1.2}Bozoni}{3}%
+\contentsline {paragraph}{Fotoni\newline }{3}%
+\contentsline {paragraph}{W i Z bozoni\newline }{4}%
+\contentsline {paragraph}{Gluoni\newline }{4}%
+\contentsline {subsection}{\numberline {2.2}Lagrangian SM-a}{4}%
+\contentsline {subsubsection}{\numberline {2.2.1}Baždarna invarijantnost}{4}%
+\contentsline {paragraph}{Lagrangian elektromagnetskog međudjelovanja\newline }{5}%
+\contentsline {paragraph}{Lagrangian elektroslabog međudjelovanja\newline }{5}%
+\contentsline {paragraph}{Lagrangian jakog međudjelovanja\newline }{6}%
+\contentsline {subsubsection}{\numberline {2.2.2}Spontano narušenje simetrije}{6}%
+\contentsline {paragraph}{Lagrangian Higgsovog polja\newline }{7}%
+\contentsline {subsection}{\numberline {2.3}Higgsov bozon}{7}%
+\contentsline {subsubsection}{\numberline {2.3.1}Mehanizam proizvodnje Higgsovog bozona}{8}%
+\contentsline {paragraph}{Fuzija gluona\newline }{8}%
+\contentsline {paragraph}{Ostali načini proizvodnje\newline }{9}%
+\contentsline {subsubsection}{\numberline {2.3.2}Mehanizmi raspada Higgsovog bozona}{10}%
+\contentsline {subsection}{\numberline {2.4}Kanal raspada \begin {math} H \rightarrow ZZ* \rightarrow 4\mu \end {math}}{10}%
+\contentsline {section}{\numberline {3}LHC sudarivač i CMS eksperiment}{12}%
+\contentsline {subsection}{\numberline {3.1}Povijest CERN-a}{12}%
+\contentsline {subsection}{\numberline {3.2}Veliki hadronski sudarač}{12}%
+\contentsline {subsection}{\numberline {3.3}Kompaktni mionski solenoid}{13}%
+\contentsline {subsubsection}{\numberline {3.3.1}Sistem okidača}{14}%
+\contentsline {subsubsection}{\numberline {3.3.2}Rekonstrukcija čestica}{15}%
+\contentsline {section}{\numberline {4}Analiza kanala raspada \begin {math} \boldmath {H \rightarrow ZZ^* \rightarrow 4\mu }\end {math} }{17}%
+\contentsline {subsection}{\numberline {4.1}Podatci i Monte Carlo simulacije}{17}%
+\contentsline {paragraph}{Monte Carlo simulacije\newline }{18}%
+\contentsline {paragraph}{Signalni Podatci\newline }{19}%
+\contentsline {paragraph}{Pozadinski Podatci\newline }{19}%
+\contentsline {paragraph}{Težina događaja\newline }{20}%
+\contentsline {subsection}{\numberline {4.2}Statistička analiza}{20}%
+\contentsline {subsubsection}{\numberline {4.2.1}Funkcija gustoće vjerojatnosti}{20}%
+\contentsline {subsubsection}{\numberline {4.2.2}Likelihood}{21}%
+\contentsline {subsection}{\numberline {4.3}ROOT i RooFit}{32}%
+\contentsline {subsection}{\numberline {4.4}Ukupni model}{32}%
+\contentsline {section}{\numberline {5}Rezultati}{35}%
+\contentsline {subsection}{\numberline {5.1}Statističke i sistematske pogreške}{36}%
+\contentsline {subsection}{\numberline {5.2}Usporedba s rezultatima CMS-a i ATLAS-a}{39}%
+\contentsline {section}{\numberline {6}Zaključak}{40}%
+\contentsline {section}{\numberline {A}Osnovne funkcije i implementacija RooFit biblioteke u C++}{44}%
+\contentsline {subsection}{\numberline {A.1}Kompleksnije funkcionalosti}{46}%

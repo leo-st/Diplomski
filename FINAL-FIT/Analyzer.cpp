@@ -227,7 +227,7 @@ TCanvas *canv = new TCanvas("canv","canv");
 
 	RooRealVar p0c("p0c","p0c",0.02108);
 		RooRealVar p1c("p1c","p1c",-2.242);
-		RooRealVar mu("mu","mu",1.0);
+		RooRealVar mu("#mu","#mu",1.0,0.5,1.5);
 		RooFormulaVar coeffH("coeffH","@3*(@0*@1 + @2)",RooArgList(mH,p0c,p1c,mu));
 
 
@@ -257,10 +257,10 @@ TCanvas *canv = new TCanvas("canv","canv");
 	
 
    masaframe->Draw();
-   canv->SaveAs("sistematska-pogreska.png");
+   canv->SaveAs("27-8.png");
 /*RooAbsReal* nll = model.createNLL(test, NumCPU(6));
 	RooMinimizer(*nll).migrad();
-	 RooPlot* frame1 = mH.frame(Bins(100),Range(124.0,126.0),Title("")) ;
+	 RooPlot* frame1 = mH.frame(Bins(100),Range(124.2,125.5),Title("")) ;
    nll->plotOn(frame1,ShiftToZero()) ;
 	//RooAbsReal* pll_frac = nll->createProfile(sigma) ;
 	//pll_frac->plotOn(frame1,ShiftToZero(),LineColor(kRed)) ;
@@ -273,11 +273,27 @@ TCanvas *canv = new TCanvas("canv","canv");
 	 frame1->GetYaxis()->SetTitleOffset(1.4) ; frame1->Draw() ;
 	//double broj = nll->getVal(0.5);
 	//cout<<broj<<endl;
-canv->SaveAs("maxliike-sigma1.png");
+	TLine *line = new TLine(124.2,0.5,125.5,0.5);
+	TLine *line2 = new TLine(124.2,1.0,125.5,1.0);
+	TLine *line3 = new TLine(124.2,1.5,125.5,1.5);
+	TLine *line4 = new TLine(124.2,2.0,125.5,2.0);
+	TLine *line5 = new TLine(124.2,2.5,125.5,2.5);
+	
+	line->SetLineStyle(kDashed);	
+	line->Draw("same");
+	line2->SetLineStyle(kDashed);
+	line2->Draw("same");
+line3->SetLineStyle(kDashed);
+	line3->Draw("same");
+line4->SetLineStyle(kDashed);
+	line4->Draw("same");
+line5->SetLineStyle(kDashed);
+	line5->Draw("same");
+canv->SaveAs("test-23-8.png");
    //delete pll_frac ;
-   delete nll ;*/
+   delete nll ;
 
-
+*/
 
 
 }
